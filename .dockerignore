@@ -1,0 +1,28 @@
+# Git files
+.git
+
+# Useless files
+.DS_Store
+Dockerfile
+
+# Rails temp files
+/tmp/*
+/log/*.log
+/storage/*
+dump.rdb
+
+# Vagrant log files
+*console.log
+
+# Database dump files
+/*.dump
+/*.dump.gz
+
+# Node stuff
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+# tmp/cache/webpacker

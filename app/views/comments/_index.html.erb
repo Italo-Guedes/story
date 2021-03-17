@@ -1,0 +1,33 @@
+<% @comments = @comments.order(id: :desc).paginate(page: params[:page]) %>
+
+<header class="content__title">
+  <h1>
+    <%= t('activerecord.models.comment.other') %>
+  </h1>
+</header>
+
+<div class="card">
+  <div class="card-body card-padding record-show">
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= t('activerecord.attributes.comment.created_at') %></th>
+          <th><%= t('activerecord.attributes.comment.user') %></th>
+          <th><%= t('activerecord.attributes.comment.text') %></th>
+          <th class="actions-column"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @comments.each do |comment| %>
+          <tr>
+            <td><%= comment.created_at %></td>
+            <td><%= comment.user %></td>
+            <td><%= comment.text %></td>
+            <td class="actions-column actions"><%= link_to '', comment, title: t("activerecord.link.destroy"), class: "zmdi zmdi-delete actions__item", method: :delete, data: { confirm_swal: t('activerecord.link.destroy_confirm') } if can? :destroy, comment %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @comments, class: "apple_pagination", previous_label: t("activerecord.link.previous"), next_label: t("activerecord.link.next") %>
+  </div>
+</div>

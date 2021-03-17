@@ -1,0 +1,144 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+en:
+  en: English
+  de: German
+  es: Spanish
+  hello: "Hello world"
+  search_here: "Search here"
+  will_paginate:
+    page_gap: "..."
+  home: "Home"
+  exit: "Exit"
+  Back: "Back"
+  Show: "Show"
+  New: "New"
+  Edit: "Edit"
+  save: "Save"
+  admin: "Admin"
+  manager: "Manager"
+  editor: "Editor"
+  author: "Author"
+  accountant: "Accountant"
+  change_password_helper_text: "Fill password and confirmation only if you want to change it"
+  roles:
+    names:
+      aviate_admin: "Aviate Admin"
+      aviate_user: "Aviate User"
+    hints:
+      aviate_admin: "Full permissions to manage meta data, key tables, product licenses and users"
+      aviate_user: "Full permissions inside it's company to create users, buy or upgrade product licenses"
+  Are you sure?: "Are you sure? This action cannot be undone."
+  Destroy: "Destroy"
+  datagrid:
+    no_results: "Search with no results"
+    form:
+      search: "Search"
+      reset: "Clear search fields"
+    table:
+      order:
+        asc: "&#x25B2;"
+        desc: "&#x25BC"
+  unauthorized:
+    manage:
+      # all: "Não autorizado para %{action} %{subject}"
+      user: "Access denied"
+  helpers:
+    submit:
+      general:
+        new: "New %{model}"
+        create: "Add %{model}"
+        edit: "Editing %{model}"
+        show: "%{model} details"
+        update: "Save changes"
+  activerecord:
+    successful:
+      messages:
+        created: "%{model} was successfully created."
+        updated: "%{model} was successfully updated."
+    models:
+      role:
+        one: "User role"
+        other: "User roles"
+      user_role:
+        one: "User role"
+        other: "User roles"
+      user:
+        one: "User"
+        other: "Users"
+    attributes:
+      user:
+        users: "Users"
+        id: "Id"
+        email: "Email"
+        phone: "Phone"
+        name: "Name"
+        user_roles: "User roles"
+        encrypted_password: "Password"
+        last_sign_in_at: "Last sign in"
+        last_sign_in_ip: "Las sign in IP"
+        current_sign_in_at: "Current sign in"
+        current_sign_in_ip: "Current sign in IP"
+        sign_in_count: "Sign in count"
+        updated_at: "Updated at"
+        created_at: "Created at"
+    link:
+      details: "Details"
+      back_to_list: "Back to list"
+      edit: "Edit"
+      destroy: "Destroy"
+      previous: "← Previous"
+      next: "Next →"
+      add_new: "Add new record"
+      remove: "Remove"
+      are_you_sure_no_undone: "Are you sure? This action cannot be undone"
+      add_new_user: "Add new user"
+    form:
+      user:
+        fill_password_hint: "Fill password and password confirmation only if you want to change it"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        products: "Products"
+        products_he_can_access: "Products he can access:"
+        employee_data: "Employee Data:"
+        person_data: "Person Data:"
+        address_data: "Address Data:"
+        legal_person_data: "Legal Person Data:"
+  key_tables: "Lookup Key Tables"
+  extras: "Extras"
+  my_apps: "My Apps"
+  license_management: "License Management"
+  aviate_admins: "Aviate Admins"
+  logout: "Sign out"
+  welcome:
+    title: "Welcome"
+    text: "Welcome to my.Aviate, your place to manage all your Aviate Apps."

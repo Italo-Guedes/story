@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+<html lang="<%= I18n.locale %>">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<%= GlobalSetting.instance.page_description %>">
+  <meta name="author" content="<%= GlobalSetting.instance.page_author %>">
+
+  <title><%= GlobalSetting.instance.page_title %></title>
+
+  <% if Rails.env.production? || Rails.env.staging? %>
+    <script src="https://browser.sentry-cdn.com/5.4.3/bundle.min.js" crossorigin="anonymous"></script>
+    <script language="javascript">
+        Sentry.init({ dsn: '' });
+        <% if current_user %>
+          Sentry.configureScope((scope) => {
+            scope.setUser({
+              id: '<%= current_user.id %>',
+              email: '<%= current_user.email %>',
+              roles: '<%= current_user.roles.pluck(:name).join(", ") %>',
+              type:  '<%= current_user.class.to_s %>',
+            });
+          });
+        <% end %>
+    </script>
+  <% end %>
+
+  <%# Essa tag server para liberar o Action Cable apenas quando o usuário está logado %>
+  <%# Verificar arquivo user_notification.js %>
+  <%= tag :meta, name: 'action' if current_user %>
+
+  <!-- Vendor CSS -->
+  <%= stylesheet_pack_tag    "application", media: "all" %>
+  <%= javascript_pack_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body data-ma-theme="red">
+  <main class="main">
+    <div class="page-loader">
+      <div class="page-loader__spinner">
+        <svg viewBox="25 25 50 50">
+          <circle cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+      </div>
+    </div>
+
+    <!--
+      Pra a versão com menu escondido:
+      <header class="header"><div class="navigation-trigger" ...>
+      <aside class="sidebar sidebar--hidden">
+      <section class="content content--full">
+    -->
+
+    <header class="header">
+      <div class="navigation-trigger hidden-xl-up" data-ma-action="aside-open" data-ma-target=".sidebar">
+        <div class="navigation-trigger__inner">
+          <i class="navigation-trigger__line"></i>
+          <i class="navigation-trigger__line"></i>
+          <i class="navigation-trigger__line"></i>
+        </div>
+      </div>
+
+      <div class="header__logo">
+        <h1>
+          <%= link_to "#{GlobalSetting.instance.page_title}", root_path %>
+          <br>
+          <small><%= GlobalSetting.instance.page_subtitle %></small>
+        </h1>
+      </div>
+
+      <ul class="top-nav">
+        <%= render 'layouts/language_selector.html.erb' %>
+        <%= render 'layouts/notifications.html.erb' %>  
+      </ul>
+    </header>
+
+    <% if current_user %>
+      <aside class="sidebar">
+        <%= render 'layouts/menu' %>
+      </aside>
+    <% else %>
+      <%= render 'layouts/menu_hider.html.erb' %>
+    <% end %>
+    
+    <section class="content">
+      <div class="content__inner">
+        <% if notice %>
+          <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+            <%= notice %>
+          </div>
+        <% end %>
+        <% if alert %>
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+            <%= alert %>
+          </div>
+        <% end %>
+        <%= yield %>
+      </div>
+      <footer class="footer hidden-xs-down">
+        <p>Copyright &copy; <%= Time.zone.now.year %> Rdmapps</p>
+        <!--ul class="nav footer__nav">
+          <a class="nav-link" href="">Homepage</a>
+          <a class="nav-link" href="">Company</a>
+          <a class="nav-link" href="">Support</a>
+          <a class="nav-link" href="">News</a>
+          <a class="nav-link" href="">Contacts</a>
+        </ul-->
+      </footer>
+    </section>
+  </main>
+  <!-- Older IE warning message -->
+  <!--[if IE]>
+    <div class="ie-warning">
+      <h1>Warning!!</h1>
+      <p>You are using an outdated version of Internet Explorer, please upgrade to any of the following web browsers to access this website.</p>
+
+      <div class="ie-warning__downloads">
+        <a href="http://www.google.com/chrome">
+          <img src="img/browsers/chrome.png" alt="">
+        </a>
+
+        <a href="https://www.mozilla.org/en-US/firefox/new">
+          <img src="img/browsers/firefox.png" alt="">
+        </a>
+
+        <a href="http://www.opera.com">
+          <img src="img/browsers/opera.png" alt="">
+        </a>
+
+        <a href="https://support.apple.com/downloads/safari">
+          <img src="img/browsers/safari.png" alt="">
+        </a>
+
+        <a href="https://www.microsoft.com/en-us/windows/microsoft-edge">
+          <img src="img/browsers/edge.png" alt="">
+        </a>
+
+        <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+          <img src="img/browsers/ie.png" alt="">
+        </a>
+      </div>
+      <p>Sorry for the inconvenience!</p>
+    </div>
+  <![endif]-->
+</body>
+<html>
+
+</html>
+<script language="javascript">
+  $(function () {
+    var valid_tz = <%= raw Oj.dump(TZInfo::Timezone.all_identifiers) %>;
+    var current_tz = '<%= Time.zone.name %>';
+    var browser_tz = jstz.determine().name();
+
+    var browser_tz_l = browser_tz.toLowerCase();
+    var rslt = null;
+    $.each(valid_tz, function(index, value) { 
+      if (rslt == null && value.toLowerCase() === browser_tz_l) {
+        rslt = index;
+        return false;
+      }
+    });
+
+    if (current_tz != browser_tz && rslt != null) {
+      $.get("/home/index.json?timezone=" + browser_tz, null);
+    }
+
+    $("#notice-div").fadeTo(10000, 500).slideUp(500, function () {
+      $("#notice-div").slideUp(500);
+    });
+
+    $("#alert-div").fadeTo(10000, 500).slideUp(500, function () {
+      $("#alert-div").slideUp(500);
+    });
+  });
+</script>
+</html>

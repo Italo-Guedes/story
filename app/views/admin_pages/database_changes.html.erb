@@ -1,0 +1,29 @@
+<header class="content__title">
+  <h1>Alterações na base de dados</h1>
+
+
+  <div class="actions">
+    <%= link_to '', '', class: 'actions__item zmdi zmdi-refresh-alt', title: t('Refresh') %>
+  </div>
+</header>
+<div class="card">
+  <div class="card-body card-padding">
+    <%= semantic_form_for '', url: request.path, method: 'GET', :html => { class: 'form-row' } do |f| %>
+      <%= f.input :item_type, as: :select, class: 'col-12', collection: [['Todos', 'todos']] + @models.map {|model| [t("activerecord.models.#{model.name.underscore}.other"), model.name] }, input_html: { class: 'select2', value: params[:item_type], data: { placeholder: 'Selecione' } }, label: 'Registro' %>
+      <div class="col-12">
+        <%= f.action :submit, label: "Buscar", as: :button, class: 'd-inline-block', html: { 'data-disable-with' => t('activerecord.link.sending') } %>
+        <%= link_to 'Limpar Filtro', admin_pages_database_changes_path %>
+      </div>
+    <% end %>
+
+    <%= render partial: 'layouts/record_changes_table', locals: { :@versions => @versions } %>
+    <br/>
+  </div>
+  <br>
+</div>
+
+<script>
+  $(function() {
+    $('#item_type').val('<%= params[:item_type] %>').trigger('change');
+  });
+</script>

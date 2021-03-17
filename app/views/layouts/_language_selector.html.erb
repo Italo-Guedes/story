@@ -1,0 +1,31 @@
+<% if I18n.available_locales.count > 1 %>
+  <style rel="stylesheet" type="text/css">
+    #language_selector .listview__item {
+      padding: 10px;
+    }
+
+    #language_selector .dropdown-menu--block {
+      width: 120px;
+    }
+  </style>
+  
+  <li id="language_selector" class="dropdown">
+    <a href="" data-toggle="dropdown">
+      <b><%= t(I18n.locale) %></b><span class="caret"></span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right dropdown-menu--block">
+    
+      <div class="listview listview--hover">
+        <% I18n.available_locales.each do |locale| %>
+          <%= link_to root_path(locale: locale), { class: 'listview__item'} do %>
+            <div class="listview__content">
+              <div class="listview__heading">
+                <%= t(locale) %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </li>
+<% end %>

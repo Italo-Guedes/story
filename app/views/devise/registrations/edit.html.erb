@@ -1,0 +1,29 @@
+<div style="max-width: 600px;margin: auto;">
+  <header class="content__title">
+    <h1><%= t('.title', resource: resource.model_name.human) %></h1>
+
+    <div class="actions">
+      <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    </div>
+  </header>
+  <div class="card">
+    <div class="card-body card-padding record">
+      <%= semantic_form_for(resource, as: resource_name, url: user_registration_path, html: { method: :put }) do |f| %>
+        <%= f.inputs do %>
+          <%= f.input :name, input_html: { autofocus: true } %>
+          <%= f.input :email, input_html: { autocomplete: "email" } %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div><%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %></div>
+          <% end %>
+          <%= f.input :password, hint: t('.leave_blank_if_you_don_t_want_to_change_it'), input_html: { autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation, input_html: { autocomplete: "new-password" } %>
+          <%= f.input :current_password, hint: t('.we_need_your_current_password_to_confirm_your_changes'), input_html: { autocomplete: "current-password" } %>
+        <% end %>
+
+        <%= f.actions do %>
+          <%= f.action :submit, label: t('.update'), as: :button, html: { 'data-disable-with' => t('activerecord.link.sending') } %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

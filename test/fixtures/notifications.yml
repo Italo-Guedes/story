@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: notifications
+#
+#  id         :bigint(8)        not null, primary key
+#  user_id    :bigint(8)
+#  text       :string
+#  image_url  :string
+#  link_url   :string
+#  viewed     :boolean          default(FALSE)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  text: MyString
+  image_url: MyString
+  link_url: MyString
+  viewed: false
+
+two:
+  user: two
+  text: MyString
+  image_url: MyString
+  link_url: MyString
+  viewed: false

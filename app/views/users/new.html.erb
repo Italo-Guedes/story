@@ -1,0 +1,14 @@
+<header class="content__title">
+  <h1><%= t('helpers.submit.general.new', model: t('activerecord.models.user.one')) %></h1>
+
+  <div class="actions">
+    <%= link_to '', users_path, title: t('activerecord.link.back_to_list'), class: 'actions__item zmdi zmdi-arrow-left' %>
+    <%= link_to '', '', title: t('Refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+  </div>
+</header>
+
+<div class="card">
+  <div class="card-body">
+		<%= render 'form' %>
+	</div>
+</div>

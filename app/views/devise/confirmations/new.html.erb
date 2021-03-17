@@ -1,0 +1,23 @@
+<%= render 'layouts/menu_hider' %>
+<div style="max-width: 600px;margin: auto;">
+  <header class="content__title">
+    <h1><%= t('.resend_confirmation_instructions') %></h1>
+
+    <div class="actions">
+      <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    </div>
+  </header>
+  <div class="card" style="max-width: 600px;margin: auto;">
+    <div class="card-body card-padding">
+      <%= semantic_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+        <%= f.inputs do %>
+          <%= f.input :email, input_html: { autocomplete: :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) } %>
+        <% end %>
+        <%= f.actions do %>
+          <%= f.action :submit, label: t('.resend_confirmation_instructions'), as: :button, html: { 'data-disable-with' => t('activerecord.link.sending') } %>
+          <%= render "devise/shared/links" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

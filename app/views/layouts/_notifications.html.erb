@@ -1,0 +1,68 @@
+<% if current_user %>
+  <style rel="stylesheet" type="text/css">
+    .listview__item.unviewed {
+      background-color: #eeeeee;
+    }
+  </style>
+  <li class="dropdown top-nav__notifications <%= 'top-nav__notify' if current_user.unviewed_notifications.any? %>">
+    <a href="" data-toggle="dropdown">
+      <i class="zmdi zmdi-notifications"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right dropdown-menu--block">
+      <div class="listview listview--hover">
+        <div class="listview__header">
+          Notificações
+          <div class="actions">
+            <a href="javascript:void(0);" id="mark_all_viewed" title="Ler todas">
+                <i class="zmdi zmdi-check-all"></i>
+              </a>
+          </div>
+        </div>
+        <% @notifications = current_user.notifications.order(id: :desc).limit(10) %>
+        <%= render partial: "layouts/notification", collection: @notifications %>
+        <a class="view-more" href="javascript:void(0);" id="more-notifications">Ver mais</a>
+      </div>
+    </div>
+  </li>
+  <script language="javascript">
+  var first_notification_id = <%= current_user.notifications.select(:id).order(:id).first&.id.to_i %>;
+
+  $(function () {
+    $("#more-notifications").click(function () {
+      var id = $("#notifications .lv-body a:last-child").data("id");
+      $.ajax({
+        url: "<%= notifications_path %>",
+        data: { notification_id: id }
+      }).done(function(html) {
+        $("#notifications .lv-body").append(html);
+        should_hide_more_button();
+      });
+    });
+    $("#mark_all_viewed").click(function () {
+      $("#notifications .lv-item").removeClass("unviewed");
+      $("#notification_counter").html("");
+      $("#notification_counter").hide();
+      $.post({
+        url: "<%= mark_all_read_notifications_path %>"
+      });
+    });
+
+    $("#notifications .lv-item").click(function () {
+      $.post({
+        url: "/notifications/" + $(this).data("id") + "/mark_read"
+      });
+      var link = $(this).attr("href");
+      setTimeout(function() {
+          window.location.href = link;
+      }, 100);
+    });
+    should_hide_more_button();
+  });
+
+  function should_hide_more_button() {
+    if ($("#notifications .lv-body a:last-child").data("id") === first_notification_id) {
+      $("#more-notifications").hide();
+    }
+  }
+  </script>
+<% end %>

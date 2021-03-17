@@ -1,0 +1,10 @@
+<header class="content__title">
+  <h1>Alterações no registro</h1>
+</header>
+<div class="card">
+  <div class="card-body card-padding">
+    <div class="table-responsive">
+      <%= render partial: 'layouts/record_changes_table', locals: { :@versions => @object.versions.reorder(id: :desc).paginate(per_page: 10, page: params[:page]), :@hide_record_type => true } %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+/* Variables */
+@import "inc/_variables.scss";
+
+/* Mixins */
+@import "inc/mixins/_mixins.scss";
+
+/* Bootstrap base */
+@import 'bootstrap/scss/bootstrap.scss';
+
+/* Bootstrap overrides */
+@import "inc/bootstrap-overrides/_dropdown.scss";
+@import "inc/bootstrap-overrides/_progress.scss";
+@import "inc/bootstrap-overrides/_card.scss";
+@import "inc/bootstrap-overrides/_buttons.scss";
+@import "inc/bootstrap-overrides/_tables.scss";
+@import "inc/bootstrap-overrides/_forms.scss";
+@import "inc/bootstrap-overrides/_input-groups.scss";
+@import "inc/bootstrap-overrides/_custom-forms.scss";
+@import "inc/bootstrap-overrides/_pagination.scss";
+@import "inc/bootstrap-overrides/_alerts.scss";
+@import "inc/bootstrap-overrides/_close.scss";
+@import "inc/bootstrap-overrides/_breadcrumbs.scss";
+@import "inc/bootstrap-overrides/_collapse.scss";
+@import "inc/bootstrap-overrides/_carousel.scss";
+@import "inc/bootstrap-overrides/_modal.scss";
+@import "inc/bootstrap-overrides/_popovers.scss";
+@import "inc/bootstrap-overrides/_tabs.scss";
+@import "inc/bootstrap-overrides/_tooltip.scss";
+
+
+/* Core styles */
+@import "inc/_fonts.scss";
+@import "inc/_generics.scss";
+@import "inc/_utilities.scss";
+@import "inc/_base.scss";
+@import "inc/_list.scss";
+@import "inc/_layout.scss";
+@import "inc/_misc.scss";
+@import "inc/_header.scss";
+@import "inc/_footer.scss";
+@import "inc/_sidebar.scss";
+// @import "inc/_chat.scss";
+@import "inc/_toggle-switch.scss";
+@import "inc/_listview.scss";
+@import "inc/_toolbars.scss";
+@import "inc/_page-loader.scss";
+// @import "inc/_profile.scss";
+// @import "inc/_photos.scss";
+@import "inc/_contacts.scss";
+// @import "inc/_groups.scss";
+// @import "inc/_messages.scss";
+// @import "inc/_pricing-table.scss";
+// @import "inc/_invoice.scss";
+// @import "inc/_login.scss";
+@import "inc/_todo.scss";
+// @import "inc/_notes.scss";
+@import "inc/_theme.scss";
+@import "inc/_ie-warning.scss";
+// @import "inc/_error.scss";
+// @import "inc/_results.scss";
+// @import "inc/_issue-tracker.scss";
+// @import "inc/_team.scss";
+// @import "inc/_blog.scss";
+// @import "inc/_q-a.scss";
+
+
+/* Widgets */
+// @import "inc/widgets/_past-days.scss";
+// @import "inc/widgets/_visitors.scss";
+// @import "inc/widgets/_pie-charts.scss";
+// @import "inc/widgets/_quick-stats.scss";
+// @import "inc/widgets/_photos.scss";
+// @import "inc/widgets/_ratings.scss";
+// @import "inc/widgets/_profile.scss";
+@import "inc/widgets/_file-input.scss";
+// @import "inc/widgets/_contact.scss";
+// @import "inc/widgets/_signups.scss";
+// @import "inc/widgets/_time.scss";
+// @import "inc/widgets/_search.scss";
+
+
+/* Vendor overrides */
+// @import "inc/vendor-overrides/_flot.scss";
+// @import "inc/vendor-overrides/_sparklines.scss";
+@import "inc/vendor-overrides/_select2.scss";
+// @import "inc/vendor-overrides/_dropzone.scss";
+// @import "inc/vendor-overrides/_nouislider.scss";
+// @import "inc/vendor-overrides/_easy-pie-charts.scss";
+// @import "inc/vendor-overrides/_data-tables.scss";
+// @import "inc/vendor-overrides/_flatpickr.scss";
+// @import "inc/vendor-overrides/_bootstrap-colorpicker.scss";
+// @import "inc/vendor-overrides/_trumbowyg.scss";
+@import "inc/vendor-overrides/_fullcalendar.scss";
+@import "inc/vendor-overrides/_sweetalert2.scss";
+@import "inc/vendor-overrides/_lightgallery.scss";
+@import "inc/vendor-overrides/_jquery.scrollbar.scss";
+// @import "inc/vendor-overrides/_Waves.scss";
+// @import "inc/vendor-overrides/_jqTree.scss";
+// @import "inc/vendor-overrides/_rateYo.scss";
+// @import "inc/vendor-overrides/_jquery-text-counter.scss";

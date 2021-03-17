@@ -1,0 +1,24 @@
+<%= semantic_form_for @user, html: { multipart: true, class: 'form-row' } do |f| %>
+  <%= f.input :avatar, as: :image, direct_upload: true, class: 'col-12' %>
+  <%= f.input :email, class: 'col-sm-6' %>
+  <%= f.input :name, class: 'col-sm-6' %>
+  <%= f.input :password, class: 'col-sm-6' %>
+  <%= f.input :password_confirmation, class: 'col-sm-6' %>
+  <% if Role.allowed_roles(current_user).any? && @user.id != current_user.id %>
+    <%= f.input :is_active, class: 'col-12' %>
+    <% allowed_roles = Role.allowed_roles(current_user) %>
+    <%= f.input :roles, as: :check_boxes, class: 'col-12', collection: Hash[allowed_roles.map { |r| ["#{t("roles.names.#{r.name}")}<span class=\"small\"> (#{t("roles.descriptions.#{r.name}")})</span>".html_safe, r.id] }] if allowed_roles.any? %>
+  <% end %>
+
+  <%= f.action :submit, label: "Salvar", :as => :button, class: 'col-12', html: { 'data-disable-with' => t('activerecord.link.sending') } %>
+<% end %>
+
+<script>
+  $(function(){
+    jCheckBoxes = $("input[name='user[role_ids][]']");
+    jCheckBoxes.on('change', function(){
+      checkBox = this;
+      jCheckBoxes.each(function(i, item){ item.checked = checkBox === item });
+    });
+  });
+</script>

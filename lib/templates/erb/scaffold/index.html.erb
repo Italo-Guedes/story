@@ -1,0 +1,69 @@
+<header class="content__title">
+  <h1>
+    <%%= t('activerecord.models.<%= singular_table_name %>.other') %>
+    <%% if controller_name == "versions" %>
+      <small style="color: red">
+        <%%= t('helpers.scaffold.deleted_warning') %>
+      </small>
+    <%% end %>
+  </h1>
+
+  <div class="actions">
+    <%%= link_to '', <%= table_name %>_path, title: t('activerecord.link.back_to_list'), class: 'actions__item zmdi zmdi-arrow-left' if controller_name == 'versions' %>
+    <%%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    <%%= link_to '', new_<%= singular_table_name %>_path, title: t('activerecord.link.add_new'), class: 'actions__item zmdi zmdi-plus' if can?(:new, <%= class_name %>) && controller_name != 'versions' %>
+  </div>
+</header>
+<div class="card">
+  <div class="card-body card-padding">
+    <%%= render 'layouts/search' unless controller_name == "versions" %>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <%% if controller_name == "versions" %>
+              <th style="color: red"><%%= t('helpers.scaffold.deleted_at') %></th>
+            <%% end %>
+            <%- attributes.each do |attribute| -%>
+              <th><%%= t('activerecord.attributes.<%= singular_table_name %>.<%= attribute.name %>') %></th>
+            <%- end -%>
+              <th class="actions-column"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%% @<%= table_name %>_a = @<%= table_name %> unless controller_name == "versions" %>
+          <%% @<%= table_name %>_a = @<%= table_name %>.map { |<%= singular_table_name %>| <%= singular_table_name %>.reify } if controller_name == "versions" %>
+
+          <%% if @<%= table_name %>_a.count == 0 %>
+            <tr>
+              <td colspan="99" class="text-center"><%%= t('helpers.scaffold.no_records') %></td>
+            </tr>
+          <%% end %>
+          <%% @<%= table_name %>_a.each do |<%= singular_table_name %>| %>
+            <tr>
+              <%% if controller_name == "versions" %>
+                <td style="color: red"><%%= <%= singular_table_name %>.version.created_at %></td>
+              <%% end %>
+              <%- attributes.each do |attribute| -%>
+                <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+              <%- end -%>
+              <td class="actions-column actions">
+                <%%= link_to '', (<%= singular_table_name %>.version.present? ? show_version_path(model_name: "<%= table_name %>", id: <%= singular_table_name %>.version.id) : <%= singular_table_name %>), title: t("activerecord.link.details"), class: "zmdi zmdi-search actions__item" %>
+                <%%= link_to '', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), title: t("activerecord.link.edit"), class: "zmdi zmdi-edit actions__item" if can? :edit, <%= singular_table_name %> %>
+                <%%= link_to '', <%= singular_table_name %>, title: t("activerecord.link.destroy"), class: "zmdi zmdi-delete actions__item", method: :delete, data: { confirm: t('activerecord.link.destroy_confirm') } if can? :destroy, <%= singular_table_name %> %>
+              </td>
+            </tr>
+          <%% end %>
+        </tbody>
+      </table>
+    </div>
+    <%%= will_paginate @<%= table_name %>, class: "apple_pagination", previous_label: t('activerecord.link.previous'), next_label: t('activerecord.link.next') %>
+    <br/>
+    <div class="text-center">
+      <%%= link_to index_versions_path(model_name: "<%= table_name %>"), style: "color: red" do %>
+        <%%= t('helpers.scaffold.deleted_records') %>
+      <%% end if can?(:read, :deleted_records) && controller_name != "versions" %>
+    </div>
+  </div>
+  <br>
+</div>

@@ -1,0 +1,7 @@
+<%= link_to notification.best_url, class: 'listview__item ' + (!notification.viewed ? 'unviewed' : ''), 'data-id' => notification.id, title: notification.text do %>
+  <%= image_tag notification.best_image, class: 'listview__img' if notification.best_image.present? %>
+  <div class='listview__content'>
+    <div class='listview__heading'><%= notification.text %></div>
+    <p><small><%= notification.created_at %></small></p>
+  </div>
+<% end %>

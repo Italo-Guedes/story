@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rdmapps">
+  <meta name="keywords" content="rdmapps">
+  <meta name="author" content="Rdmapps">
+
+  <title>Rdmapps</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800" rel="stylesheet">
+  <meta name="theme-color" content="#ffffff">
+  <style type="text/css" rel="stylesheet">
+    body {
+      background-color: white;
+      color: white;
+      font-family: 'Open Sans', sans-serif;
+      letter-spacing: 0px;
+      font-size: 16px;
+      margin: 40px 0 0 0;
+      padding: 0px;
+    }
+
+    h1 {
+      font-size: 700%;
+      margin: 0px;
+      font-weight: 900;
+      -webkit-text-stroke-width: 1.5px;
+      -webkit-text-stroke-color: gray;
+      text-shadow: 0 0 5px rgba(100, 100, 100, .43);
+    }
+
+    small {
+      font-size: 17%;
+      display: block;
+      margin-bottom: 30px;
+      -webkit-text-stroke-width: 0;
+      -webkit-text-stroke-color: none;
+    }
+
+    .orange-line {
+      background-color: white;
+      height: 3px;
+      width: 40%;
+      display: inline-block;
+    }
+
+    #container {
+      -webkit-transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
+
+    #inner-container {
+      max-width: 800px;
+      margin: auto;
+      position: relative;
+      top: 40%;
+      text-align: center;
+      transform: translateY(-50%);
+    }
+
+    #logo {
+      /* max-width: 90%; */
+    }
+
+    p {
+      font-size: 110%;
+      display: block;
+      color: grey;
+      -webkit-text-stroke-width: 0;
+      -webkit-text-stroke-color: none;
+    }
+
+    a:link,
+    a:hover,
+    a:visited {
+      color: grey;
+      text-decoration: none;
+    }
+
+    .separator {
+      height: 290px;
+      width: 2px;
+      margin: 0px 30px;
+      display: inline-block;
+      background: grey;
+    }
+    .image {
+      display: inline-block;
+      max-width: 360px;
+    }
+
+    .text {
+      display: inline-block;
+      text-align: left;
+      width: 360px;
+    }
+
+    @media (max-width: 800px) {
+      .separator {
+        display: none;
+      }
+
+      .image {
+        display: inline-block;
+        width: 440px;
+      }
+
+      .text {
+        display: inline-block;
+        text-align: center;
+        width: 440px;
+      }
+
+      #inner-container {
+        top: 50px;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="inner-container" class="row">
+      <div class="image">
+        <img id="logo" src="./roo_erro.png" class="banner-logo" alt="Logo" />
+      </div>
+      <div class="separator"></div>
+      <div class="text">
+        <h1>404</h1>
+        <p style="font-style: italic;">A página que você acessou não foi encontrada.</p>
+        <p style="font-weight: 100; color:rgb(184, 182, 182)">Código do Erro: 404</p>
+        <p style="font-weight: 100;"><a href="/">Clique aqui para voltar à página inicial</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

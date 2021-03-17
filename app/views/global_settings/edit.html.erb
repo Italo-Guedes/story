@@ -1,0 +1,14 @@
+<header class="content__title">
+  <h1><%= t('helpers.submit.general.edit', model: t('activerecord.models.global_setting.one')) %></h1>
+
+  <div class="actions">
+    <%= link_to '', global_settings_path, title: t('Show'), class: 'actions__item zmdi zmdi-search' %>
+    <%= link_to '', '', title: t('Refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+  </div>
+</header>
+
+<div class="card">
+  <div class="card-body">
+		<%= render 'form' %>
+	</div>
+</div>

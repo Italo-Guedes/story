@@ -1,0 +1,26 @@
+<%= render 'layouts/menu_hider' %>
+<div style="max-width: 600px;margin: auto;">
+  <header class="content__title">
+    <h1><%= t('.sign_up') %></h1>
+
+    <div class="actions">
+      <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    </div>
+  </header>
+  <div class="card" style="max-width: 600px;margin: auto;">
+    <div class="card-body card-padding">
+      <%= semantic_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= f.inputs do %>
+          <%= f.input :name, input_html: { autofocus: true } %>
+          <%= f.input :email, input_html: { autocomplete: "email" } %>
+          <%= f.input :password, hint: (@minimum_password_length ? t('devise.shared.minimum_password_length', count: @minimum_password_length) : ''), input_html: { autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation, input_html: { autocomplete: "new_password" } %>
+        <% end %>
+        <%= f.actions do %>
+          <%= f.action :submit, label: t('.sign_up'), as: :button, html: { 'data-disable-with' => t('activerecord.link.sending') } %>
+          <%= render "devise/shared/links" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

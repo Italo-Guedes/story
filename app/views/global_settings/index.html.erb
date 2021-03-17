@@ -1,0 +1,70 @@
+<header class="content__title">
+  <h1>
+    <%= t('activerecord.models.global_setting.other') %>
+  </h1>
+
+  <div class="actions">
+    <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    <%= link_to '', edit_global_setting_path(@global_setting), title: t('activerecord.link.edit'), class: 'actions__item zmdi zmdi-edit' if can?(:edit, @global_setting) && controller_name != 'versions' %>
+  </div>
+</header>
+
+<div class="card">
+  <div class="card-body card-padding record-show">
+    <div class="row">
+      <div class="col-sm-6">
+        <label class="fg-label">
+          <%= t('activerecord.attributes.global_setting.page_title') %>
+        </label><br />&nbsp;
+        <%= @global_setting.page_title %>
+      </div>
+      <div class="col-sm-6">
+        <label class="fg-label">
+          <%= t('activerecord.attributes.global_setting.page_subtitle') %>
+        </label><br />&nbsp;
+        <%= @global_setting.page_subtitle %>
+      </div>
+      <div class="col-12">
+        <label class="fg-label">
+          <%= t('activerecord.attributes.global_setting.page_author') %>
+        </label><br />&nbsp;
+        <%= @global_setting.page_author %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <label class="fg-label">
+          <%= t('activerecord.attributes.global_setting.menu_border_color') %>
+        </label><br />&nbsp;
+        <%= @global_setting.menu_border_color %>
+      </div>
+      <div class="col-sm-6">
+        <label class="fg-label">
+          <%= t('activerecord.attributes.global_setting.menu_color') %>
+        </label><br />&nbsp;
+        <%= @global_setting.menu_color %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <label class="fg-label">
+          <%= t('activerecord.attributes.global_setting.page_description') %>
+        </label><br />&nbsp;
+        <%= @global_setting.page_description %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <label class="fg-label">
+          <%= t('activerecord.attributes.global_setting.created_at') %></label><br />&nbsp;
+        <%= @global_setting.created_at %>
+      </div>
+      <div class="col-sm-6">
+        <label class="fg-label">
+          <%= t('activerecord.attributes.global_setting.updated_at') %></label><br />&nbsp;
+        <%= @global_setting.updated_at %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render partial: "layouts/record_changes", locals: { :@object => @global_setting } %>

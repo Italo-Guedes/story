@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rdmapps</title>
+    <%= csrf_meta_tags %>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <%= javascript_pack_tag 'react_public_application' %>
+    <%= stylesheet_pack_tag 'react_public_application' %>
+  </head>
+
+  <body>
+    <div id='root'>
+      <%= yield %>
+    </div>
+  </body>
+</html>

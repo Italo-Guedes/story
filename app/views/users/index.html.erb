@@ -1,0 +1,70 @@
+<header class="content__title">
+  <h1>
+    <%= t('activerecord.models.user.other') %>
+    <% if controller_name == "versions" %>
+      <small style="color: red">
+        (apenas registros deletados)
+      </small>
+    <% end %>
+  </h1>
+
+  <div class="actions">
+    <%= link_to '', users_path, title: t('activerecord.link.back_to_list'), class: 'actions__item zmdi zmdi-arrow-left' if controller_name == 'versions' %>
+    <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    <%= link_to '', new_user_path, title: t('activerecord.link.add_new'), class: 'actions__item zmdi zmdi-plus' if can?(:new, User) && controller_name != 'versions' %>
+  </div>
+</header>
+
+<div class="card">
+  <div class="card-body">
+    <%= render 'layouts/search' unless controller_name == "versions" %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <% if controller_name == "versions" %>
+            <th style="color: red">Deletado em</th>
+          <% end %>
+          <th><%= t('activerecord.attributes.user.name') %></th>
+          <th><%= t('activerecord.attributes.user.email') %></th>
+          <th><%= t('activerecord.attributes.user.user_roles') %></th>
+          <th class="actions-column"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users_a = @users unless controller_name == "versions" %>
+        <% @users_a = @users.map { |user| user.reify } if controller_name == "versions" %>
+        <% if @users_a.blank? %>
+          <tr>
+            <td colspan="99" class="text-center">Nenhum registro encontrado.</td>
+          </tr>
+        <% end %>
+        <% @users_a.each do |user| %>
+          <tr>
+            <% if controller_name == "versions" %>
+              <td style="color: red"><%= user.version.created_at %></td>
+            <% end %>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.roles.map { |r| I18n.t("roles.names.#{r.name}") }.join(', ') %></td>
+            <td class="actions-column actions">
+              <%= link_to '', (user.version.present? ? show_version_path(model_name: "users", id: user.version.id) : user), title: t("activerecord.link.details"), class: "zmdi zmdi-search actions__item" %>
+              <%= link_to '', edit_user_path(user), title: t("activerecord.link.edit"), class: "zmdi zmdi-edit actions__item" if can? :edit, user %>
+              <%= link_to '', user, title: t("activerecord.link.destroy"), class: "zmdi zmdi-delete actions__item", method: :delete, data: { confirm_swal: t('activerecord.link.destroy_confirm') } if can? :destroy, user %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= will_paginate @users, class: "apple_pagination", previous_label: t("activerecord.link.previous"), next_label: t("activerecord.link.next") %>
+
+    <br/>
+    <div class="text-center">
+      <%= link_to index_versions_path(model_name: "users"), style: "color: red" do %>
+        Lista de registros deletados
+      <% end if can?(:read, :deleted_records) && controller_name != "versions" %>
+    </div>
+  </div>
+  <br>
+</div>

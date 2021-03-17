@@ -1,0 +1,54 @@
+<header class="content__title">
+  <h1>
+    <%= t('helpers.submit.general.show', model: t('activerecord.models.user.one')) %>
+  </h1>
+
+  <div class="actions">
+    <%= link_to '', (controller_name == "versions" ? index_versions_path(model_name: "users") : users_path), title: t('activerecord.link.back_to_list'), class: 'actions__item zmdi zmdi-arrow-left' %>
+    <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    <%= link_to '', edit_user_path(@user), title: t('activerecord.link.add_new'), class: 'actions__item zmdi zmdi-edit' if can?(:edit, @user) && controller_name != 'versions' %>
+  </div>
+</header>
+<div class="card">
+  <div class="card-body card-padding record-show">
+    <div class="row">
+      <div class="col-sm-6">
+        <label class="fg-label"><%= t("activerecord.attributes.user.email") %></label><br/>&nbsp;
+        <%= @user.email %>
+      </div>
+      <div class="col-sm-6">
+        <label class="fg-label"><%= t("activerecord.attributes.user.name") %></label><br/>&nbsp;
+        <%= @user.name %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <label class="fg-label"><%= t("activerecord.attributes.user.is_active") %></label><br/>&nbsp;
+        <%= @user.is_active ? "Sim" : "Não" %>
+      </div>
+      <div class="col-sm-10">
+        <label class="fg-label"><%= t("activerecord.attributes.user.user_roles") %></label><br/>&nbsp;
+        <%= (@user.roles.pluck(:name).map { |m| t("roles.names.#{m}") }).join(", ") %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <label class="fg-label"><%= t("activerecord.attributes.user.created_at") %></label><br/>&nbsp;
+        <%= @user.created_at %>
+      </div>
+      <div class="col-sm-6">
+        <label class="fg-label"><%= t("activerecord.attributes.user.updated_at") %></label><br/>&nbsp;
+        <%= @user.updated_at %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="fg-label"><%= t("activerecord.attributes.user.avatar") %></label><br/>&nbsp;
+        <%= link_to url_for(@user.avatar), data: { lightbox: true } do %>
+          <%= image_tag url_for(thumb(@user.avatar)) %>
+        <% end if @user.avatar.attached? %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render partial: "layouts/record_changes", locals: { :@object => @user } %>

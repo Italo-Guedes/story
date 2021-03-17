@@ -1,0 +1,74 @@
+<div class="scrollbar-inner">
+  <% if current_user %>
+    <div class="user">
+      <div class="user__info" data-toggle="dropdown">
+        <% if current_user.avatar.attached? %>
+          <%= image_tag url_for(square_thumb(current_user.avatar)), class: 'user__img' %>
+        <% else %>
+          <%= gravatar_for(current_user, class: 'user__img') %>
+        <% end %>
+        <div>
+          <div class="user__name"><%= current_user.name %></div>
+          <div class="user__email"><%= current_user.email %></div>
+        </div>
+      </div>
+
+      <div class="dropdown-menu">
+        <%= link_to 'Editar perfil', edit_user_path(current_user), class: 'dropdown-item' %>
+        <%= link_to 'Sair', destroy_user_session_path, method: 'DELETE', class: 'dropdown-item' %>
+      </div>
+    </div>
+  <% end %>
+
+  <ul class="navigation">
+    <% unless user_signed_in? %>
+      <li class="navigation__active">
+        <%= link_to('Faça login', new_user_session_path)  %>
+      </li>
+    <% else %>
+      <li class="navigation__active">
+        <%= link_to home_index_path do %>
+          <i class="zmdi zmdi-home"></i> Home
+        <% end %>
+      </li>
+      <li>
+        <%= link_to home_calendar_path do %>
+          <i class="zmdi zmdi-calendar"></i> Calendário
+        <% end %>
+      </li>
+
+      <% if can? :manage, User %>
+        <li>
+          <%= link_to users_path do %>
+            <i class="zmdi zmdi-accounts-alt"></i><%= t('activerecord.models.user.other') %>
+          <% end %>
+        </li>
+      <% end %>
+      
+      <li class="separator"><hr/></li>
+      <% if can?(:index, GlobalSetting) || can?(:admin_pages, :database_changes) %>
+        <li class="navigation__sub">
+          <a href=""><i class="zmdi zmdi-settings"></i> Administração</a>
+          <ul>
+            <li><%= link_to 'Configurações Globais', global_settings_path if can? :index, GlobalSetting %></li>
+            <li><%= link_to 'Auditoria', admin_pages_database_changes_path if can? :admin_pages, :database_changes %></li>
+            <li><%= link_to 'Sidekiq', admin_pages_sidekiq_path if can? :admin_pages, :sidekiq %></li>
+            <li><%= link_to 'PgHero', admin_pages_pghero_path if can? :admin_pages, :pghero %>
+            </li>
+          </ul>
+        </li>
+      <% end %>
+      
+      <!--li class="navigation__sub">
+        <a href=""><i class="zmdi zmdi-view-week"></i> Variants</a>
+
+        <ul>
+          <li><a href="hidden-sidebar.html">Hidden Sidebar</a></li>
+          <li><a href="boxed-layout.html">Boxed Layout</a></li>
+          <li><a href="hidden-sidebar-boxed-layout.html">Boxed Layout with Hidden Sidebar</a></li>
+          <li><a href="top-navigation.html">Top Navigation</a></li>
+        </ul>
+      </li-->
+    <% end %>
+  </ul>
+</div>

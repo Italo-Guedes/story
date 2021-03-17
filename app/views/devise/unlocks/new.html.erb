@@ -1,0 +1,24 @@
+<%= render 'layouts/menu_hider' %>
+<div style="max-width: 600px;margin: auto;">
+  <header class="content__title">
+    <h1><%= t('.resend_unlock_instructions') %></h1>
+
+    <div class="actions">
+      <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    </div>
+  </header>
+
+  <div class="card" style="max-width: 600px;margin: auto;">
+    <div class="card-body card-padding">
+      <%= semantic_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+        <%= f.inputs do %>
+          <%= f.input :email, input_html: { autofocus: true, autocomplete: "email" } %>
+        <% end %>
+        <%= f.actions do %>
+          <%= f.action :submit, label: t('.resend_unlock_instructions'), as: :button, html: { 'data-disable-with' => t('activerecord.link.sending') } %>
+          <%= render "devise/shared/links" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

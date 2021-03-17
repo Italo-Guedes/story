@@ -1,0 +1,437 @@
+pt-BR:
+  pt-BR: Português
+  en: Inglês
+  de: Alemão
+  es: Espanhol
+  will_paginate:
+    page_gap: "..."
+  hello: "Olá mundo"
+  Back: "Voltar"
+  Show: "Mostrar"
+  "true": "Sim"
+  "false": "Não"
+  New: "Novo"
+  fileinput:
+    add: 'Selecionar arquivo'
+    change: 'Mudar arquivo'
+    remove: 'Remover'
+  papertrail:
+    events:
+      create: "Criação"
+      update: "Atualização"
+      destroy: "Deleção"
+  search_here: "Pesquise aqui"
+  Edit: "Editar"
+  Add: "Adicionar"
+  Refresh: "Atualizar"
+  roles:
+    names:
+      super_admin: "Super administrador"
+      admin: "Administrador"
+      operator: "Operador"
+    descriptions:
+      super_admin: "Pode criar outros administradores"
+      admin: "Pode editar todos os registros"
+      operator: "Usuário operacional"
+  Are you sure?: "Tem certeza?"
+  Destroy: "Remover"
+  change_password_helper_text: "Preencha a senha apenas se deseja alterá-la"
+  unauthorized:
+    manage:
+      all: "Não autorizado para %{action} %{subject}"
+      user: "Acesso Negado"
+  helpers:
+    scaffold:
+      deleted_warning: (apenas registros deletados)
+      deleted_at: Deletado em
+      no_records: Nenhum registro encontrado.
+      deleted_records: Lista de registros deletados
+    select:
+      prompt: Por favor selecione
+    submit:
+      create: Criar %{model}
+      submit: Salvar %{model}
+      update: Atualizar %{model}
+      update: "Salvar alterações"
+      general:
+        show: "%{model} - Detalhes"
+        edit: "Editar %{model}"
+        new: "Novo %{model}"
+  activerecord:
+    link:
+      back_to_list: "Voltar"
+      details: "Detalhes"
+      edit: "Editar"
+      save: 'Salvar'
+      destroy: "Apagar"
+      destroy_confirm: "Tem certeza? Esta ação não pode ser desfeita, e ela fica registrada nos logs do sistema"
+      refresh: 'Recarregar'
+      add_new: "Adicionar"
+      previous: "← Anterior"
+      next: "Próxima →"
+      sending: 'Aguarde...'
+    successful:
+      messages:
+        created: "%{model} foi criado com sucesso."
+        updated: "%{model} foi atualizado com sucesso."
+    models:
+      task:
+        one: tarefa
+        other: tarefas
+      global_setting:
+        one: "Configuração Global"
+        other: "Configurações Globais"  
+      role:
+        one: "Perfil de Acesso"
+        other: "Perfis de Acesso"
+      user_role:
+        one: "Perfil de Acesso"
+        other: "Perfis de Acesso"
+      user:
+        one: "Usuário"
+        other: "Usuários"
+      operational_cost:
+        one: "Custo operacional"
+        other: "Custos operacionais"
+      project_amendment:
+        one: "Aditivo contratual"
+        other: "Aditivos contratuais"
+      project_cost:
+        one: "Custo de projeto"
+        other: "Custos de projeto"
+      project:
+        one: "Projeto"
+        other: "Projetos"
+      salary:
+        one: "Salário"
+        other: "Salários"
+      work:
+        one: "Apontamento de trabalho"
+        other: "Apontamentos de trabalho"
+      worker:
+        one: "Funcionário"
+        other: "Funcionários"
+      comment:
+        one: 'Comentário'
+        other: 'Comentários'
+    attributes:
+      comment:
+        id: "Id"
+        text: Comentário
+        created_at: "Data da criação"
+        updated_at: "Última atualização"
+      task:
+        id: "Id"
+        name: Nome
+        age: idade
+        user: Usuário
+        birthtime: nascimento com hora
+        birth: nascimento
+        bio: bio
+        created_at: "Data da criação"
+        updated_at: "Última atualização"
+      global_setting:
+        page_title: "Título da página"
+        page_subtitle: "Subtítulo da página"
+        page_author: "Autor da página"
+        page_description: "Descrição da página"
+        menu_color: "Cor do menu"
+        menu_border_color: "Cor da Borda do menu"
+        created_at: "Data da criação"
+        updated_at: "Última atualização"
+      user:
+        id: "Id"
+        avatar: "Avatar"
+        first_name: "Primeiro nome"
+        last_name: "Último nome"
+        name: "Nome"
+        phone: "Telefone"
+        timezone: "Timezone"
+        is_active: "Conta ativa?"
+        encrypted_password: "Senha"
+        user_roles: "Regras de acesso"
+        confirmation_sent_at: Confirmação enviada em
+        confirmation_token: Token de confirmação
+        confirmed_at: Confirmado em
+        created_at: Criado em
+        current_password: Senha atual
+        current_sign_in_at: Atualmente logado em
+        current_sign_in_ip: IP do acesso atual
+        email: E-mail
+        encrypted_password: Senha criptografada
+        failed_attempts: Tentativas sem sucesso
+        last_sign_in_at: Último acesso em
+        last_sign_in_ip: Último IP de acesso
+        locked_at: Bloqueado em
+        password: Senha
+        password_confirmation: Confirme sua senha
+        remember_created_at: Lembrar criado em
+        remember_me: Lembre-se de mim
+        reset_password_sent_at: Resetar senha enviado em
+        reset_password_token: Resetar token de senha
+        sign_in_count: Contagem de acessos
+        unconfirmed_email: E-mail não confirmado
+        unlock_token: Token de desbloqueio
+        updated_at: Atualizado em
+      operational_cost:
+        id: "Id"
+        name: "Nome"
+        year: "Ano"
+        month: "Mês"
+        value: "Custo"
+        created_at: "Data da criação"
+        updated_at: "Última atualização"
+      project_amendment:
+        project: "Projeto"
+        id: "Id"
+        name: "Nome"
+        initial_cost: "Valor contratado"
+        paid_cost: "Valor pago"
+        initial_work: "Trabalho previsto"
+        done_work: "Trabalho realizado"
+        created_at: "Data da criação"
+        updated_at: "Última atualização"
+      project_cost:
+        id: "Id"
+        project: "Projeto"
+        name: "Nome"
+        year: "Ano"
+        month: "Mês"
+        value: "Custo"
+        created_at: "Data da criação"
+        updated_at: "Última atualização"
+      project:
+        id: "Id"
+        name: "Nome"
+        possible_names: "Nomes possíveis"
+        initial_cost: "Valor contratado"
+        paid_cost: "Valor pago"
+        base_project: "Projeto base"
+        base_project_hint: "Selecione um projeto base se este for um aditivo contratual"
+        initial_work: "Trabalho previsto"
+        done_work: "Trabalho realizado"
+        internal: "Projeto interno?"
+        created_at: "Data da criação"
+        updated_at: "Última atualização"
+      salary:
+        id: "Id"
+        name: "Nome"
+        year: "Ano"
+        month: "Mês"
+        worker: "Funcionário"
+        net_value: "Valor líquido"
+        gross_value: "Valor bruto"
+        created_at: "Data da criação"
+        updated_at: "Última atualização"
+      work:
+        id: "Id"
+        name: "Nome"
+        year: "Ano"
+        month: "Mês"
+        work: "Trabalho"
+        project: "Projeto"
+        worker: "Funcionário"
+        created_at: "Data da criação"
+        updated_at: "Última atualização"
+      worker:
+        id: "Id"
+        name: "Nome"
+        picture: "Foto"
+        created_at: "Data da criação"
+        updated_at: "Última atualização"
+  date:
+    abbr_day_names:
+    - Dom
+    - Seg
+    - Ter
+    - Qua
+    - Qui
+    - Sex
+    - Sáb
+    abbr_month_names:
+    -
+    - Jan
+    - Fev
+    - Mar
+    - Abr
+    - Mai
+    - Jun
+    - Jul
+    - Ago
+    - Set
+    - Out
+    - Nov
+    - Dez
+    day_names:
+    - Domingo
+    - Segunda
+    - Terça
+    - Quarta
+    - Quinta
+    - Sexta
+    - Sábado
+    formats:
+      default: ! '%d/%m/%Y'
+      long: ! '%d de %B de %Y'
+      short: ! '%d de %B'
+    month_names:
+    -
+    - Janeiro
+    - Fevereiro
+    - Março
+    - Abril
+    - Maio
+    - Junho
+    - Julho
+    - Agosto
+    - Setembro
+    - Outubro
+    - Novembro
+    - Dezembro
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: aproximadamente 1 hora
+        other: aproximadamente %{count} horas
+      about_x_months:
+        one: aproximadamente 1 mês
+        other: aproximadamente %{count} meses
+      about_x_years:
+        one: aproximadamente 1 ano
+        other: aproximadamente %{count} anos
+      almost_x_years:
+        one: quase 1 ano
+        other: quase %{count} anos
+      half_a_minute: meio minuto
+      less_than_x_minutes:
+        one: menos de um minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: mais de 1 ano
+        other: mais de %{count} anos
+      x_days:
+        one: 1 dia
+        other: ! '%{count} dias'
+      x_minutes:
+        one: 1 minuto
+        other: ! '%{count} minutos'
+      x_months:
+        one: 1 mês
+        other: ! '%{count} meses'
+      x_seconds:
+        one: 1 segundo
+        other: ! '%{count} segundos'
+    prompts:
+      day: Dia
+      hour: Hora
+      minute: Minuto
+      month: Mês
+      second: Segundo
+      year: Ano
+  errors:
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: deve ser aceito
+      blank: não pode ficar em branco
+      present: deve ficar em branco
+      confirmation: não é igual a %{attribute}
+      empty: não pode ficar vazio
+      equal_to: deve ser igual a %{count}
+      even: deve ser par
+      exclusion: não está disponível
+      greater_than: deve ser maior que %{count}
+      greater_than_or_equal_to: deve ser maior ou igual a %{count}
+      inclusion: não está incluído na lista
+      invalid: não é válido
+      less_than: deve ser menor que %{count}
+      less_than_or_equal_to: deve ser menor ou igual a %{count}
+      not_a_number: não é um número
+      not_an_integer: não é um número inteiro
+      odd: deve ser ímpar
+      record_invalid: ! 'A validação falhou: %{errors}'
+      restrict_dependent_destroy:
+        one: "Não é possível excluir o registro pois existe um %{record} dependente"
+        many: "Não é possível excluir o registro pois existem %{record} dependentes"
+      taken: já está em uso
+      too_long: ! 'é muito longo (máximo: %{count} caracteres)'
+      too_short: ! 'é muito curto (mínimo: %{count} caracteres)'
+      wrong_length: não possui o tamanho esperado (%{count} caracteres)
+    template:
+      body: ! 'Por favor, verifique o(s) seguinte(s) campo(s):'
+      header:
+        one: ! 'Não foi possível gravar %{model}: 1 erro'
+        other: ! 'Não foi possível gravar %{model}: %{count} erros.'
+  number:
+    currency:
+      format:
+        delimiter: .
+        format: ! '%u %n'
+        precision: 2
+        separator: ! ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: R$
+    format:
+      delimiter: .
+      precision: 3
+      separator: ! ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion:
+            one: bilhão
+            other: bilhões
+          million:
+            one: milhão
+            other: milhões
+          quadrillion:
+            one: quatrilhão
+            other: quatrilhões
+          thousand: mil
+          trillion:
+            one: trilhão
+            other: trilhões
+          unit: ''
+      format:
+        delimiter: .
+        precision: 2
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: .
+    precision:
+      format:
+        delimiter: .
+  support:
+    array:
+      last_word_connector: ! ' e '
+      two_words_connector: ! ' e '
+      words_connector: ! ', '
+  time:
+    am: ''
+    formats:
+      default: ! '%a, %d de %B de %Y, %H:%M:%S %z'
+      long: ! '%d de %B de %Y, %H:%M'
+      short: ! '%d de %B, %H:%M'
+    pm: ''

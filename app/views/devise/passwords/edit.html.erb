@@ -1,0 +1,29 @@
+<%= render 'layouts/menu_hider' %>
+<div style="max-width: 600px;margin: auto;">
+  <header class="content__title">
+    <h1><%= t('.change_your_password') %></h1>
+
+    <div class="actions">
+      <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    </div>
+  </header>
+  <div class="card" style="max-width: 600px;margin: auto;">
+    <div class="card-body card-padding record">
+      <%= semantic_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+        <%= f.inputs do %>
+          <%= f.input :reset_password_token, as: :hidden %>
+          <% if @minimum_password_length %>
+            <em><%=  %></em><br />
+          <% end %>
+          <%= f.input :password, hint: (@minimum_password_length ? t('devise.shared.minimum_password_length', count: @minimum_password_length) : ''), input_html: { autofocus: true, autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation, input_html: { autocomplete: "new-password" } %>
+        <% end %>
+
+        <%= f.actions do %>
+          <%= f.action :submit, label: t('.change_my_password'), as: :button, html: { 'data-disable-with' => t('activerecord.link.sending') } %>
+          <%= render "devise/shared/links" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
