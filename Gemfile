@@ -65,6 +65,8 @@ group :development do
   gem 'annotate'
   gem 'web-console'
 
+  gem 'derailed'
+
   # VSCode debugging
   gem 'debase'
   gem 'ruby-debug-ide'
