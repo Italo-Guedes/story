@@ -47,4 +47,4 @@ import '../theme/js/functions/swal-ujs'
 Rails.start()
 ActiveStorage.start()
 
-console.log('Hello World from Webpacker5')
+// console.log('Hello World from Webpacker5')

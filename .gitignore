@@ -13,7 +13,6 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-/tmp
 
 *.sublime-project
 *.sublime-workspace
@@ -38,3 +37,14 @@ config/secrets.yml.key
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+!tmp/
+
+tmp/*
+!tmp/pids/
+!tmp/cache/
+
+tmp/pids/*
+tmp/cache/*
+
+!.keep

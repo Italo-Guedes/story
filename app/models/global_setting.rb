@@ -20,9 +20,17 @@ class GlobalSetting < ApplicationRecord
 
   attr_accessor :cities, :currency, :field_date, :field_datetime
 
-  @@instance = GlobalSetting.first || GlobalSetting.create!(page_title: 'Rdmapps', page_subtitle: 'startkit', page_author: 'Rdmapps', page_description: 'Um sistema feito pela Rdmapps', menu_color: '#D12E5E', menu_border_color: '#FFFFFF')
+  @instance = GlobalSetting.first ||
+              GlobalSetting.create!(
+                page_title: 'Rdmapps',
+                page_subtitle: 'startkit',
+                page_author: 'Rdmapps',
+                page_description: 'Um sistema feito pela Rdmapps',
+                menu_color: '#D12E5E',
+                menu_border_color: '#FFFFFF'
+              )
 
   def self.instance
-    @@instance
+    @instance
   end
 end
