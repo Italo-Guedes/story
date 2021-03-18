@@ -8,7 +8,6 @@ class Ability
       can :teste, :notification
       if user.has_cached_role?(:super_admin)
         can :manage, User
-        can :manage, Task
         cannot :destroy, User, id: user.id
         can :manage, GlobalSetting, id: GlobalSetting.instance.id
         can :read, :deleted_records
