@@ -20,7 +20,6 @@ services:
     depends_on:
       - db
       - redis
-      # - yarn
     environment:
       WEB_CONCURRENCY: 0
       DB_HOST: db

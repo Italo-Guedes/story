@@ -23,7 +23,8 @@
 </div>
 
 <script>
-  $(function() {
-    $('#item_type').val('<%= params[:item_type] %>').trigger('change');
-  });
+$( document ).on('turbolinks:load', function() {
+// $(function() {
+  $('#item_type').val('<%= params[:item_type] %>').trigger('change');
+});
 </script>

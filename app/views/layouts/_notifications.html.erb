@@ -24,45 +24,46 @@
       </div>
     </div>
   </li>
-  <script language="javascript">
-  var first_notification_id = <%= current_user.notifications.select(:id).order(:id).first&.id.to_i %>;
+<script language="javascript">
+var first_notification_id = <%= current_user.notifications.select(:id).order(:id).first&.id.to_i %>;
 
-  $(function () {
-    $("#more-notifications").click(function () {
-      var id = $("#notifications .lv-body a:last-child").data("id");
-      $.ajax({
-        url: "<%= notifications_path %>",
-        data: { notification_id: id }
-      }).done(function(html) {
-        $("#notifications .lv-body").append(html);
-        should_hide_more_button();
-      });
+$( document ).on('turbolinks:load', function() {
+// $(function () {
+  $("#more-notifications").click(function () {
+    var id = $("#notifications .lv-body a:last-child").data("id");
+    $.ajax({
+      url: "<%= notifications_path %>",
+      data: { notification_id: id }
+    }).done(function(html) {
+      $("#notifications .lv-body").append(html);
+      should_hide_more_button();
     });
-    $("#mark_all_viewed").click(function () {
-      $("#notifications .lv-item").removeClass("unviewed");
-      $("#notification_counter").html("");
-      $("#notification_counter").hide();
-      $.post({
-        url: "<%= mark_all_read_notifications_path %>"
-      });
+  });
+  $("#mark_all_viewed").click(function () {
+    $("#notifications .lv-item").removeClass("unviewed");
+    $("#notification_counter").html("");
+    $("#notification_counter").hide();
+    $.post({
+      url: "<%= mark_all_read_notifications_path %>"
     });
-
-    $("#notifications .lv-item").click(function () {
-      $.post({
-        url: "/notifications/" + $(this).data("id") + "/mark_read"
-      });
-      var link = $(this).attr("href");
-      setTimeout(function() {
-          window.location.href = link;
-      }, 100);
-    });
-    should_hide_more_button();
   });
 
-  function should_hide_more_button() {
-    if ($("#notifications .lv-body a:last-child").data("id") === first_notification_id) {
-      $("#more-notifications").hide();
-    }
+  $("#notifications .lv-item").click(function () {
+    $.post({
+      url: "/notifications/" + $(this).data("id") + "/mark_read"
+    });
+    var link = $(this).attr("href");
+    setTimeout(function() {
+        window.location.href = link;
+    }, 100);
+  });
+  should_hide_more_button();
+});
+
+function should_hide_more_button() {
+  if ($("#notifications .lv-body a:last-child").data("id") === first_notification_id) {
+    $("#more-notifications").hide();
   }
-  </script>
+}
+</script>
 <% end %>

@@ -153,31 +153,32 @@
 
 </html>
 <script language="javascript">
-  $(function () {
-    var valid_tz = <%= raw Oj.dump(TZInfo::Timezone.all_identifiers) %>;
-    var current_tz = '<%= Time.zone.name %>';
-    var browser_tz = jstz.determine().name();
+$( document ).on('turbolinks:load', function() {
+// $(function () {
+  var valid_tz = <%= raw Oj.dump(TZInfo::Timezone.all_identifiers) %>;
+  var current_tz = '<%= Time.zone.name %>';
+  var browser_tz = jstz.determine().name();
 
-    var browser_tz_l = browser_tz.toLowerCase();
-    var rslt = null;
-    $.each(valid_tz, function(index, value) { 
-      if (rslt == null && value.toLowerCase() === browser_tz_l) {
-        rslt = index;
-        return false;
-      }
-    });
-
-    if (current_tz != browser_tz && rslt != null) {
-      $.get("/home/index.json?timezone=" + browser_tz, null);
+  var browser_tz_l = browser_tz.toLowerCase();
+  var rslt = null;
+  $.each(valid_tz, function(index, value) { 
+    if (rslt == null && value.toLowerCase() === browser_tz_l) {
+      rslt = index;
+      return false;
     }
-
-    $("#notice-div").fadeTo(10000, 500).slideUp(500, function () {
-      $("#notice-div").slideUp(500);
-    });
-
-    $("#alert-div").fadeTo(10000, 500).slideUp(500, function () {
-      $("#alert-div").slideUp(500);
-    });
   });
+
+  if (current_tz != browser_tz && rslt != null) {
+    $.get("/home/index.json?timezone=" + browser_tz, null);
+  }
+
+  $("#notice-div").fadeTo(10000, 500).slideUp(500, function () {
+    $("#notice-div").slideUp(500);
+  });
+
+  $("#alert-div").fadeTo(10000, 500).slideUp(500, function () {
+    $("#alert-div").slideUp(500);
+  });
+});
 </script>
 </html>
