@@ -18,11 +18,7 @@
 <div class="card">
   <div class="card-body">
     <%= render 'layouts/search' unless controller_name == "versions" %>
-    <%
-=begin%>
- <div class="table-responsive"> 
-<%
-=end%>
+    <div class="table-responsive"> 
       <table class="table table-striped">
         <thead>
           <tr>
@@ -61,11 +57,7 @@
           <% end %>
         </tbody>
       </table>
-    <%
-=begin%>
- </div> 
-<%
-=end%>
+    </div> 
 
     <%= will_paginate @users, class: "apple_pagination", previous_label: t("activerecord.link.previous"), next_label: t("activerecord.link.next") %>
 
