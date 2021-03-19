@@ -34,11 +34,10 @@ image: ruby:2.7.2-alpine
 #     - docker
 
 production:
+  image: rdmapps/ruby_dpl
   stage: deploy
   script:
-  - apk add curl git
-  - gem install dpl --pre
-  - dpl heroku api --app=rdmapps --api-key=$HEROKU_API_KEY
+    - dpl --provider=heroku --app=rdmapps --api-key=$HEROKU_API_KEY
   only:
     - master
   tags:
