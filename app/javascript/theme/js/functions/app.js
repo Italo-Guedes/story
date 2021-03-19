@@ -5,9 +5,9 @@ import $ from 'jquery'
 -------------------------------------------------*/
 $( document ).on('turbolinks:load', function() {
 // $(window).on('load', function () {
-    setTimeout(function () {
-        $('.page-loader').fadeOut();
-    }, 50);
+    // setTimeout(function () {
+    //     $('.page-loader').fadeOut();
+    // }, 50);
 });
 
 $( document ).on('turbolinks:load', function() {
