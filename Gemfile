@@ -4,11 +4,11 @@ ruby '2.7.2'
 gem 'rails', '~> 6.0.3'
 gem 'rails-i18n', '~> 6.0.0'
 
-gem 'bootsnap'
 
 # Front end
 gem 'react-rails'
 gem 'webpacker'
+gem 'turbolinks'
 
 # File management
 gem 'aws-sdk-s3', require: false
@@ -19,6 +19,8 @@ gem 'paper_trail'
 gem 'pg'
 gem 'pg_search'
 gem 'pghero'
+
+# Front end (needed only because of pghero and graphiql)
 gem 'coffee-rails'
 gem 'sass-rails'
 gem 'jquery-rails'
@@ -50,6 +52,7 @@ gem 'oj'
 gem 'puma'
 
 # Development produtivity
+gem 'bootsnap'
 gem 'cocoon'
 gem 'figaro'
 gem 'formtastic'
