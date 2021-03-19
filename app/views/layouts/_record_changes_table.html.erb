@@ -1,43 +1,45 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>Data</th>
-      <th>Usuário responsável</th>
-      <th>Evento</th>
-      <th class="record_type">Registro</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% 
-      # Code to preload users and remove empty lines
-      @versions = @versions.preload(:item).where.not('object_changes is null and event = \'update\'')
-      preloaded_users_hash = {}
-      User.where(id: @versions.map(&:whodunnit).uniq).find_each do |u|
-        preloaded_users_hash[u.id] = u.email
-      end
-    %>
-    <% @versions.each do |version| %>
-      <tr class="clickable" onclick="javascript: toggleEventInfo('<%= version.id %>', this)">
-        <td><%= version.created_at %></td>
-        <td><%= preloaded_users_hash[version.whodunnit.to_i] || "Conta do Sistema"  %></td>
-        <td><%= t("papertrail.events.#{version.event}").upcase %></td>
-        <td class="record_type"><%= t("activerecord.models.#{version.item_type.underscore}.one") %> <%= version.item_id %></td>
-        <td class='indicator' style="width: 20px"><%= raw '<b class="zmdi zmdi-unfold-more"></b>' %></td>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Usuário responsável</th>
+        <th>Evento</th>
+        <th class="record_type">Registro</th>
+        <th></th>
       </tr>
-      <tr version-id="<%= version.id %>" style="display: none;">
-        <td colspan="5">
-          <dl class="row">
-            <% version.translated_changeset.each_with_index do |(k, v), i| %>
-              <dt class="col-sm-3 <%= 'odd' if i.odd? %>"><%= k %>:</dt>
-              <dd class="col-sm-9 <%= 'odd' if i.odd? %>"><%= version.event == 'destroy' ? v[0] : v[1] %>&nbsp;</dd>
-            <% end %>
-          </dl>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% 
+        # Code to preload users and remove empty lines
+        @versions = @versions.preload(:item).where.not('object_changes is null and event = \'update\'')
+        preloaded_users_hash = {}
+        User.where(id: @versions.map(&:whodunnit).uniq).find_each do |u|
+          preloaded_users_hash[u.id] = u.email
+        end
+      %>
+      <% @versions.each do |version| %>
+        <tr class="clickable" onclick="javascript: toggleEventInfo('<%= version.id %>', this)">
+          <td><%= version.created_at %></td>
+          <td><%= preloaded_users_hash[version.whodunnit.to_i] || "Conta do Sistema"  %></td>
+          <td><%= t("papertrail.events.#{version.event}").upcase %></td>
+          <td class="record_type"><%= t("activerecord.models.#{version.item_type.underscore}.one") %> <%= version.item_id %></td>
+          <td class='indicator' style="width: 20px"><%= raw '<b class="zmdi zmdi-unfold-more"></b>' %></td>
+        </tr>
+        <tr version-id="<%= version.id %>" style="display: none;">
+          <td colspan="5">
+            <dl class="row">
+              <% version.translated_changeset.each_with_index do |(k, v), i| %>
+                <dt class="col-sm-3 <%= 'odd' if i.odd? %>"><%= k %>:</dt>
+                <dd class="col-sm-9 <%= 'odd' if i.odd? %>"><%= version.event == 'destroy' ? v[0] : v[1] %>&nbsp;</dd>
+              <% end %>
+            </dl>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= will_paginate @versions, class: "apple_pagination", previous_label: "← Anterior", next_label: "Próxima →" %>
 

@@ -1,7 +1,8 @@
 'use strict';
 import $ from 'jquery'
 
-$(document).ready(function () {
+$( document ).on('turbolinks:load', function() {
+// $(document).ready(function () {
     var $body = $('body');
 
     //Fullscreen Launch function

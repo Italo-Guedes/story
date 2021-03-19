@@ -13,7 +13,7 @@ class FileInput < Formtastic::Inputs::FileInput
     template.content_tag(
       :span,
       (
-        "#{I18n.t('fileinput.remove')}" <<
+        I18n.t('fileinput.remove').to_s <<
         builder.hidden_field("#{method}_remove", value: '0')
       ).html_safe,
       removal_html_options
@@ -21,7 +21,7 @@ class FileInput < Formtastic::Inputs::FileInput
   end
 
   def removal_html_options
-    classes = %w(btn btn-danger fileinput-exists)
+    classes = %w[btn btn-danger fileinput-exists]
     { class: classes.compact.join(' '), 'data-dismiss' => 'fileinput' }
   end
 
@@ -52,13 +52,9 @@ class FileInput < Formtastic::Inputs::FileInput
   def input_html_options
     new_hash = {}
     if options[:direct_upload] == true
-      new_hash['data-direct-upload-url'] = if Rails.env.production?
-                                             Rails.application.routes.url_helpers.rails_direct_uploads_url.gsub('http://', 'https://')
-                                           else
-                                             Rails.application.routes.url_helpers.rails_direct_uploads_url
-                                           end
+      new_hash['data-direct-upload-url'] = Rails.application.routes.url_helpers.rails_direct_uploads_path
     end
-    hash = super.merge(new_hash)
+    super.merge(new_hash)
   end
 
   def attachment

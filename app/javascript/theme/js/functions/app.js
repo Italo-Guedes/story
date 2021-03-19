@@ -3,14 +3,15 @@ import $ from 'jquery'
 /*------------------------------------------------
     Page Loader
 -------------------------------------------------*/
-$(window).on('load', function () {
+$( document ).on('turbolinks:load', function() {
+// $(window).on('load', function () {
     setTimeout(function () {
         $('.page-loader').fadeOut();
     }, 50);
 });
 
-
-$(function () {
+$( document ).on('turbolinks:load', function() {
+// $(function () {
     /*------------------------------------------------
         Theme Switch
     -------------------------------------------------*/

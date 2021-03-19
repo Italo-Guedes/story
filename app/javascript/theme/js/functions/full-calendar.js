@@ -2,10 +2,15 @@ import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import ptBRLocale from '@fullcalendar/core/locales/pt-br';
 // import timeGridPlugin from '@fullcalendar/timegrid';
-// import listPlugin from '@fullcalendar/list';
+import listPlugin from '@fullcalendar/list';
 
-$(function () {
+$( document ).on('turbolinks:load', function() {
+// $(function () {
   if ($('#full-calendar-plugin')[0]) {
+    var defaultView = 'dayGridMonth';
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      defaultView = 'listWeek';
+    } //IF MOBILE CHANGE VIEW TO AGENDA DAY
     var events = [];
     if (typeof fullCalendarFetchEvents === 'function') {
       events = fullCalendarFetchEvents;
@@ -16,14 +21,14 @@ $(function () {
     window.calendar = new Calendar($('#full-calendar-plugin')[0], {
       locale: ptBRLocale,
       events: events,
-      plugins: [ dayGridPlugin ],
+      plugins: [ dayGridPlugin, listPlugin ],
       dayMaxEventRows: true, // for all non-TimeGrid views
-      initialView: 'dayGridMonth',
+      initialView: defaultView,
       headerToolbar: {
-        right: 'prev,next',
+        // left: 'prev,next today',
+        left: 'prev,next',
         center: 'title',
-        left: 'today'
-        // right: 'dayGridMonth,timeGridWeek,listWeek'
+        right: 'dayGridMonth,listWeek'
       }
     });
     window.calendar.render();
