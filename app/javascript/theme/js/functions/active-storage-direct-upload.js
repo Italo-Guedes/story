@@ -2,7 +2,8 @@ import $ from 'jquery'
 import Rails from "@rails/ujs"
 var Swal = require('sweetalert2');
 
-$(function () {
+$( document ).on('turbolinks:load', function() {
+// $(function () {
   addEventListener("direct-upload:error", function(event) {
     event.preventDefault();
     debugger;

@@ -23,6 +23,7 @@ function imagePath(name) {
 import Rails from "@rails/ujs"
 window.Rails = Rails;
 import * as ActiveStorage from "@rails/activestorage"
+import Turbolinks from "turbolinks"
 import jstz from'jstz'
 window.jstz = jstz
 import $ from 'jquery';
@@ -44,7 +45,8 @@ import '../theme/js/functions/active-storage-direct-upload'
 import '../theme/js/actions'
 import '../theme/js/functions/swal-ujs'
 
-Rails.start()
-ActiveStorage.start()
+Rails.start();
+Turbolinks.start();
+ActiveStorage.start();
 
 // console.log('Hello World from Webpacker5')

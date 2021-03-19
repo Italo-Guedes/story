@@ -8,15 +8,5 @@ module.exports = {
       },
       stage: 3
     })
-  ],
-   entry: {
-        vendors: [
-            "webpack-material-design-icons"
-            ]
-    },
-    module: {
-        loaders: [
-          { test: /\.(jpe?g|png|gif|svg|eot|woff|ttf|svg|woff2)$/, loader: "file?name=[name].[ext]" }
-        ]
-    }
+  ]
 }

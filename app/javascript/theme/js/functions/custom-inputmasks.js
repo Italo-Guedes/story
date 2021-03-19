@@ -1,7 +1,8 @@
 import $ from 'jquery'
 import Inputmask from "inputmask"
 
-$(function () {
+$( document ).on('turbolinks:load', function() {
+// $(function () {
     Inputmask.extendAliases({
       'br-currency': {
         alias: 'currency',
