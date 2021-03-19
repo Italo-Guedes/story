@@ -1,8 +1,9 @@
 
 class ContactMailer < ApplicationMailer
-
-  def contact(form)
-    @form = form
-    mail(to: 'rafael@rdmapps.com.br', subject: 'Mensagem Rdmapps')
+  
+  def contact(user)
+    @user = user
+    mail(to: 'contato@rdmapps.com.br', reply_to: @user.email)
   end
+
 end
