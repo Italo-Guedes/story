@@ -8,9 +8,9 @@ if Rails.env.development?
     # same name.
     Annotate.set_defaults(
       'additional_file_patterns'    => [],
-      'routes'                      => 'true',
+      'routes'                      => 'false',
       'models'                      => 'true',
-      'position_in_routes'          => 'after',
+      'position_in_routes'          => 'before',
       'position_in_class'           => 'before',
       'position_in_test'            => 'before',
       'position_in_fixture'         => 'before',
@@ -34,7 +34,7 @@ if Rails.env.development?
       'exclude_sti_subclasses'      => 'false',
       'ignore_model_sub_dir'        => 'false',
       'ignore_columns'              => nil,
-      'ignore_routes'               => nil,
+      'ignore_routes'               => 'true',
       'ignore_unknown_models'       => 'false',
       'hide_limit_column_types'     => 'integer,bigint,boolean',
       'hide_default_column_types'   => 'json,jsonb,hstore',
