@@ -1,13 +1,5 @@
 image: ruby:2.7.2-alpine
 
-
-hello:
-  stage: test
-  script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
-  tags:
-    - docker
-
 # services:
 #   - postgres:12-alpine
 #   - redis:alpine
@@ -41,13 +33,13 @@ hello:
 #   tags:
 #     - docker
 
-# production:
-#   stage: deploy
-#   script:
-#   - apk add curl git
-#   - gem install dpl --pre
-#   - dpl heroku api --app=NOME_DO_APP_PROD --api-key=$HEROKU_API_KEY
-#   only:
-#     - master
-#   tags:
-#     - docker
+production:
+  stage: deploy
+  script:
+  - apk add curl git
+  - gem install dpl --pre
+  - dpl heroku api --app=rdmapps --api-key=$HEROKU_API_KEY
+  only:
+    - master
+  tags:
+    - docker
