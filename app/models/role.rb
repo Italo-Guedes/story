@@ -7,9 +7,9 @@
 #  id            :integer          not null, primary key
 #  name          :string
 #  resource_type :string
-#  resource_id   :integer
 #  created_at    :datetime
 #  updated_at    :datetime
+#  resource_id   :integer
 #
 
 # Role class, helps with user authorization rules

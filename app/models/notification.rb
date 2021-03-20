@@ -4,14 +4,16 @@
 #
 # Table name: notifications
 #
-#  id         :bigint(8)        not null, primary key
-#  user_id    :bigint(8)
-#  text       :string
-#  image_url  :string
-#  link_url   :string
-#  viewed     :boolean          default(FALSE)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :bigint           not null, primary key
+#  image_url    :string
+#  link_url     :string
+#  subject_type :string
+#  text         :string
+#  viewed       :boolean          default(FALSE)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  subject_id   :integer
+#  user_id      :bigint
 #
 
 # Notification class, to use with internal notification system
