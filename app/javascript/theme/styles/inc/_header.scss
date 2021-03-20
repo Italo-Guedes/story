@@ -184,6 +184,10 @@
     }
   }
 
+  .notifications-body {
+    max-height: 50vh;
+  }
+
   .listview__scroll {
     height: 350px;
   }
@@ -203,7 +207,7 @@
     content: '';
     width: 7px;
     height: 7px;
-    background-color: lighten($theme-red, 2%);
+    background-color: $theme-white;
     color: $theme-white;
     border-radius: 50%;
     position: absolute;

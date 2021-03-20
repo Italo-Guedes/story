@@ -4,7 +4,7 @@
       background-color: #eeeeee;
     }
   </style>
-  <li class="dropdown top-nav__notifications <%= 'top-nav__notify' if current_user.unviewed_notifications.any? %>">
+  <li id="notifications" class="dropdown top-nav__notifications <%= 'top-nav__notify' if current_user.unviewed_notifications.any? %>">
     <a href="" data-toggle="dropdown">
       <i class="zmdi zmdi-notifications"></i>
     </a>
@@ -18,8 +18,10 @@
               </a>
           </div>
         </div>
-        <% @notifications = current_user.notifications.order(id: :desc).limit(10) %>
-        <%= render partial: "layouts/notification", collection: @notifications %>
+        <% @notifications = current_user.notifications.order(id: :desc).limit(5) %>
+        <div class="notifications-body scrollbar-inner">
+          <%= render partial: "layouts/notification", collection: @notifications %>
+        </div>
         <a class="view-more" href="javascript:void(0);" id="more-notifications">Ver mais</a>
       </div>
     </div>
@@ -29,26 +31,28 @@ var first_notification_id = <%= current_user.notifications.select(:id).order(:id
 
 $( document ).on('turbolinks:load', function() {
 // $(function () {
-  $("#more-notifications").click(function () {
-    var id = $("#notifications .lv-body a:last-child").data("id");
+  $("#more-notifications").click(function (e) {
+    e.stopPropagation();
+    var id = $("#notifications .notifications-body a:last-child").data("id");
     $.ajax({
       url: "<%= notifications_path %>",
       data: { notification_id: id }
     }).done(function(html) {
-      $("#notifications .lv-body").append(html);
+      $("#notifications .notifications-body").append(html);
       should_hide_more_button();
     });
   });
   $("#mark_all_viewed").click(function () {
-    $("#notifications .lv-item").removeClass("unviewed");
+    $("#notifications .listview__item").removeClass("unviewed");
     $("#notification_counter").html("");
     $("#notification_counter").hide();
+    $(".top-nav__notify").removeClass("top-nav__notify");
     $.post({
       url: "<%= mark_all_read_notifications_path %>"
     });
   });
 
-  $("#notifications .lv-item").click(function () {
+  $("#notifications .listview__item").click(function () {
     $.post({
       url: "/notifications/" + $(this).data("id") + "/mark_read"
     });
@@ -61,7 +65,7 @@ $( document ).on('turbolinks:load', function() {
 });
 
 function should_hide_more_button() {
-  if ($("#notifications .lv-body a:last-child").data("id") === first_notification_id) {
+  if ($("#notifications .notifications-body a:last-child").data("id") === first_notification_id) {
     $("#more-notifications").hide();
   }
 }
