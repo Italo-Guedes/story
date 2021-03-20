@@ -10,11 +10,18 @@
         color: rgb(60, 66, 64);
       }
 
-      h1,
-      a,
-      a:link,
-      a:hover,
-      a:visited {
+      header h1,
+      header a,
+      header a:link,
+      header a:hover,
+      header a:visited,
+      header small,
+      footer h1,
+      footer a,
+      footer a:link,
+      footer a:hover,
+      footer a:visited,
+      footer small {
         color: #fff;
         text-decoration: none;
       }
@@ -23,7 +30,7 @@
         padding: 20px;
         margin-right: auto;
         margin-left: auto;
-        background-color: #D12E5E;
+        background-color: <%= GlobalSetting.instance.menu_color %>;
       }
 
       @media (min-width: 768px) {
@@ -49,9 +56,9 @@
     <header style="box-shadow: none;">
       <div class="container">
         <div style="list-style: none; padding: 0px;">
-          <%= link_to "#", style: "display: inline-block" do %>
-           Logo
-          <%  end %>
+          <%= link_to "#{GlobalSetting.instance.page_title}", '#', style: 'display: inline-block' %>
+          <br>
+          <small><%= GlobalSetting.instance.page_subtitle %></small>
         </div>
       </div>
     </header>
@@ -60,16 +67,21 @@
     </div>
     <footer id="footer">
       <div class="container" style="height: 40px;">
+        <small>
+          Copyright &copy; <%= Time.zone.now.year %> <a href="/"><%= GlobalSetting.instance.page_author %></a>.
+        </small>
         <div style="float: right;">
-          <%= link_to "https://fb.com/", style: "display: inline-block;" do %>
-            Facebook
-          <% end %>
-          <%= link_to "https://instagram.com/", style: "display: inline-block;" do %>
-            Instagram
-          <% end %>
-          <%= link_to "https://twitter.com/", style: "display: inline-block;" do %>
-            Twitter
-          <% end %>
+          <small>
+            <%= link_to "https://fb.com/rdmapps", style: "display: inline-block;" do %>
+              Facebook
+            <% end %>
+            <%= link_to "https://instagram.com/rdmapps", style: "display: inline-block;" do %>
+              Instagram
+            <% end %>
+            <%= link_to "https://twitter.com/rdmappsbr", style: "display: inline-block;" do %>
+              Twitter
+            <% end %>
+          </small>
         </div>
       </div>
       </div>
