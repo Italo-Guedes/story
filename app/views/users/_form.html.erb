@@ -1,9 +1,9 @@
 <%= semantic_form_for @user, html: { multipart: true, class: 'form-row' } do |f| %>
   <%= f.input :avatar, as: :image, direct_upload: true, class: 'col-12' %>
-  <%= f.input :email, as: :date_time_picker, class: 'col-sm-6' %>
-  <%= f.input :name, as: :date_time_picker, class: 'col-sm-6' %>
-  <%= f.input :password, as: :date_picker, class: 'col-sm-6' %>
-  <%= f.input :password_confirmation, as: :date_picker, class: 'col-sm-6' %>
+  <%= f.input :email, class: 'col-sm-6' %>
+  <%= f.input :name, class: 'col-sm-6' %>
+  <%= f.input :password, class: 'col-sm-6' %>
+  <%= f.input :password_confirmation, class: 'col-sm-6' %>
 
   <% if Role.allowed_roles(current_user).any? && @user.id != current_user.id %>
     <%= f.input :is_active, class: 'col-12' %>
