@@ -26,33 +26,35 @@
         <%= link_to('Faça login', new_user_session_path)  %>
       </li>
     <% else %>
-      <li>
+      <!-- utilizar sempre esta class navigation__li, exceto para sub-menu -->
+      <li class="navigation__li">
         <%= active_link_to home_index_path, active: [home: :index] do %>
           <i class="zmdi zmdi-home"></i> Home
         <% end %>
       </li>
-      <li>
+      <li class="navigation__li">
         <%= active_link_to home_calendar_path, active: [home: :calendar] do %>
           <i class="zmdi zmdi-calendar"></i> Calendário
         <% end %>
       </li>
 
       <% if can? :manage, User %>
-        <li>
-          <%= active_link_to users_path, active: [users: :index] do %>
+        <li class="navigation__li">
+          <%= active_link_to users_path, active: [['users'], []] do %>
             <i class="zmdi zmdi-accounts-alt"></i><%= t('activerecord.models.user.other') %>
           <% end %>
         </li>
       <% end %>
       
+      <!-- sempre seguir esse padrão de submenu com as class desta forma -->
       <li class="separator"><hr/></li>
       <% if can?(:index, GlobalSetting) || can?(:admin_pages, :database_changes) %>
         <li class="navigation__sub">
-          <%= active_link_to '', active: [['global_settings', 'admin_pages'], ['index', 'database_changes', 'sidekiq', 'pghero']] do %>
+          <%= active_link_to '' do %>
             <i class="zmdi zmdi-settings"></i> Administração
           <% end %>
           <ul class="navigation__ul">
-            <li><%= active_link_to 'Configurações Globais', global_settings_path, active: [global_settings: :index] if can? :index, GlobalSetting %></li>
+            <li><%= active_link_to 'Configurações Globais', global_settings_path, active: [['global_settings'], []] if can? :index, GlobalSetting %></li>
             <li><%= active_link_to 'Auditoria', admin_pages_database_changes_path, active: [admin_pages: :database_changes] if can? :admin_pages, :database_changes %></li>
             <li><%= active_link_to 'Sidekiq', admin_pages_sidekiq_path, active: [admin_pages: :sidekiq] if can? :admin_pages, :sidekiq %></li>
             <li><%= active_link_to 'PgHero', admin_pages_pghero_path, active: [admin_pages: :pghero] if can? :admin_pages, :pghero %></li>
@@ -74,19 +76,19 @@
   </ul>
 </div>
 
-<style>
-  .active {
-    background-color: rgba(0, 0, 0, 0.04);
-    font-weight: bold !important;
-  }
-</style>
-
 <script>
+  // neste caso específico, o uso do turbo-links deixou a navegação completamente bugada. Como não é uma função vital, utilizar a function padrão
   $(function () {
-    $("a.active").each(function(){
-      parent = $(this).parent(".navigation__sub")
-      if(parent.length > 0){
-        $(this).click();
+    $(".navigation__li a.active").parent().addClass("navigation__active");
+    $(".navigation__sub").children("ul.navigation__ul").each(function(){
+      subMenu = $(this).prev("a.active");
+      if(subMenu.length > 0){
+        $(this).children("li").each(function(){
+          if ($(this).children("a.active")[0]){
+            $(this).addClass("navigation__active");
+            subMenu.click();
+          }
+        });
       }
     });
   });
