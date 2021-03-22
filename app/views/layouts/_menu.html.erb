@@ -26,20 +26,20 @@
         <%= link_to('Faça login', new_user_session_path)  %>
       </li>
     <% else %>
-      <li class="navigation__active">
-        <%= link_to home_index_path do %>
+      <li>
+        <%= active_link_to home_index_path, active: [home: :index] do %>
           <i class="zmdi zmdi-home"></i> Home
         <% end %>
       </li>
       <li>
-        <%= link_to home_calendar_path do %>
+        <%= active_link_to home_calendar_path, active: [home: :calendar] do %>
           <i class="zmdi zmdi-calendar"></i> Calendário
         <% end %>
       </li>
 
       <% if can? :manage, User %>
         <li>
-          <%= link_to users_path do %>
+          <%= active_link_to users_path, active: [users: :index] do %>
             <i class="zmdi zmdi-accounts-alt"></i><%= t('activerecord.models.user.other') %>
           <% end %>
         </li>
@@ -48,13 +48,14 @@
       <li class="separator"><hr/></li>
       <% if can?(:index, GlobalSetting) || can?(:admin_pages, :database_changes) %>
         <li class="navigation__sub">
-          <a href=""><i class="zmdi zmdi-settings"></i> Administração</a>
-          <ul>
-            <li><%= link_to 'Configurações Globais', global_settings_path if can? :index, GlobalSetting %></li>
-            <li><%= link_to 'Auditoria', admin_pages_database_changes_path if can? :admin_pages, :database_changes %></li>
-            <li><%= link_to 'Sidekiq', admin_pages_sidekiq_path if can? :admin_pages, :sidekiq %></li>
-            <li><%= link_to 'PgHero', admin_pages_pghero_path if can? :admin_pages, :pghero %>
-            </li>
+          <%= active_link_to '', active: [['global_settings', 'admin_pages'], ['index', 'database_changes', 'sidekiq', 'pghero']] do %>
+            <i class="zmdi zmdi-settings"></i> Administração
+          <% end %>
+          <ul class="navigation__ul">
+            <li><%= active_link_to 'Configurações Globais', global_settings_path, active: [global_settings: :index] if can? :index, GlobalSetting %></li>
+            <li><%= active_link_to 'Auditoria', admin_pages_database_changes_path, active: [admin_pages: :database_changes] if can? :admin_pages, :database_changes %></li>
+            <li><%= active_link_to 'Sidekiq', admin_pages_sidekiq_path, active: [admin_pages: :sidekiq] if can? :admin_pages, :sidekiq %></li>
+            <li><%= active_link_to 'PgHero', admin_pages_pghero_path, active: [admin_pages: :pghero] if can? :admin_pages, :pghero %></li>
           </ul>
         </li>
       <% end %>
@@ -72,3 +73,21 @@
     <% end %>
   </ul>
 </div>
+
+<style>
+  .active {
+    background-color: rgba(0, 0, 0, 0.04);
+    font-weight: bold !important;
+  }
+</style>
+
+<script>
+  $(function () {
+    $("a.active").each(function(){
+      parent = $(this).parent(".navigation__sub")
+      if(parent.length > 0){
+        $(this).click();
+      }
+    });
+  });
+</script>
