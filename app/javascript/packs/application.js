@@ -44,6 +44,7 @@ import '../theme/js/functions/full-calendar'
 import '../theme/js/functions/active-storage-direct-upload'
 import '../theme/js/actions'
 import '../theme/js/functions/swal-ujs'
+import '../theme/js/functions/flatpickr'
 
 Rails.start();
 Turbolinks.start();
