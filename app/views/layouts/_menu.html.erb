@@ -77,19 +77,8 @@
 </div>
 
 <script>
-  // neste caso específico, o uso do turbo-links deixou a navegação completamente bugada. Como não é uma função vital, utilizar a function padrão
-  $(function () {
-    $(".navigation__li a.active").parent().addClass("navigation__active");
-    $(".navigation__sub").children("ul.navigation__ul").each(function(){
-      subMenu = $(this).prev("a.active");
-      if(subMenu.length > 0){
-        $(this).children("li").each(function(){
-          if ($(this).children("a.active")[0]){
-            $(this).addClass("navigation__active");
-            subMenu.click();
-          }
-        });
-      }
-    });
+  $(document).on('turbolinks:load', function() {
+    $(".navigation__sub ul a.active").parents(".navigation__sub").addClass("navigation__sub--toggled");
+    $(".navigation__sub ul a.active").parents(".navigation__sub ul").show();
   });
 </script>
