@@ -59,6 +59,7 @@ gem 'formtastic'
 gem 'money-rails'
 gem 'sentry-raven'
 gem 'will_paginate'
+gem 'active_link_to'
 
 # Background jobs
 gem 'sidekiq'

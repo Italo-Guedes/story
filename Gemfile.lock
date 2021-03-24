@@ -37,6 +37,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_link_to (1.0.5)
+      actionpack
+      addressable
     activejob (6.0.3.5)
       activesupport (= 6.0.3.5)
       globalid (>= 0.3.6)
@@ -379,6 +382,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_link_to
   annotate
   aws-sdk-s3
   bootsnap

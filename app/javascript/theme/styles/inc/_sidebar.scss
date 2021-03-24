@@ -99,9 +99,9 @@
 
     &:not(.navigation__active):not(.navigation__sub--active) {
       a {
-        &:hover {
+        &:hover, &:focus {
           background-color: $navigation-link-hover-bg;
-          color: darken($navigation-link-color, 10%);
+          // color: darken($navigation-link-color, 10%);
         }
       }
     }

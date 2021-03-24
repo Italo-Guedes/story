@@ -10,6 +10,8 @@
 
   .navigation__sub--active > a,
   .navigation__active > a,
+  .navigation__li > a.active,
+  .navigation__ul a.active,
   .navigation__active:before {
     color: $color;
   }
