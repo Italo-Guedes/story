@@ -46,7 +46,10 @@
   
 
   .navigation__sub--active > a,
-  .navigation__active > a,
+  .navigation__li a.active,
+  .navigation__sub a.active,
+  .navigation__sub a.active:focus,
+  .navigation__sub a.active:hover,
   .navigation__active:before {
     color: <%= GlobalSetting.instance.menu_color %>;
   }

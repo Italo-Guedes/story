@@ -17,10 +17,11 @@ class HomeController < ApplicationController
   def calendar_events
     events = []
     10.times do |i|
+      b = (Random.rand * 1000 - 500).to_i
       events << {
         title: "Evento #{i}",
-        start: Time.zone.now.change(hour: i + 8),
-        end: Time.zone.now.change(hour: i + 9),
+        start: Time.zone.now + b.hours,
+        end: Time.zone.now + (b + 1).hours,
         # url: url_for(current_user),
         # allDay: true,
         # classNames: 'event-red',
