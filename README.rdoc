@@ -15,7 +15,9 @@ docker volume create --name=global_node_modules_cache
 
 ```bash
 docker-compose build
-docker-compose up web (após subir o servidor, fecha e executar o próximo comando)
+
+docker-compose up web (após subir o servidor, fechar e executar o próximo comando)
+
 docker-compose run web rake db:create db:migrate
 ```
 
@@ -25,7 +27,7 @@ docker-compose run web rake db:create db:migrate
 docker-compose up
 ```
 
-##### 5. Para visualizar no terminal apenas log da parte web da aplicação, a fim de facilitar o debug, rode desta forma:
+##### 5. Para visualizar no terminal apenas o log da parte web da aplicação, a fim de facilitar o debug, rode desta forma:
 
 ```bash
 docker-compose up -d && docker attach web
