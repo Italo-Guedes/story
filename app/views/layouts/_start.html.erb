@@ -1,0 +1,63 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">StartKit Rails</h4>
+    <p>Parabéns! Você conseguiu levantar o projeto, agora você está pronto para começar.</p></br>
+    <p>As primeiras ações que você deverá tomar são:</p>
+
+    <ol>
+      <li>
+        Mudar o GlobalSettings para inicializar o site
+        com informações corretas do projeto.
+      </li>
+      <pre>
+        <code>
+        # app/models/global_setting.rb
+        
+        @instance = GlobalSetting.first ||
+        GlobalSetting.create!(
+          page_title: 'Rdmapps',
+          page_subtitle: 'startkit',
+          page_author: 'Rdmapps',
+          page_description: 'Um sistema feito pela Rdmapps',
+          menu_color: '#D12E5E',
+          menu_border_color: '#FFFFFF'
+        )</code>
+      </pre>
+      <li>
+        Se o site não tiver mais de um idioma, deixe
+        apenas o idioma do projeto no application.rb.
+      </li>
+      <pre>
+        <code>
+        # config/application.rb
+        
+        config.i18n.available_locales = %w[pt-BR]
+        </code>
+      </pre>
+      <li>
+        Remover o conteúdo desta página na 'home/index', comentando a partial 'layouts/start'.
+        Deixá-la apenas com uma mensagem de boas vindas.
+      </li>
+      <pre>
+        <code>
+        # app/views/home/index.html.erb
+        
+        <-%= render partial: 'layouts/start' %>
+        </code>
+      </pre>
+      <li>
+        O usuário padrão para login na aplicação é o <b style="font-weight: bold;">contato@roadmaps.com.br</b> e qualquer senha funciona.
+      </li>
+    </ol>
+    <p>
+      <%= link_to t("devise.shared.links.sign_in"), new_session_path('user') unless current_user %><br />
+    </p>
+  </div>
+</div>
+
+<style>
+  ol > li { font-size: 17px; padding-bottom: 15px; }
+  p { font-size: 17px; }
+  pre { background-color: #3f3f3f; padding: 0px; }
+  pre code { font-size: 15px; color: white; }
+</style>

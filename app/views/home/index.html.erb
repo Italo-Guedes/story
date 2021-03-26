@@ -16,39 +16,4 @@
   </div>
 </header>
 
-<div class="card">
-  <div class="card-body">
-    <h4 class="card-title">Startkit</h4>
-
-    <p>Parabéns! Você conseguiu levantar o projeto, agora você está pronto para começar.</p>
-    <p>As primeiras ações que você deveria tomar são:</p>
-
-    <ol>
-      <li>
-        Remover o git remote para que suas 
-        modificações não reflitam no startkit
-      </li>
-      <li>
-        Mudar o nome do container base no docker-compose 
-        para refletir o nome do projeto
-      </li>
-      <li>
-        Mudar o GlobalSettings para inicializar o site 
-        com informações corretas do projeto.
-      </li>
-      <li>
-        Se o site não tiver mais de um idioma, deixe
-        apenas o idioma do projeto no application.rb
-      </li>
-      <li>
-        Remover o conteúdo desta página, e deixá-la 
-        apenas com uma mensagem de boas vindas
-
-        lalal 2
-      </li>
-    </ol>
-    <p>
-      <%= link_to t("devise.shared.links.sign_in"), new_session_path('user') unless current_user %><br />
-    </p>
-  </div>
-</div>
+<%= render partial: 'layouts/start' %>
