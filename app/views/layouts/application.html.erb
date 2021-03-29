@@ -35,8 +35,33 @@
   <%= stylesheet_pack_tag    "application", media: "all" %>
   <%= javascript_pack_tag "application" %>
   <%= csrf_meta_tags %>
+  <% if GlobalSetting.instance.menu_color.present? %>
+  <style>
+  .header,
+  .login__block__header,
+  .login__block__btn,
+  .top-menu {
+    background-color: <%= GlobalSetting.instance.menu_color %>;
+  }
+  
+
+  .navigation__sub--active > a,
+  .navigation__li a.active,
+  .navigation__sub a.active,
+  .navigation__sub a.active:focus,
+  .navigation__sub a.active:hover,
+  .navigation__active:before {
+    color: <%= GlobalSetting.instance.menu_color %>;
+  }
+  </style>
+  <% end %>
 </head>
-<body data-ma-theme="red">
+<%
+=begin%>
+ <body data-ma-theme="red"> 
+<%
+=end%>
+<body>
   <main class="main">
     <!--div class="page-loader">
       <div class="page-loader__spinner">
@@ -153,31 +178,32 @@
 
 </html>
 <script language="javascript">
-  $(function () {
-    var valid_tz = <%= raw Oj.dump(TZInfo::Timezone.all_identifiers) %>;
-    var current_tz = '<%= Time.zone.name %>';
-    var browser_tz = jstz.determine().name();
+$( document ).on('turbolinks:load', function() {
+// $(function () {
+  var valid_tz = <%= raw Oj.dump(TZInfo::Timezone.all_identifiers) %>;
+  var current_tz = '<%= Time.zone.name %>';
+  var browser_tz = jstz.determine().name();
 
-    var browser_tz_l = browser_tz.toLowerCase();
-    var rslt = null;
-    $.each(valid_tz, function(index, value) { 
-      if (rslt == null && value.toLowerCase() === browser_tz_l) {
-        rslt = index;
-        return false;
-      }
-    });
-
-    if (current_tz != browser_tz && rslt != null) {
-      $.get("/home/index.json?timezone=" + browser_tz, null);
+  var browser_tz_l = browser_tz.toLowerCase();
+  var rslt = null;
+  $.each(valid_tz, function(index, value) { 
+    if (rslt == null && value.toLowerCase() === browser_tz_l) {
+      rslt = index;
+      return false;
     }
-
-    $("#notice-div").fadeTo(10000, 500).slideUp(500, function () {
-      $("#notice-div").slideUp(500);
-    });
-
-    $("#alert-div").fadeTo(10000, 500).slideUp(500, function () {
-      $("#alert-div").slideUp(500);
-    });
   });
+
+  if (current_tz != browser_tz && rslt != null) {
+    $.get("/home/index.json?timezone=" + browser_tz, null);
+  }
+
+  $("#notice-div").fadeTo(10000, 500).slideUp(500, function () {
+    $("#notice-div").slideUp(500);
+  });
+
+  $("#alert-div").fadeTo(10000, 500).slideUp(500, function () {
+    $("#alert-div").slideUp(500);
+  });
+});
 </script>
 </html>

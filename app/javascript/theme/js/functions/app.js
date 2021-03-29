@@ -5,10 +5,19 @@ import $ from 'jquery'
 -------------------------------------------------*/
 $( document ).on('turbolinks:load', function() {
 // $(window).on('load', function () {
-    // setTimeout(function () {
-    //     $('.page-loader').fadeOut();
-    // }, 50);
+    if ($('.page-loader')[0]) {
+        setTimeout(function () {
+            $('.page-loader').fadeOut();
+        }, 90);
+    }
 });
+$( document ).on('turbolinks:visit', function() {
+// $(window).on('load', function () {
+    if ($('.page-loader')[0]) {
+        $('.page-loader').fadeIn();
+    }
+});
+
 
 $( document ).on('turbolinks:load', function() {
 // $(function () {
