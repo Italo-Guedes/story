@@ -50,7 +50,7 @@
       <li class="separator"><hr/></li>
       <% if can?(:index, GlobalSetting) || can?(:admin_pages, :database_changes) %>
         <li class="navigation__sub">
-          <%= active_link_to '' do %>
+          <%= link_to '' do %>
             <i class="zmdi zmdi-settings"></i> Administração
           <% end %>
           <ul class="navigation__ul">
