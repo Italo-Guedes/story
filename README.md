@@ -19,7 +19,7 @@ O layout do site, junto com os formulários usando formtastic e o gerador de sca
 Passo a passo para começar a utilizar o projeto
 --------------
 
-1. **Prerrequisitos**
+1. **Pré-requisitos**
 
 Para executar este projeto, você precisa ter o Docker Desktop e o Git instalados na sua máquina.
 
