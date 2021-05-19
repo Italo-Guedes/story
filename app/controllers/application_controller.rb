@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
 
     attachment_names(klass).each do |attachment_name|
       params[class_name].delete attachment_name if params.dig(class_name, attachment_name).blank?
-      break unless params[class_name]["#{attachment_name}_remove"].to_i == 1
+      next unless params[class_name]["#{attachment_name}_remove"].to_i == 1
 
       params[class_name].delete attachment_name
       model&.send(attachment_name)&.purge
