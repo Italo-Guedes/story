@@ -49,6 +49,17 @@
         <% end if @user.avatar.attached? %>
       </div>
     </div>
+    <!-- abaixo é quando vamos exibir quando houver um has_many_attached -->
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="fg-label"><%= t('activerecord.attributes.user.avatar') %></label>
+        <hr style="margin-top: 15px; margin-bottom: -10px;">
+        <% @user.files.each do |file| %></br>
+          <b><%= link_to file.filename, rails_blob_path(file, disposition: 'attachment')%></b>
+          <hr style="margin-top: 15px; margin-bottom: -10px;">
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 <%= render partial: "layouts/record_changes", locals: { :@object => @user } %>

@@ -4,6 +4,18 @@
   <%= f.input :name, class: 'col-sm-6' %>
   <%= f.input :password, class: 'col-sm-6' %>
   <%= f.input :password_confirmation, class: 'col-sm-6' %>
+  
+  <div class="dropzone dropzone-default dz-clickable" style="margin-top: 35px;"
+      data-controller="dropzone"
+      data-max-file-size="2"
+      data-dropzone-max-files="100">
+    <%= f.file_field :files, multiple: true, direct_upload: true, data: { target: "dropzone.input" }, class: 'col-sm-12' %>
+    <div class="dropzone-msg dz-message needsclick">
+      <h3 class="dropzone-msg-title" style="color: gray">Arraste os arquivos ou clique para carrega-los</h3>
+      <span class="dropzone-msg-desc text-sm" style="color: gray">Máximo de 2 MB por imagem. Extensões aceitas: .png, .jpg</span>
+      </div>
+    </div>
+  </div>
 
   <% if Role.allowed_roles(current_user).any? && @user.id != current_user.id %>
     <%= f.input :is_active, class: 'col-12' %>

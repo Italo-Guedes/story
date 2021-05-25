@@ -13,7 +13,7 @@ pt-BR:
   New: "Novo"
   fileinput:
     add: 'Selecionar arquivo'
-    change: 'Mudar arquivo'
+    change: 'Trocar'
     remove: 'Remover'
   papertrail:
     events:
@@ -142,6 +142,7 @@ pt-BR:
       user:
         id: "Id"
         avatar: "Avatar"
+        files: "Arquivos"
         first_name: "Primeiro nome"
         last_name: "Último nome"
         name: "Nome"
