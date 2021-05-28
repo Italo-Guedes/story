@@ -67,7 +67,13 @@ class FileInput < Formtastic::Inputs::FileInput
 
   def file_label_html
     template.content_tag(
-      :div
+      :div,
+      template.content_tag(
+        :span,
+        filename,
+        class: 'fileinput-filename'
+      ),
+      class: "form-control #{'is-invalid' if errors.any?}", 'data-trigger' => 'fileinput'
     )
   end
 

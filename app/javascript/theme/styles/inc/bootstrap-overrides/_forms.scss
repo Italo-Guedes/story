@@ -1,5 +1,3 @@
-@import "dropzone/dist/min/dropzone.min.css";
-@import "dropzone/dist/min/basic.min.css";
 
 form {
   .invalid-feedback {
@@ -274,20 +272,6 @@ $icon-toggle-colors: (
           color: $value;
         }
       }
-    }
-  }
-}
-
-.dropzone {
-  border: 2px dashed;
-  border-color: lightgray;
-
-  &.dz-drag-hover {
-    border: 2px dashed;
-    border-color: lightgray;
-
-    .dz-message {
-      opacity: 0.9;
     }
   }
 }

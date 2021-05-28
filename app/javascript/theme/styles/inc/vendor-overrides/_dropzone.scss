@@ -1,11 +1,14 @@
+@import "dropzone/dist/min/dropzone.min.css";
+@import "dropzone/dist/min/basic.min.css";
+
 .dropzone {
-  border: 0;
+  border: 1.5px dashed;
   background-color: lighten($body-bg, 1%);
-  border-radius: $border-radius;
+  border-radius: 5px;
   @include transition(border-color 300ms, background-color 300ms);
   min-height: 50px;
   position: relative;
-
+  width: 100%;
 
   &:before {
     font-family: $font-family-icon;
@@ -108,7 +111,7 @@
 
   &.dz-drag-hover {
     .dz-message {
-      opacity: 0;
+      opacity: 0.9;
     }
 
     &:before {

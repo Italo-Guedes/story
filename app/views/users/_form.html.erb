@@ -1,21 +1,25 @@
 <%= semantic_form_for @user, html: { multipart: true, class: 'form-row' } do |f| %>
-  <%= f.input :avatar, as: :image, direct_upload: true, class: 'col-12' %>
+  <%= f.input :avatar, as: :image, direct_upload: true, class: 'col-sm-2' %>
+  <div class="col-sm-10"></div>
   <%= f.input :email, class: 'col-sm-6' %>
   <%= f.input :name, class: 'col-sm-6' %>
   <%= f.input :password, class: 'col-sm-6' %>
   <%= f.input :password_confirmation, class: 'col-sm-6' %>
   
-  <div class="dropzone dropzone-default dz-clickable" style="margin-top: 35px;"
+  <%# options_for_dropzone: { max_size_mb: 2, max_files: 3 } %>
+  <%= f.input :files, as: :dropzone, direct_upload: true, class: 'col-sm-12' %>
+  
+  <!--<div class="dropzone dropzone-default dz-clickable" style="margin-top: 35px;"
       data-controller="dropzone"
       data-max-file-size="2"
       data-dropzone-max-files="100">
-    <%= f.file_field :files, multiple: true, direct_upload: true, data: { target: "dropzone.input" }, class: 'col-sm-12' %>
+    <%#= f.file_field :files, multiple: true, direct_upload: true, data: { target: "dropzone.input" }, class: 'col-sm-12' %>
     <div class="dropzone-msg dz-message needsclick">
-      <h3 class="dropzone-msg-title" style="color: gray">Arraste os arquivos ou clique para carrega-los</h3>
-      <span class="dropzone-msg-desc text-sm" style="color: gray">Máximo de 2 MB por imagem. Extensões aceitas: .png, .jpg</span>
+      <h4 class="dropzone-msg-title">Arraste os arquivos ou clique para carrega-los</h4>
+      <span class="dropzone-msg-desc text-sm">Máximo de 2 MB por imagem. Extensões aceitas: .png, .jpg</span>
       </div>
     </div>
-  </div>
+  </div>-->
 
   <% if Role.allowed_roles(current_user).any? && @user.id != current_user.id %>
     <%= f.input :is_active, class: 'col-12' %>

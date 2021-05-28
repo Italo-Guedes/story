@@ -114,8 +114,8 @@
 
 .fileinput .fileinput-preview {
   line-height: 150px;
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 100%;
   text-align: center;
   img {
     max-height: 100%;
@@ -126,7 +126,7 @@
 .input-group-prepend {
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 100%;
 }
 
 // Not 100% correct, but helps in typical use case

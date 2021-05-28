@@ -6,7 +6,7 @@
   <div class="actions">
     <%= link_to '', (controller_name == "versions" ? index_versions_path(model_name: "users") : users_path), title: t('activerecord.link.back_to_list'), class: 'actions__item zmdi zmdi-arrow-left' %>
     <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
-    <%= link_to '', edit_user_path(@user), title: t('activerecord.link.add_new'), class: 'actions__item zmdi zmdi-edit' if can?(:edit, @user) && controller_name != 'versions' %>
+    <%= link_to '', edit_user_path(@user), title: t('activerecord.link.edit'), class: 'actions__item zmdi zmdi-edit' if can?(:edit, @user) && controller_name != 'versions' %>
   </div>
 </header>
 <div class="card">
