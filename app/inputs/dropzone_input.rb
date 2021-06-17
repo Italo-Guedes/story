@@ -19,19 +19,19 @@ class DropzoneInput
           builder.file_field(method, input_html_options) << file_label_html
         end
       ),
-      dropzone_classes(input_html_options["options_for_dropzone"])
+      dropzone_classes(input_html_options["dropzone_html"])
     )
   end
 
   def input_htmls(attachment)
     signed_id = attachment.signed_id
-    builder.hidden_field(method, value: signed_id) <<
+    "<input value=\"#{signed_id}\" type=\"hidden\" name=\"#{object.class.name}[#{method}][]\" />" <<
     template.content_tag(
       :div,
       (
         ("<div class=\"dz-image\">#{img_html(attachment)}</div>" <<
         "<div class=\"dz-details\">#{details(attachment)}</div>" <<
-        "<a class=\"dz-remove\" href='' data-dz-remove></a>")
+        "<a class=\"dz-remove\" href='#{remove_attachment(attachment)}' data-dz-remove></a>")
       ).html_safe,
       class: 'dz-preview dz-image-preview dz-processing dz-success dz-complete'
     )
@@ -44,6 +44,10 @@ class DropzoneInput
   def details(attachment)
     ("<div class=\"dz-size\">#{size(attachment)}</div>" <<
     "<div class=\"dz-filename\">#{filename(attachment)}</div>").html_safe
+  end
+
+  def remove_attachment
+    
   end
 
   def size(attachment)
@@ -71,7 +75,7 @@ class DropzoneInput
   def dropzone_classes(options)
     # por algum motivo não tá funcionando o de tamanho de arquivo, irei investigar (Hugo)
     max_size_mb = options && options[:max_size_mb].present? ? options[:max_size_mb] : 2
-    max_files = options && options[:max_files].present? ? options[:max_files] : 10
+    max_files = options && options[:max_files].present? ? options[:max_files] : 20
     classes = %w[dropzone dropzone-default dz-clickable]
     { class: classes.compact.join(' '), 'data-controller' => 'dropzone', 'data-max-file-size' => "#{max_size_mb}", 'data-dropzone-max-files'=> "#{max_files}", 'style' => 'margin: 30px 0px;' }
   end
@@ -83,8 +87,8 @@ class DropzoneInput
     if options[:direct_upload] == true
       new_hash['data-direct-upload-url'] = Rails.application.routes.url_helpers.rails_direct_uploads_path
     end
-    if options[:options_for_dropzone].present?
-      new_hash['options_for_dropzone'] = { max_size_mb: options[:options_for_dropzone][:max_size_mb], max_files: options[:options_for_dropzone][:max_files] }
+    if options[:dropzone_html].present?
+      new_hash['dropzone_html'] = { max_size_mb: options[:dropzone_html][:max_size_mb], max_files: options[:dropzone_html][:max_files] }
     end
     super.merge(new_hash)
   end

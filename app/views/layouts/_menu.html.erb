@@ -53,7 +53,7 @@
           <%= link_to '' do %>
             <i class="zmdi zmdi-settings"></i> Administração
           <% end %>
-          <ul class="navigation__ul">
+          <ul class="navigation__ul" id="navigation_sub_change_color">
             <li><%= active_link_to 'Configurações Globais', global_settings_path, active: [['global_settings'], []] if can? :index, GlobalSetting %></li>
             <li><%= active_link_to 'Auditoria', admin_pages_database_changes_path, active: [admin_pages: :database_changes] if can? :admin_pages, :database_changes %></li>
             <li><%= active_link_to 'Sidekiq', admin_pages_sidekiq_path, active: [admin_pages: :sidekiq] if can? :admin_pages, :sidekiq %></li>

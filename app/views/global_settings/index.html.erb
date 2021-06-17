@@ -24,27 +24,28 @@
         </label><br />&nbsp;
         <%= @global_setting.page_subtitle %>
       </div>
-      <div class="col-12">
+      <div class="col-sm-6">
         <label class="fg-label">
           <%= t('activerecord.attributes.global_setting.page_author') %>
         </label><br />&nbsp;
         <%= @global_setting.page_author %>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <label class="fg-label">
-          <%= t('activerecord.attributes.global_setting.menu_border_color') %>
-        </label><br />&nbsp;
-        <%= @global_setting.menu_border_color %>
-      </div>
       <div class="col-sm-6">
         <label class="fg-label">
           <%= t('activerecord.attributes.global_setting.menu_color') %>
-        </label><br />&nbsp;
-        <%= @global_setting.menu_color %>
+        </label><br />
+        <div style="display: flex;">
+          <span style="margin-right: 5px; background-color: <%= @global_setting.menu_color %>; border: 2px solid #a9adb1; width: 3%; height: 17px; border-radius: 5px;"></span>
+          <%= @global_setting.menu_color %>
+        </div>
       </div>
     </div>
+    <!--<div class="col-sm-6">
+      <label class="fg-label">
+        <%#= t('activerecord.attributes.global_setting.menu_border_color') %>
+      </label><br />&nbsp;
+      <span style="background-color: <%#= @global_setting.menu_border_color %>;"><%#= @global_setting.menu_border_color %></span>
+    </div>-->
     <div class="row">
       <div class="col-12">
         <label class="fg-label">
