@@ -80,8 +80,6 @@ class UsersController < ApplicationController
   def user_params
     sanitize_active_storage_params(User, @user)
     sanitize_role_params
-    # analisar isso antes de subir. Funcionou, mas tá meio estranho esses params
-    params[:user][:files] = params[:user][:files] + params[:User][:files] if params[:User] && params[:User][:files].present?
     params.require(:user).permit(:email, :password, :password_confirmation, :name, :locale, :is_active, :avatar, files: [], role_ids: [])
   end
 

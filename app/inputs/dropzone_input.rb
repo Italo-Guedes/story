@@ -25,15 +25,17 @@ class DropzoneInput
 
   def input_htmls(attachment)
     signed_id = attachment.signed_id
-    "<input value=\"#{signed_id}\" type=\"hidden\" name=\"#{object.class.name}[#{method}][]\" />" <<
+    active_storage_name = "active_storage_#{attachment.id}"
+    "<input value=\"#{signed_id}\" id=\"#{active_storage_name}\" type=\"hidden\" name=\"#{object.class.name.underscore}[#{method}][]\" />" <<
     template.content_tag(
       :div,
       (
         ("<div class=\"dz-image\">#{img_html(attachment)}</div>" <<
         "<div class=\"dz-details\">#{details(attachment)}</div>" <<
-        "<a class=\"dz-remove\" href='#{remove_attachment(attachment)}' data-dz-remove></a>")
+        "<a class=\"dz-remove\" onclick=\"document.getElementById(`#{active_storage_name}`).remove()\" data-dz-remove></a>")
       ).html_safe,
-      class: 'dz-preview dz-image-preview dz-processing dz-success dz-complete'
+      class: 'dz-preview dz-image-preview dz-processing dz-success dz-complete',
+      id: "active_storage_#{attachment.id}"
     )
   end
 
@@ -46,8 +48,9 @@ class DropzoneInput
     "<div class=\"dz-filename\">#{filename(attachment)}</div>").html_safe
   end
 
-  def remove_attachment
-    
+  def remove_attachment(attachment)
+    # binding.pry
+    # ActiveStorage::Attachment.find_by(id: attachment.id).purge
   end
 
   def size(attachment)
