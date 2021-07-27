@@ -150,6 +150,12 @@ function createDropZone(controller) {
     maxFilesize: controller.maxFileSize,
     acceptedFiles: controller.acceptedFiles,
     addRemoveLinks: controller.addRemoveLinks,
+    dictDefaultMessage: 'Solte os arquivos aqui para envia-los',
+    dictFallbackMessage: 'Seu navegador não suporta uploads de arquivos arrastar e soltar.',
+    dictFallbackText: 'Use o formulário substituto abaixo para enviar seus arquivos como antigamente.',
+    dictFileTooBig : `O tamanho máximo permitido é ${controller.maxFiles}MB.`,
+    dictInvalidFileType: 'Você não pode fazer upload de arquivos deste tipo.',
+    dictMaxFilesExceeded: `Você só poderá adicionar até ${controller.maxFiles} arquivos.`,
     autoQueue: false
   });
 }
