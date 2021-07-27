@@ -72,11 +72,11 @@ class DropzoneInput
   end
 
   def dropzone_classes(options)
-    # por algum motivo não tá funcionando o de tamanho de arquivo, irei investigar (Hugo)
-    max_size_mb = options && options[:max_size_mb].present? ? options[:max_size_mb] : 2
+    max_size_mb = options && options[:max_size_mb].present? ? options[:max_size_mb] : 20
     max_files = options && options[:max_files].present? ? options[:max_files] : 20
+    accepted_files = options && options[:accepted_files].present? ? options[:accepted_files] : 'image/jpeg,image/gif,image/png'
     classes = %w[dropzone dropzone-default dz-clickable]
-    { class: classes.compact.join(' '), 'data-controller' => 'dropzone', 'data-max-file-size' => "#{max_size_mb}", 'data-dropzone-max-files'=> "#{max_files}", 'style' => 'margin: 30px 0px;' }
+    { class: classes.compact.join(' '), 'data-controller' => 'dropzone', 'data-dropzone-max-file-size' => "#{max_size_mb}", 'data-dropzone-max-files'=> "#{max_files}", 'data-dropzone-accepted-files' => "#{accepted_files}",  'style' => 'margin: 30px 0px;' }
   end
 
   def input_html_options
@@ -87,7 +87,9 @@ class DropzoneInput
       new_hash['data-direct-upload-url'] = Rails.application.routes.url_helpers.rails_direct_uploads_path
     end
     if options[:dropzone_html].present?
-      new_hash['dropzone_html'] = { max_size_mb: options[:dropzone_html][:max_size_mb], max_files: options[:dropzone_html][:max_files] }
+      new_hash['dropzone_html'] = { max_size_mb: options[:dropzone_html][:max_size_mb],
+                                    max_files: options[:dropzone_html][:max_files],
+                                    accepted_files: options[:dropzone_html][:accepted_files] }
     end
     super.merge(new_hash)
   end
