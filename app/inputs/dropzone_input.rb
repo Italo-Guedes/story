@@ -74,7 +74,7 @@ class DropzoneInput
   def dropzone_classes(options)
     max_size_mb = options && options[:max_size_mb].present? ? options[:max_size_mb] : 20
     max_files = options && options[:max_files].present? ? options[:max_files] : 20
-    accepted_files = options && options[:accepted_files].present? ? options[:accepted_files] : 'image/jpeg,image/gif,image/png'
+    accepted_files = options && options[:accepted_files].present? ? options[:accepted_files] : 'audio/ogg,image/jpeg,image/gif,image/png'
     classes = %w[dropzone dropzone-default dz-clickable]
     { class: classes.compact.join(' '), 'data-controller' => 'dropzone', 'data-dropzone-max-file-size' => "#{max_size_mb}", 'data-dropzone-max-files'=> "#{max_files}", 'data-dropzone-accepted-files' => "#{accepted_files}",  'style' => 'margin: 30px 0px;' }
   end
