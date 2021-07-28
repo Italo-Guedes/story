@@ -51,7 +51,7 @@ class User < ApplicationRecord
   rolify
 
   has_one_attached :avatar
-  has_many_attached :files
+  # has_many_attached :files
 
   # Include default devise modules. Others available are:
   # :timeoutable and :omniauthable
