@@ -5,7 +5,7 @@
   <%= f.input :name, class: 'col-sm-6' %>
   <%= f.input :password, class: 'col-sm-6' %>
   <%= f.input :password_confirmation, class: 'col-sm-6' %>
-  <%= f.input :files, as: :dropzone, direct_upload: true, class: 'col-sm-12' %><%# dropzone_html: { max_size_mb: 2, max_files: 3 } %>
+  <%#= f.input :files, as: :dropzone, direct_upload: true, class: 'col-sm-12' %><%# dropzone_html: { max_size_mb: 2, max_files: 3 } %>
 
   <% if Role.allowed_roles(current_user).any? && @user.id != current_user.id %>
     <%= f.input :is_active, class: 'col-12' %>
