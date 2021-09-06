@@ -13,8 +13,10 @@ pt-BR:
   New: "Novo"
   fileinput:
     add: 'Selecionar arquivo'
-    change: 'Mudar arquivo'
+    change: 'Trocar'
     remove: 'Remover'
+    multiple_add: 'Arraste os arquivos ou clique para carrega-los'
+    multiple_warning: 'Máximo de 2 MB por imagem. Extensões aceitas: .png, .jpg'
   papertrail:
     events:
       create: "Criação"
@@ -142,6 +144,7 @@ pt-BR:
       user:
         id: "Id"
         avatar: "Avatar"
+        files: "Arquivos"
         first_name: "Primeiro nome"
         last_name: "Último nome"
         name: "Nome"

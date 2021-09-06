@@ -1,14 +1,22 @@
 <%= semantic_form_for @global_setting, html: { class: 'form-row' } do |f| %>
   <%= f.input :page_title, class: 'col-6' %>
   <%= f.input :page_subtitle, class: 'col-6' %>
-  <%= f.input :page_author, class: 'col-12' %>
+  <%= f.input :page_author, class: 'col-6' %>
+  <%= f.input :menu_color, as: :color, class: 'col-6', input_html: { onChange: "getColorMenu();" } %>
   <%#= f.input :page_title, class: 'col-12', as: :date_picker %>
   <%#= f.input :page_title, class: 'col-12', as: :string, input_html: { inputmask: 'br-currency' } %>
   <%#= f.input :page_title, class: 'col-12', as: :string, input_html: { inputmask: 'br-datetime' } %>
   <%#= f.input :page_title, class: 'col-12', as: :string, input_html: { inputmask: 'br-date' } %>
   <%#= f.input :page_title, class: 'col-12', as: :select, collection: [], input_html: { class: 'select2 select-ajax', data: { placeholder: 'Selecione o time', url: users_path } }  %>
   <%= f.input :page_description, as: :text, input_html: { class: 'textarea-autosize' }, class: 'col-12' %>
-  <%= f.input :menu_color, as: :color, class: 'col-6' %>
-  <%= f.input :menu_border_color, as: :color, class: 'col-6' %>
+  <%#= f.input :menu_border_color, as: :color, class: 'col-6', input_html: { onChange: "getColorMenu();" } %>
   <%= f.action :submit, label: "Salvar", as: :button, class: 'col-12', html: { 'data-disable-with' => t('activerecord.link.sending') } %>
 <% end %>
+
+<script>
+  function getColorMenu(e) {
+    var menu_color = $('#global_setting_menu_color').val();
+    $("#global_setting_change_color").css('background-color', menu_color);
+    $("#navigation_sub_change_color").children(2).children('.active').css('color', menu_color);
+  }
+</script>

@@ -56,6 +56,7 @@
   }
   .btn {
     vertical-align: middle;
+    margin-left: 0px !important;
   }
   .form-group {
     overflow: hidden;
@@ -68,6 +69,7 @@
 .fileinput-exists .fileinput-new,
 .fileinput-new .fileinput-exists {
   display: none;
+  margin-left: 0px;
 }
 
 //close X button alignment
@@ -113,12 +115,18 @@
 .fileinput .fileinput-preview {
   line-height: 150px;
   height: 150px;
-  width: 200px;
+  width: 100%;
   text-align: center;
   img {
     max-height: 100%;
     max-width: 100%;
   }
+}
+
+.input-group-prepend {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 // Not 100% correct, but helps in typical use case
