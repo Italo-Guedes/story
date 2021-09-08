@@ -39,6 +39,6 @@ production:
   script:
     - dpl --provider=heroku --app=rdmapps --api-key=$HEROKU_API_KEY
   only:
-    - master
+    - main
   tags:
     - docker
