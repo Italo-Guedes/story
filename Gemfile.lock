@@ -200,15 +200,6 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
     minitest (5.14.4)
-    monetize (1.9.2)
-      money (~> 6.12)
-    money (6.13.4)
-      i18n (>= 0.6.4, <= 2)
-    money-rails (1.13.3)
-      activesupport (>= 3.0)
-      monetize (~> 1.9.0)
-      money (~> 6.13.2)
-      railties (>= 3.0)
     msgpack (1.4.2)
     multipart-post (2.1.1)
     nio4r (2.5.7)
@@ -405,7 +396,6 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   listen (~> 3.0.5)
-  money-rails
   oj
   paper_trail
   pg
@@ -437,7 +427,7 @@ DEPENDENCIES
   will_paginate
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 2.7.4p191
 
 BUNDLED WITH
    2.1.4

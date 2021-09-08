@@ -2,7 +2,7 @@
 version: "3"
 services:
   web:
-    image: ${DOCKER_IMAGE_NAME-ruby-2-7-2}
+    image: ${DOCKER_IMAGE_NAME-ruby-2-7-4}
     build:
       context: .
       dockerfile: Dockerfile.dev
@@ -36,7 +36,7 @@ services:
     tty: true # Debuggar usando o pry
     stdin_open: true # Debuggar usando o pry
   yarn:
-    image: ${DOCKER_IMAGE_NAME-ruby-2-7-2}
+    image: ${DOCKER_IMAGE_NAME-ruby-2-7-4}
     command: "./scripts/start_webpack_dev.sh"
     volumes:
       - .:/rdmapps:cached
@@ -52,7 +52,7 @@ services:
       WEBPACKER_DEV_SERVER_PUBLIC: 0.0.0.0:3001 # Hot Reload só funciona com o 0.0.0.0
     container_name: yarn
   sidekiq:
-    image: ${DOCKER_IMAGE_NAME-ruby-2-7-2}
+    image: ${DOCKER_IMAGE_NAME-ruby-2-7-4}
     command: ["./scripts/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "sidekiq", "-c", "6", "-q", "default", "-q", "mailers", "-q", "push_notifications"]
     volumes:
       - .:/rdmapps:cached

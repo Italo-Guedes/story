@@ -1,4 +1,4 @@
-FROM ruby:2.7.2-alpine
+FROM ruby:2.7.4-alpine
 
 ENV APP_PATH /rdmapps
 ENV BUNDLE_VERSION 2.1.4
@@ -14,7 +14,7 @@ RUN mkdir $APP_PATH
 WORKDIR $APP_PATH
 
 # rails server
-EXPOSE 3000 
+EXPOSE 3000
 # yarn server
 EXPOSE 3001
 # for vscode debug

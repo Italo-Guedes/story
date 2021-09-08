@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.7.2'
+ruby '2.7.4'
 
 gem 'rails', '~> 6.0.3'
 gem 'rails-i18n', '~> 6.0.0'
