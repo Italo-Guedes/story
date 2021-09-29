@@ -18,10 +18,21 @@ class BooleanInput < Formtastic::Inputs::BooleanInput
   #   <input type="checkbox" name="teste" id="customCheck1">
   #   <label class="checkbox__label" for="customCheck1">Check this custom checkbox</label>
   # </div>
+  def error_html
+    return nil if errors.blank?
+
+    template.content_tag(
+      :div,
+      errors.join('<br/>').html_safe,
+      class: 'invalid-feedback'
+    )
+  end
+
   def to_html
     input_wrapping do
       hidden_field_html <<
-      label_with_nested_checkbox
+      label_with_nested_checkbox <<
+      error_html
     end
   end
 
