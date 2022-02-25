@@ -2,6 +2,10 @@ FROM ruby:2.7.4-alpine
 
 ENV APP_PATH /rdmapps
 ENV BUNDLE_PATH /usr/local/bundle/gems
+ENV RAILS_ENV production
+ENV RACK_ENV production
+ENV RAILS_SERVE_STATIC_FILES true
+
 
 RUN apk add --no-cache --update build-base openssl tar bash linux-headers git \
     postgresql-dev tzdata postgresql-client less imagemagick python2 \
@@ -26,18 +30,14 @@ RUN yarn
 # Copying app
 COPY . .
 
-# Add a script to be executed every time the container starts, that erases the tmp/pids/server.pid file
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+RUN mkdir -p tmp/pids/
+RUN mkdir -p tmp/logs/
+
+
+RUN bundle exec rake assets:precompile
 
 # rails server
-EXPOSE 3000 
-# yarn server
-EXPOSE 3001
-# for vscode debug
-EXPOSE 1234
-EXPOSE 26162
+EXPOSE 3000
 
 # Start the main process
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
