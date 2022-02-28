@@ -2,12 +2,11 @@
 version: "3"
 services:
   web:
-    image: ${DOCKER_IMAGE_NAME-ruby-2-7-4}
+    image: ${DOCKER_IMAGE_NAME-ruby-3-0-3}
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: [ "./scripts/wait-for-it.sh", "db:5432", "--", "./scripts/start_rails.sh"] # Normal run
-    # command: [ "./scripts/wait-for-it.sh", "db:5432", "--", "./scripts/start_rails_vscode_debug.sh"] # Debug
+    command: [ "./scripts/wait-for-it.sh", "db:5432", "--", "./scripts/start_rails.sh"]
     entrypoint: dev_docker_entrypoint.sh
     volumes:
       - .:/rdmapps:cached
@@ -15,8 +14,6 @@ services:
       - global_node_modules_cache:/rdmapps/node_modules
     ports:
       - "3000:3000"
-      - "1234:1234"
-      - "26162:26162"
     depends_on:
       - db
       - redis
@@ -36,7 +33,7 @@ services:
     tty: true # Debuggar usando o pry
     stdin_open: true # Debuggar usando o pry
   yarn:
-    image: ${DOCKER_IMAGE_NAME-ruby-2-7-4}
+    image: ${DOCKER_IMAGE_NAME-ruby-3-0-3}
     command: "./scripts/start_webpack_dev.sh"
     volumes:
       - .:/rdmapps:cached
@@ -52,8 +49,8 @@ services:
       WEBPACKER_DEV_SERVER_PUBLIC: 0.0.0.0:3001 # Hot Reload só funciona com o 0.0.0.0
     container_name: yarn
   sidekiq:
-    image: ${DOCKER_IMAGE_NAME-ruby-2-7-4}
-    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "sidekiq", "-c", "6", "-q", "default", "-q", "mailers", "-q", "push_notifications"]
+    image: ${DOCKER_IMAGE_NAME-ruby-3-0-3}
+    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "sidekiq", "-c", "6", "-q", "default", "-q", "mailers", "-q", "push_notifications", "-q", "active_storage_analysis", "-q", "active_storage_purge"]
     volumes:
       - .:/rdmapps:cached
       - global_gems_cache:/usr/local/bundle/gems

@@ -1,15 +1,15 @@
 pt-BR:
+  will_paginate:
+    page_gap: "..."
+  "true": "Sim"
+  "false": "Não"
   pt-BR: Português
   en: Inglês
   de: Alemão
   es: Espanhol
-  will_paginate:
-    page_gap: "..."
   hello: "Olá mundo"
   Back: "Voltar"
   Show: "Mostrar"
-  "true": "Sim"
-  "false": "Não"
   New: "Novo"
   fileinput:
     add: 'Selecionar arquivo'
@@ -77,9 +77,6 @@ pt-BR:
         created: "%{model} foi criado com sucesso."
         updated: "%{model} foi atualizado com sucesso."
     models:
-      task:
-        one: tarefa
-        other: tarefas
       global_setting:
         one: "Configuração Global"
         other: "Configurações Globais"  
@@ -92,27 +89,6 @@ pt-BR:
       user:
         one: "Usuário"
         other: "Usuários"
-      operational_cost:
-        one: "Custo operacional"
-        other: "Custos operacionais"
-      project_amendment:
-        one: "Aditivo contratual"
-        other: "Aditivos contratuais"
-      project_cost:
-        one: "Custo de projeto"
-        other: "Custos de projeto"
-      project:
-        one: "Projeto"
-        other: "Projetos"
-      salary:
-        one: "Salário"
-        other: "Salários"
-      work:
-        one: "Apontamento de trabalho"
-        other: "Apontamentos de trabalho"
-      worker:
-        one: "Funcionário"
-        other: "Funcionários"
       comment:
         one: 'Comentário'
         other: 'Comentários'
@@ -120,16 +96,6 @@ pt-BR:
       comment:
         id: "Id"
         text: Comentário
-        created_at: "Data da criação"
-        updated_at: "Última atualização"
-      task:
-        id: "Id"
-        name: Nome
-        age: idade
-        user: Usuário
-        birthtime: nascimento com hora
-        birth: nascimento
-        bio: bio
         created_at: "Data da criação"
         updated_at: "Última atualização"
       global_setting:
@@ -145,8 +111,6 @@ pt-BR:
         id: "Id"
         avatar: "Avatar"
         files: "Arquivos"
-        first_name: "Primeiro nome"
-        last_name: "Último nome"
         name: "Nome"
         phone: "Telefone"
         timezone: "Timezone"
@@ -176,72 +140,6 @@ pt-BR:
         unconfirmed_email: E-mail não confirmado
         unlock_token: Token de desbloqueio
         updated_at: Atualizado em
-      operational_cost:
-        id: "Id"
-        name: "Nome"
-        year: "Ano"
-        month: "Mês"
-        value: "Custo"
-        created_at: "Data da criação"
-        updated_at: "Última atualização"
-      project_amendment:
-        project: "Projeto"
-        id: "Id"
-        name: "Nome"
-        initial_cost: "Valor contratado"
-        paid_cost: "Valor pago"
-        initial_work: "Trabalho previsto"
-        done_work: "Trabalho realizado"
-        created_at: "Data da criação"
-        updated_at: "Última atualização"
-      project_cost:
-        id: "Id"
-        project: "Projeto"
-        name: "Nome"
-        year: "Ano"
-        month: "Mês"
-        value: "Custo"
-        created_at: "Data da criação"
-        updated_at: "Última atualização"
-      project:
-        id: "Id"
-        name: "Nome"
-        possible_names: "Nomes possíveis"
-        initial_cost: "Valor contratado"
-        paid_cost: "Valor pago"
-        base_project: "Projeto base"
-        base_project_hint: "Selecione um projeto base se este for um aditivo contratual"
-        initial_work: "Trabalho previsto"
-        done_work: "Trabalho realizado"
-        internal: "Projeto interno?"
-        created_at: "Data da criação"
-        updated_at: "Última atualização"
-      salary:
-        id: "Id"
-        name: "Nome"
-        year: "Ano"
-        month: "Mês"
-        worker: "Funcionário"
-        net_value: "Valor líquido"
-        gross_value: "Valor bruto"
-        created_at: "Data da criação"
-        updated_at: "Última atualização"
-      work:
-        id: "Id"
-        name: "Nome"
-        year: "Ano"
-        month: "Mês"
-        work: "Trabalho"
-        project: "Projeto"
-        worker: "Funcionário"
-        created_at: "Data da criação"
-        updated_at: "Última atualização"
-      worker:
-        id: "Id"
-        name: "Nome"
-        picture: "Foto"
-        created_at: "Data da criação"
-        updated_at: "Última atualização"
   date:
     abbr_day_names:
     - Dom

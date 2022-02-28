@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.7.4'
+ruby '3.0.3'
 
-gem 'rails', '~> 6.0.3'
+gem 'rails', '~> 6.1.4'
 gem 'rails-i18n', '~> 6.0.0'
 
 
@@ -12,7 +12,7 @@ gem 'turbolinks'
 
 # File management
 gem 'aws-sdk-s3', require: false
-gem 'image_processing', '~> 1.2'
+gem 'image_processing'
 
 # Database related
 gem 'paper_trail'
@@ -40,8 +40,8 @@ gem 'jbuilder'
 gem 'oj'
 
 # Excel handling
-# gem 'caxlsx'
-# gem 'caxlsx_rails'
+# gem 'caxlsx' # export
+# gem 'caxlsx_rails' # export
 # gem 'roo', '1.13.2' # import
 
 # PDF Generation
@@ -67,13 +67,7 @@ gem 'sidekiq-cron'
 
 group :development do
   gem 'annotate'
-  gem 'web-console'
-
-  gem 'derailed'
-
-  # VSCode debugging
-  gem 'debase'
-  gem 'ruby-debug-ide'
+  gem 'derailed_benchmarks'
 end
 
 group :development, :test do
@@ -84,7 +78,6 @@ group :development, :test do
 
   # tests
   gem 'capybara'
-  gem 'cpf_faker'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'listen', '~> 3.0.5'

@@ -69,7 +69,7 @@ Rails.application.configure do
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
 
-  config.web_console.whiny_requests = false
+  # config.web_console.whiny_requests = false
   config.webpacker.check_yarn_integrity = false
 
   logger           = ActiveSupport::Logger.new(STDOUT)
