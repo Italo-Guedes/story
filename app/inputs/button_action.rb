@@ -18,6 +18,6 @@ class ButtonAction < Formtastic::Actions::ButtonAction
 
   def extra_button_html_options
     new_class = [super[:class], 'btn', 'btn-primary', 'btn-sm'].compact.join(' ')
-    super.merge(class: new_class).merge(options[:html])
+    super.merge(class: new_class).merge(options[:html]) if options[:html].present?
   end
 end

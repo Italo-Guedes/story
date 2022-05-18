@@ -7,13 +7,20 @@ class <%= class_name.pluralize %>Controller < ApplicationController
   # GET /<%= table_name %>
   # GET /<%= table_name %>.json
   def index
-    @<%= table_name %> = @<%= table_name %>.order(:id).search(params[:q], params[:page])
+    @q = @<%= table_name %>.ransack(params[:q])
+    @q.sorts = 'id desc' if @q.sorts.empty?
+    @<%= table_name %> = @q.result
+    @<%= table_name %> = @<%= table_name %>.order(:id).search(params[:pgq], params[:page])
     return unless params[:select2]
 
-    render json: Oj.dump({
-                           results: @<%= table_name %>.map { |<%= singular_table_name %>| { text: <%= singular_table_name %>.to_s, id: <%= singular_table_name %>.id } },
-                           pagination: { more: @<%= table_name %>.next_page.present? } 
-                         }, mode: :compat)
+    # As a universal way of enabling select2 autocomplete,
+    # we need to return, on each index action, a json with their format
+    render json: Oj.dump(
+      {
+        results: @<%= table_name %>.map { |<%= singular_table_name %>| { text: <%= singular_table_name %>.to_s, id: <%= singular_table_name %>.id } },
+        pagination: { more: @<%= table_name %>.next_page.present? } 
+      }, mode: :compat
+    )
   end
 
   # GET /<%= table_name %>/1

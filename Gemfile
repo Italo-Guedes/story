@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '3.0.3'
+ruby '3.0.4'
 
 gem 'rails', '~> 6.1.4'
 gem 'rails-i18n', '~> 6.0.0'
@@ -19,6 +19,7 @@ gem 'paper_trail'
 gem 'pg'
 gem 'pg_search'
 gem 'pghero'
+gem 'ransack'
 
 # Front end (needed only because of pghero and graphiql)
 gem 'coffee-rails'
@@ -68,6 +69,7 @@ gem 'sidekiq-cron'
 group :development do
   gem 'annotate'
   gem 'derailed_benchmarks'
+  gem 'web-console'
 end
 
 group :development, :test do

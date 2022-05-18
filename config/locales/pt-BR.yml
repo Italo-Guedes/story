@@ -11,6 +11,16 @@ pt-BR:
   Back: "Voltar"
   Show: "Mostrar"
   New: "Novo"
+  ransack:
+    asc: ascendente
+    desc: descentende
+    predicates:
+      cont: contém
+      not_cont: não contém
+      start: começa com
+      end: termina com
+      gt: maior que
+      lt: menor que
   fileinput:
     add: 'Selecionar arquivo'
     change: 'Trocar'
