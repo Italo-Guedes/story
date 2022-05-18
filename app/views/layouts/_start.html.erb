@@ -1,5 +1,6 @@
 <div class="card">
   <div class="card-body">
+    <% if Rails.env.development? %>
     <h4 class="card-title">StartKit Rails</h4>
     <p>Parabéns! Você conseguiu levantar o projeto, agora você está pronto para começar.</p></br>
     <p>As primeiras ações que você deverá tomar são:</p>
@@ -52,6 +53,7 @@
         Acesse o template base se tiver dúvidas de layout: <a href="https://www.dropbox.com/s/e2n7id51l66zyvv/WB011H985.zip?dl=1" target="_blank">clique aqui</a>
       </li>
     </ol>
+    <% end %>
     <p>
       <%= link_to t("devise.shared.links.sign_in"), new_session_path('user') unless current_user %><br />
     </p>
