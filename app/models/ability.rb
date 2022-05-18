@@ -14,7 +14,6 @@ class Ability
         can :admin_pages, :sidekiq
         can :admin_pages, :database_changes
         can :admin_pages, :pghero
-        can :manage, Project
       end
 
       if user.has_cached_role?(:admin) || user.has_cached_role?(:super_admin)
