@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 ruby '3.0.4'
 
 gem 'rails', '~> 6.1.4'
 gem 'rails-i18n', '~> 6.0.0'
 
-
 # Front end
 gem 'react-rails'
-gem 'webpacker'
 gem 'turbolinks'
+gem 'webpacker'
 
 # File management
 gem 'aws-sdk-s3', require: false
@@ -17,14 +18,14 @@ gem 'image_processing'
 # Database related
 gem 'paper_trail'
 gem 'pg'
-gem 'pg_search'
 gem 'pghero'
+gem 'pg_search'
 gem 'ransack'
 
 # Front end (needed only because of pghero and graphiql)
 gem 'coffee-rails'
-gem 'sass-rails'
 gem 'jquery-rails'
+gem 'sass-rails'
 
 # Account management
 gem 'cancancan'
@@ -53,6 +54,7 @@ gem 'oj'
 gem 'puma'
 
 # Development produtivity
+gem 'active_link_to'
 gem 'bootsnap'
 gem 'cocoon'
 gem 'figaro'
@@ -60,7 +62,6 @@ gem 'formtastic'
 # gem 'money-rails'
 gem 'sentry-raven'
 gem 'will_paginate'
-gem 'active_link_to'
 
 # Background jobs
 gem 'sidekiq'
