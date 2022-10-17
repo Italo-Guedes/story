@@ -1,4 +1,4 @@
-FROM ruby:3.0.3
+FROM ruby:3.0.4
 
 ENV APP_PATH /rdmapps
 ENV BUNDLE_PATH /usr/local/bundle/gems

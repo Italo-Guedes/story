@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index contact]
-  
+
   def index
     respond_to do |format|
       format.html
@@ -8,11 +8,9 @@ class HomeController < ApplicationController
     end
   end
 
-  def about
-  end
+  def about; end
 
-  def calendar
-  end
+  def calendar; end
 
   def calendar_events
     events = []

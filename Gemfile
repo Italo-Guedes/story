@@ -69,7 +69,9 @@ gem 'sidekiq-cron'
 
 group :development do
   gem 'annotate'
+  gem 'debug', '>= 1.0.0'
   gem 'derailed_benchmarks'
+  gem 'foreman'
   gem 'web-console'
 end
 

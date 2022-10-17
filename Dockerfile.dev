@@ -9,6 +9,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 
 RUN npm install -g yarn
 
+RUN gem install solargraph debug
+
 RUN mkdir $APP_PATH
 WORKDIR $APP_PATH
 
@@ -16,6 +18,5 @@ WORKDIR $APP_PATH
 EXPOSE 3000
 # yarn server
 EXPOSE 3001
-
-COPY scripts/dev_docker_entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/dev_docker_entrypoint.sh
+# yarn server when in foreman
+EXPOSE 4001
