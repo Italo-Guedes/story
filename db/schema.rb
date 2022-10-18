@@ -58,16 +58,11 @@ ActiveRecord::Schema.define(version: 2022_02_28_064019) do
 
   create_table "global_settings", force: :cascade do |t|
     t.string "page_title", default: "Rdmapps"
-    t.string "page_subtitle"
-    t.string "startkit"
-    t.string "page_author"
-    t.string "Rdmapps"
-    t.string "page_description"
-    t.string "Startkit rdmapps"
-    t.string "menu_color"
-    t.string "#D12E5E"
-    t.string "menu_border_color"
-    t.string "#FFFFFF"
+    t.string "page_subtitle", default: "startkit"
+    t.string "page_author", default: "Rdmapps"
+    t.string "page_description", default: "Startkit rdmapps"
+    t.string "menu_color", default: "#D12E5E"
+    t.string "menu_border_color", default: "#FFFFFF"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
