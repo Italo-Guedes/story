@@ -69,10 +69,7 @@ services:
   db:
     image: postgres:12-alpine
     volumes:
-      # This is recommended when you working with large datasets
       - database:/var/lib/postgresql/data
-      # This faster to clean/inspect size, but slower on restore
-      # - ./tmp/db:/var/lib/postgresql/data:delegated
     environment:
       POSTGRES_PASSWORD: postgres
     ports:
