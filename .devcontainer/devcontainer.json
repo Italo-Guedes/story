@@ -2,7 +2,7 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/docker-existing-docker-compose
 // If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
 {
-	"name": "Docker Compose",
+	"name": "Startkit",
 
 	// Update the 'dockerComposeFile' list if you have more compose files or use different names.
 	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
@@ -21,9 +21,7 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"aki77.rails-db-schema",
 		"castwide.solargraph",
-		"kaiwood.endwise",
 		"koichisasada.vscode-rdbg",
 		"rebornix.ruby",
 		"redhat.vscode-yaml",
@@ -35,7 +33,15 @@
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	"forwardPorts": ["localhost:3000"],
+	
+	"portsAttributes": {
+		"3000": {
+			"onAutoForward": "openBrowserOnce",
+			"label": "Rails server"
+		}
+	},
+	"otherPortsAttributes": {"onAutoForward": "ignore"},
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	"runServices": ["web"]

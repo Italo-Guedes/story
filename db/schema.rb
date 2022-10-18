@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_18_015007) do
+ActiveRecord::Schema.define(version: 2022_02_28_064019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
-  enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -58,14 +57,19 @@ ActiveRecord::Schema.define(version: 2022_05_18_015007) do
   end
 
   create_table "global_settings", force: :cascade do |t|
+    t.string "page_title", default: "Rdmapps"
+    t.string "page_subtitle"
+    t.string "startkit"
+    t.string "page_author"
+    t.string "Rdmapps"
+    t.string "page_description"
+    t.string "Startkit rdmapps"
+    t.string "menu_color"
+    t.string "#D12E5E"
+    t.string "menu_border_color"
+    t.string "#FFFFFF"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "page_title"
-    t.string "page_subtitle"
-    t.string "page_author"
-    t.string "page_description"
-    t.string "menu_color"
-    t.string "menu_border_color"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -74,10 +78,11 @@ ActiveRecord::Schema.define(version: 2022_05_18_015007) do
     t.string "image_url"
     t.string "link_url"
     t.boolean "viewed", default: false
+    t.string "subject_type"
+    t.bigint "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "subject_id"
-    t.string "subject_type"
+    t.index ["subject_type", "subject_id"], name: "index_notifications_on_subject"
     t.index ["subject_type", "subject_id"], name: "index_notifications_on_subject_type_and_subject_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
@@ -90,28 +95,6 @@ ActiveRecord::Schema.define(version: 2022_05_18_015007) do
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
-  end
-
-  create_table "sidekiq_jobs", id: :serial, force: :cascade do |t|
-    t.string "jid"
-    t.string "queue"
-    t.string "class_name"
-    t.text "args"
-    t.boolean "retry"
-    t.datetime "enqueued_at"
-    t.datetime "started_at"
-    t.datetime "finished_at"
-    t.string "status"
-    t.string "name"
-    t.text "result"
-    t.index ["class_name"], name: "index_sidekiq_jobs_on_class_name"
-    t.index ["enqueued_at"], name: "index_sidekiq_jobs_on_enqueued_at"
-    t.index ["finished_at"], name: "index_sidekiq_jobs_on_finished_at"
-    t.index ["jid"], name: "index_sidekiq_jobs_on_jid"
-    t.index ["queue"], name: "index_sidekiq_jobs_on_queue"
-    t.index ["retry"], name: "index_sidekiq_jobs_on_retry"
-    t.index ["started_at"], name: "index_sidekiq_jobs_on_started_at"
-    t.index ["status"], name: "index_sidekiq_jobs_on_status"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -132,13 +115,13 @@ ActiveRecord::Schema.define(version: 2022_05_18_015007) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string "name"
     t.string "phone"
     t.string "locale", default: "pt-BR"
     t.boolean "is_active", default: true
     t.string "timezone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -154,9 +137,9 @@ ActiveRecord::Schema.define(version: 2022_05_18_015007) do
     t.integer "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"
-    t.text "object"
+    t.jsonb "object"
+    t.jsonb "object_changes"
     t.datetime "created_at"
-    t.text "object_changes"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
