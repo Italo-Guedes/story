@@ -53,7 +53,7 @@ docker volume create --name=global_node_modules_cache
 docker-compose build
 docker-compose up web 
 # Aguarde a instalação das gems ser concluída, e encerre o docker pressionando ctrl+c
-docker-compose run web rake db:create db:migrate
+docker-compose run web rake db:create db:schema:load db:seed
 ```
 
 6. **Levante o projeto, aguarde o rails e o yarn indicarem que terminaram de levantar o projeto, e acesse o mesmo no seu navegador em http://localhost:3000**
@@ -67,3 +67,5 @@ docker-compose up
 ```bash
 docker-compose up -d && docker attach web
 ```
+
+8. **Se você quiser utilizar o dev containers, apenas instale a extensão no VSCode, e abra a pasta no container. O servidor levanta automaticamente.**

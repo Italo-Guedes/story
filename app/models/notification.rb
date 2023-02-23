@@ -12,7 +12,7 @@
 #  viewed       :boolean          default(FALSE)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  subject_id   :integer
+#  subject_id   :bigint
 #  user_id      :bigint
 #
 

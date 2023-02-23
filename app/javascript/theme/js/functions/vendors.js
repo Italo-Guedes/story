@@ -35,9 +35,17 @@ $( document ).on('turbolinks:load', function() {
 
       jElement.select2({
         ajax: {
-          url: url + "?select2=true",
+          url: url,
           dataType: 'json',
           delay: 250,
+          data: function (params) {
+            var query = {
+              pgq: params.term,
+              select2: true
+            }
+            // Query parameters will be ?pgq=[term]&select2=true
+            return query;
+          }
         },
         allowClear: true,
         placeholder: placeholder,
