@@ -1,15 +1,21 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '3.0.4'
+ruby '3.1.3'
 
-gem 'rails', '~> 6.1.4'
+gem 'psych', '< 4'
+
+gem 'rails', '~> 6.1.7'
 gem 'rails-i18n', '~> 6.0.0'
 
 # Front end
+gem 'coffee-rails'
 gem 'react-rails'
 gem 'turbolinks'
 gem 'webpacker'
+# Front end (needed only because of pghero and graphiql)
+gem 'jquery-rails'
+gem 'sass-rails'
 
 # File management
 gem 'aws-sdk-s3', require: false
@@ -21,11 +27,6 @@ gem 'pg'
 gem 'pghero'
 gem 'pg_search'
 gem 'ransack'
-
-# Front end (needed only because of pghero and graphiql)
-gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'sass-rails'
 
 # Account management
 gem 'cancancan'
@@ -60,6 +61,7 @@ gem 'cocoon'
 gem 'figaro'
 gem 'formtastic'
 # gem 'money-rails'
+gem 'rubocop', require: false
 gem 'sentry-raven'
 gem 'will_paginate'
 

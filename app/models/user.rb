@@ -51,12 +51,9 @@ class User < ApplicationRecord
   rolify
 
   has_one_attached :avatar
-  # has_many_attached :files
 
   # Include default devise modules. Others available are:
-  # :timeoutable and :omniauthable
-  # Adicione estes três módulos se tiver cadastro
-  #  :lockable
+  # :timeoutable and :omniauthable, :lockable
   devise :database_authenticatable, :rememberable,
          :trackable, :validatable, :recoverable, :registerable, :confirmable
 
@@ -99,16 +96,21 @@ class User < ApplicationRecord
   end
 
   def as_json(_options = nil)
-    { 
-      id: id,
-      name: name,
-      email: email,
-      avatar: avatar.attached? ? 
-        {
-          thumb: Rails.application.routes.url_helpers.url_for(ApplicationController.helpers.square_thumb(avatar)),
-          original: Rails.application.routes.url_helpers.url_for(avatar)
-        } : nil,
-      created_at: created_at
+    {
+      id:,
+      name:,
+      email:,
+      avatar: avatar_json,
+      created_at:
+    }
+  end
+
+  def avatar_json
+    return nil unless avatar.attached?
+
+    {
+      thumb: Rails.application.routes.url_helpers.url_for(ApplicationController.helpers.square_thumb(avatar)),
+      original: Rails.application.routes.url_helpers.url_for(avatar)
     }
   end
 
@@ -118,14 +120,16 @@ class User < ApplicationRecord
 
   def self.search(search, page)
     if search.present?
-      paginate(per_page: 20, page: page).full_search(search)
+      paginate(per_page: 20, page:).full_search(search)
     else
-      paginate(per_page: 20, page: page)
+      paginate(per_page: 20, page:)
     end
   end
 
-  pg_search_scope :full_search,
+  pg_search_scope(
+    :full_search,
     against: %i[email name],
-    using: {tsearch: { prefix: true } },
+    using: { tsearch: { prefix: true } },
     ignoring: :accents
+  )
 end

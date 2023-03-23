@@ -5,22 +5,9 @@ class Ability
   include CanCan::Ability
   def initialize(user)
     if user
-      can :teste, :notification
-      if user.has_cached_role?(:super_admin)
-        can :manage, User
-        cannot :destroy, User, id: user.id
-        can :manage, GlobalSetting, id: GlobalSetting.instance.id
-        can :read, :deleted_records
-        can :admin_pages, :sidekiq
-        can :admin_pages, :database_changes
-        can :admin_pages, :pghero
-      end
-
-      if user.has_cached_role?(:admin) || user.has_cached_role?(:super_admin)
-        merge Abilities::Admin.new(user)
-      end
-
-      can %i[index mark_read mark_all_read], Notification, user_id: user.id
+      merge Abilities::User.new(user)
+      merge Abilities::Admin.new(user) if user.has_cached_role?(:admin) || user.has_cached_role?(:super_admin)
+      merge Abilities::SuperAdmin.new(user) if user.has_cached_role?(:super_admin)
     end
 
     cannot [:edit, :update, :destroy], :all do |model|

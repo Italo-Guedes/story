@@ -20,17 +20,22 @@
 	"workspaceFolder": "/rdmapps",
 
 	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"castwide.solargraph",
-		"koichisasada.vscode-rdbg",
-		"rebornix.ruby",
-		"redhat.vscode-yaml",
-		"dbaeumer.vscode-eslint",
-		"eamodio.gitlens",
-		"seatonjiang.gitmoji-vscode",
-		"vincaslt.highlight-matching-tag",
-		"rangav.vscode-thunder-client"
-	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"castwide.solargraph",
+				"koichisasada.vscode-rdbg",
+				"rebornix.ruby",
+				"redhat.vscode-yaml",
+				"dbaeumer.vscode-eslint",
+				"eamodio.gitlens",
+				"seatonjiang.gitmoji-vscode",
+				"vincaslt.highlight-matching-tag",
+				"rangav.vscode-thunder-client",
+				"misogi.ruby-rubocop"
+			]
+		}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": ["localhost:3000"],
@@ -44,7 +49,7 @@
 	"otherPortsAttributes": {"onAutoForward": "ignore"},
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
-	"runServices": ["web"]
+	"runServices": ["web", "db", "redis", "yarn", "sidekiq"]
 
 	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
 	// "shutdownAction": "none",
