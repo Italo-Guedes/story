@@ -49,9 +49,9 @@ class Rack::Attack
   # definido pelo mecanismo de throttle
   # (ou seja, de limitação de requisições).
   #
-  # self.throttled_responder = lambda do |env|
-  #  [ 503,  # status
-  #    {},   # headers
-  #    ['']] # body
-  # end
+  self.throttled_responder = lambda do |env|
+    [ 429,  # status
+      {},   # headers
+      ["Throttled\n"]] # body
+  end
 end
