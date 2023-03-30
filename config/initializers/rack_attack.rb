@@ -1,27 +1,5 @@
 class Rack::Attack
 
-  ### Configure Cache ###
-  # Implementa uma interface de armazenamento de cache
-  #
-  # ActiveSupport::Cache::Store 
-  # Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
-
-  ###  Configure Blocklist ###
-  # O método pode ser usado para bloquear IPs específicos
-  # que estejam tentando acessar o servidor.
-  #
-  # Rack::Attack.blocklist_ip("")
-
-  #### Throttle all requests by IP (60rpm) ### 
-  # Limita a taxa de requisições, o que significa que um único endereço
-  # IP só pode fazer 60 requisições por minuto antes de ser
-  # limitado pelo mecanismo de throttle
-  #
-  # Key: "rack::attack:#{Time.now.to_i/:period}:req/ip:#{req.ip}"
-  # throttle('req/ip', limit: 300, period: 5.minutes) do |req|
-  #   req.ip
-  # end
-
   ### Prevent Brute-Force Login Attacks ###
   # Bloqueia requisições POST para /login que excedam um limite
   # de 5 requisições por 20 segundos por endereço IP.
@@ -49,9 +27,31 @@ class Rack::Attack
   # definido pelo mecanismo de throttle
   # (ou seja, de limitação de requisições).
   #
-  self.throttled_responder = lambda do |env|
-    [ 429,  # status
-      {},   # headers
-      ["Throttled\n"]] # body
-  end
+  # self.throttled_responder = lambda do |env|
+    # [ 429,  # status
+    #   {},   # headers
+    #   ["Throttled\n"]] # body
+  # end
+
+  ### Configure Cache ###
+  # Implementa uma interface de armazenamento de cache
+  #
+  # ActiveSupport::Cache::Store 
+  # Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
+
+  ###  Configure Blocklist ###
+  # O método pode ser usado para bloquear IPs específicos
+  # que estejam tentando acessar o servidor.
+  #
+  # Rack::Attack.blocklist_ip("")
+
+  #### Throttle all requests by IP (60rpm) ### 
+  # Limita a taxa de requisições, o que significa que um único endereço
+  # IP só pode fazer 60 requisições por minuto antes de ser
+  # limitado pelo mecanismo de throttle
+  #
+  # Key: "rack::attack:#{Time.now.to_i/:period}:req/ip:#{req.ip}"
+  # throttle('req/ip', limit: 300, period: 5.minutes) do |req|
+  #   req.ip
+  # end
 end
