@@ -42,6 +42,9 @@ gem 'tzinfo-data'
 gem 'jbuilder'
 gem 'oj'
 
+# Security
+gem 'rack-attack'
+
 # Excel handling
 # gem 'caxlsx' # export
 # gem 'caxlsx_rails' # export

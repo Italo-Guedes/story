@@ -39,6 +39,9 @@ module Rdmapps
     # Descomentar se for utilizar o sidekiq
     config.active_job.queue_adapter = :sidekiq
 
+    # Descomentar se for utilizar o rack-attack
+    # Rack::Attack.enabled = true
+
     # # Configuração do Sentry
     # Raven.configure do |config|
     #   # Gerar o dsn no Sentry
