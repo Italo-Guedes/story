@@ -1,13 +1,19 @@
+# frozen_string_literal: true
+
+# Creation of notifications table, from rdmapps startkit
 class CreateNotifications < ActiveRecord::Migration[5.1]
   def change
     create_table :notifications do |t|
       t.references :user, foreign_key: true
-      t.string :text
-      t.string :image_url
-      t.string :link_url
-      t.boolean :viewed, default: false
+      t.string     :text
+      t.string     :image_url
+      t.string     :link_url
+      t.boolean    :viewed, default: false
+      t.references :subject, polymorphic: true
 
       t.timestamps
     end
+
+    add_index(:notifications, %i[subject_type subject_id])
   end
 end

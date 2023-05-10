@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Abilities
-	# Permission class for admin
+  # Permission class for admin
   class Admin
     include CanCan::Ability
 

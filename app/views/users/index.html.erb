@@ -22,25 +22,27 @@
       <table class="table table-striped">
         <thead>
           <tr>
+            <%# As we use this view to show deleted records, we check if it's %>
+            <%# the versions controller to show an extra column %>
             <% if controller_name == "versions" %>
               <th style="color: red">Deletado em</th>
             <% end %>
-            <th><%= t('activerecord.attributes.user.name') %></th>
-            <th><%= t('activerecord.attributes.user.email') %></th>
-            <th><%= t('activerecord.attributes.user.user_roles') %></th>
+            <%# If there's a @q, ransack is started. Otherwise, normal translated text %>
+            <th><%= if @q then sort_link(@q, :name) else t('activerecord.attributes.user.name') end %></th>
+            <th><%= if @q then sort_link(@q, :email) else t('activerecord.attributes.user.email') end %></th>
+            <th><%= if @q then sort_link(@q, :roles_name, t('activerecord.attributes.user.user_roles')) else t('activerecord.attributes.user.user_roles') end %></th>
             <th class="actions-column"></th>
           </tr>
         </thead>
 
         <tbody>
-          <% @users_a = @users unless controller_name == "versions" %>
-          <% @users_a = @users.map { |user| user.reify } if controller_name == "versions" %>
-          <% if @users_a.blank? %>
+          <% if @users.empty? %>
             <tr>
               <td colspan="99" class="text-center">Nenhum registro encontrado.</td>
             </tr>
           <% end %>
-          <% @users_a.each do |user| %>
+          <%# If we're in version controller, we need to reify each element %>
+          <% (controller_name == 'versions' ? @users.map(&:reify) : @users).each do |user| %>
             <tr>
               <% if controller_name == "versions" %>
                 <td style="color: red"><%= user.version.created_at %></td>

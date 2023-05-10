@@ -96,8 +96,8 @@
       </div>
 
       <ul class="top-nav">
-        <%= render 'layouts/language_selector.html.erb' %>
-        <%= render 'layouts/notifications.html.erb' %>  
+        <%= render 'layouts/language_selector' %>
+        <%= render 'layouts/notifications' %>  
       </ul>
     </header>
 
@@ -106,7 +106,7 @@
         <%= render 'layouts/menu' %>
       </aside>
     <% else %>
-      <%= render 'layouts/menu_hider.html.erb' %>
+      <%= render 'layouts/menu_hider' %>
     <% end %>
     
     <section class="content">

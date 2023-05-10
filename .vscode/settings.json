@@ -1,0 +1,6 @@
+{
+  "solargraph.commandPath": "solargraph",
+  "solargraph.diagnostics": true,
+  "ruby.useBundler": true,
+  "ruby.pathToBundler": ""
+}

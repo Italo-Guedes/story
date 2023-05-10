@@ -1,4 +1,6 @@
-class DeviseMailer < Devise::Mailer   
+# frozen_string_literal: true
+
+class DeviseMailer < Devise::Mailer
   layout 'mailer'
   helper :application # gives access to all helpers defined within `application_helper`.
   include Devise::Controllers::UrlHelpers # Optional. eg. `confirmation_url`

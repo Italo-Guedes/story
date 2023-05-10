@@ -7,13 +7,20 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = @users.order(:email).search(params[:q], params[:page])
+    @q = @users.ransack(params[:q])
+    @q.sorts = 'id desc' if @q.sorts.empty?
+    @users = @q.result
+    @users = @users.search(params[:pgq], params[:page])
     return unless params[:select2]
 
-    render json: Oj.dump({
-                           results: @users.select(:id, :name).map { |user| { text: user.to_s, id: user.id } },
-                           pagination: @users.next_page.present?
-                         }, mode: :compat)
+    # As a universal way of enabling select2 autocomplete,
+    # we need to return, on each index action, a json with their format
+    render json: Oj.dump(
+      {
+        results: @users.select(:id, :name).map { |user| { text: user.to_s, id: user.id } },
+        pagination: @users.next_page.present?
+      }, mode: :compat
+    )
   end
 
   # GET /users/1
@@ -80,8 +87,7 @@ class UsersController < ApplicationController
   def user_params
     sanitize_active_storage_params(User, @user)
     sanitize_role_params
-    params[:user]["files"] = [] if params[:user]["files"].nil?
-    params.require(:user).permit(:email, :password, :password_confirmation, :name, :locale, :is_active, :avatar, files: [], role_ids: [])
+    params.require(:user).permit(:email, :password, :password_confirmation, :name, :locale, :is_active, :avatar, role_ids: [])
   end
 
   def sanitize_role_params

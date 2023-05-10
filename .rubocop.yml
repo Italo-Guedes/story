@@ -1,0 +1,9 @@
+AllCops:
+  Exclude:
+    - db/schema.rb
+Metrics/ClassLength:
+  Enabled: false
+Metrics/MethodLength:
+  Max: 20
+Metrics/AbcSize:
+  Max: 20

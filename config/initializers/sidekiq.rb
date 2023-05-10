@@ -13,7 +13,9 @@ end
 require 'sidekiq/web'
 Sidekiq::Web.set :sessions, false
 
-sidekiq_cronfig = 'config/sidekiq_cron.yml'
-if Sidekiq.server? && File.exist?(sidekiq_cronfig) && (config = YAML.load_file(sidekiq_cronfig))
-  Sidekiq::Cron::Job.load_from_hash config
+Rails.application.reloader.to_prepare do
+  sidekiq_cronfig = 'config/sidekiq_cron.yml'
+  if Sidekiq.server? && File.exist?(sidekiq_cronfig) && (config = YAML.load_file(sidekiq_cronfig))
+    Sidekiq::Cron::Job.load_from_hash config
+  end
 end

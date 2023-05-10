@@ -1,6 +1,6 @@
 <%= form_tag request.path, :method => 'get', :class => '' do %>
   <div class="input-group mb-3">
-    <%= text_field_tag :q, params[:q], :class => "form-control", placeholder: t("search_here") %>
+    <%= text_field_tag :pgq, params[:pgq], :class => "form-control", placeholder: t("search_here") %>
     <button class="btn zmdi zmdi-search" type="submit"></button>
   </div>
 <% end %>

@@ -30,16 +30,14 @@ class Comment < ApplicationRecord
   belongs_to :user
 
   after_create :send_notifications
-  
-  delegate :management_unit, to: :user
 
-  def as_json(options=nil)
+  def as_json(_options = nil)
     {
-      id: id,
-      commenteable_id: commenteable_id,
-      commenteable_type: commenteable_type,
-      text: text,
-      created_at: created_at,
+      id:,
+      commenteable_id:,
+      commenteable_type:,
+      text:,
+      created_at:,
       user_id: user.id
     }
   end
@@ -48,9 +46,9 @@ class Comment < ApplicationRecord
 
   def send_notifications
     # Notification.create(
-    #   user: user_owner_of_the_resource, 
-    #   text: "Texto", 
-    #   link_url: link_of_the_resource, 
+    #   user: user_owner_of_the_resource,
+    #   text: "Texto",
+    #   link_url: link_of_the_resource,
     #   image_url: some_image
     # )
   end

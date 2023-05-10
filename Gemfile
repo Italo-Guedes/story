@@ -1,29 +1,32 @@
-source 'https://rubygems.org'
-ruby '2.7.4'
+# frozen_string_literal: true
 
-gem 'rails', '~> 6.0.3'
+source 'https://rubygems.org'
+ruby '3.1.3'
+
+gem 'psych', '< 4'
+
+gem 'rails', '~> 6.1.7'
 gem 'rails-i18n', '~> 6.0.0'
 
-
 # Front end
+gem 'coffee-rails'
 gem 'react-rails'
-gem 'webpacker'
 gem 'turbolinks'
+gem 'webpacker'
+# Front end (needed only because of pghero and graphiql)
+gem 'jquery-rails'
+gem 'sass-rails'
 
 # File management
 gem 'aws-sdk-s3', require: false
-gem 'image_processing', '~> 1.2'
+gem 'image_processing'
 
 # Database related
 gem 'paper_trail'
 gem 'pg'
-gem 'pg_search'
 gem 'pghero'
-
-# Front end (needed only because of pghero and graphiql)
-gem 'coffee-rails'
-gem 'sass-rails'
-gem 'jquery-rails'
+gem 'pg_search'
+gem 'ransack'
 
 # Account management
 gem 'cancancan'
@@ -39,9 +42,12 @@ gem 'tzinfo-data'
 gem 'jbuilder'
 gem 'oj'
 
+# Security
+gem 'rack-attack'
+
 # Excel handling
-# gem 'caxlsx'
-# gem 'caxlsx_rails'
+# gem 'caxlsx' # export
+# gem 'caxlsx_rails' # export
 # gem 'roo', '1.13.2' # import
 
 # PDF Generation
@@ -52,14 +58,15 @@ gem 'oj'
 gem 'puma'
 
 # Development produtivity
+gem 'active_link_to'
 gem 'bootsnap'
 gem 'cocoon'
 gem 'figaro'
 gem 'formtastic'
 # gem 'money-rails'
+gem 'rubocop', require: false
 gem 'sentry-raven'
 gem 'will_paginate'
-gem 'active_link_to'
 
 # Background jobs
 gem 'sidekiq'
@@ -67,13 +74,10 @@ gem 'sidekiq-cron'
 
 group :development do
   gem 'annotate'
+  gem 'debug', '>= 1.0.0'
+  gem 'derailed_benchmarks'
+  gem 'foreman'
   gem 'web-console'
-
-  gem 'derailed'
-
-  # VSCode debugging
-  gem 'debase'
-  gem 'ruby-debug-ide'
 end
 
 group :development, :test do
@@ -84,7 +88,6 @@ group :development, :test do
 
   # tests
   gem 'capybara'
-  gem 'cpf_faker'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'listen', '~> 3.0.5'
