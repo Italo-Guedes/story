@@ -253,6 +253,8 @@ GEM
     raabro (1.4.0)
     racc (1.6.2)
     rack (2.2.6.4)
+    rack-attack (6.6.1)
+      rack (>= 1.0, < 3)
     rack-proxy (0.6.5)
       rack
     rack-test (2.1.0)
@@ -448,6 +450,7 @@ DEPENDENCIES
   pry-rails
   psych (< 4)
   puma
+  rack-attack
   rails (~> 6.1.7)
   rails-i18n (~> 6.0.0)
   ransack
