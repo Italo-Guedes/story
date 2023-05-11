@@ -9,10 +9,6 @@
     <%%= link_to '', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), title: t('activerecord.link.edit'), class: 'actions__item zmdi zmdi-edit' if can?(:edit, @<%= singular_table_name %>) && controller_name != 'versions' %>
   </div>
 </header>
-
-
-
-
 <div class="card">
   <div class="card-body card-padding record-show">
     <div class="row">

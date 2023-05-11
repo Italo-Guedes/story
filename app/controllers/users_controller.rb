@@ -3,7 +3,7 @@
 # /admin/users
 class UsersController < ApplicationController
   load_and_authorize_resource
-  
+
   # GET /users
   # GET /users.json
   def index
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     render json: Oj.dump(
       {
         results: @users.select(:id, :name).map { |user| { text: user.to_s, id: user.id } },
-        pagination: @users.next_page.present?
+        pagination: { more: @users.next_page.present? }
       }, mode: :compat
     )
   end

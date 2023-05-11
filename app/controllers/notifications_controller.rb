@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Notifications controller
 class NotificationsController < ApplicationController
   load_and_authorize_resource
 

@@ -2,7 +2,7 @@
 version: "3"
 services:
   web:
-    image: ${DOCKER_IMAGE_NAME-ruby-3-1-3}
+    image: ${DOCKER_IMAGE_NAME-startkit}
     build:
       context: .
       dockerfile: Dockerfile.dev
@@ -30,11 +30,10 @@ services:
       WEBPACKER_DEV_SERVER_HOST: yarn
       WEBPACKER_DEV_SERVER_PORT: 3001
       WEBPACKER_DEV_SERVER_PUBLIC: yarn:3001
-    container_name: "web"
     tty: true
     stdin_open: true
   yarn:
-    image: ${DOCKER_IMAGE_NAME-ruby-3-1-3}
+    image: ${DOCKER_IMAGE_NAME-startkit}
     command: "./scripts/start_webpack_dev.sh"
     volumes:
       - .:/rdmapps:cached
@@ -48,9 +47,8 @@ services:
       WEBPACKER_DEV_SERVER_HOST: 0.0.0.0 # Hot Reload só funciona com o 0.0.0.0
       WEBPACKER_DEV_SERVER_PORT: 3001
       WEBPACKER_DEV_SERVER_PUBLIC: 0.0.0.0:3001 # Hot Reload só funciona com o 0.0.0.0
-    container_name: yarn
   sidekiq:
-    image: ${DOCKER_IMAGE_NAME-ruby-3-1-3}
+    image: ${DOCKER_IMAGE_NAME-startkit}
     command: ["./scripts/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "sidekiq", "-c", "6", "-q", "default", "-q", "mailers", "-q", "push_notifications", "-q", "active_storage_analysis", "-q", "active_storage_purge"]
     volumes:
       - .:/rdmapps:cached

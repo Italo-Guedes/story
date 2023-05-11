@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Base controller
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -13,7 +16,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     stored_location_for(resource) || root_path
   end
-  
+
   def configure_permitted_parameters
     # Don't allow avatar if it's empty
     if params[:user] && params[:user][:avatar].blank?
@@ -41,8 +44,8 @@ class ApplicationController < ActionController::Base
     current_user.update_attributes locale: I18n.locale.to_s if current_user && current_user.locale != I18n.locale.to_s
   end
 
-  def default_url_options(options={})
-    { :locale => (current_user && current_user.locale ? current_user.locale : false) || params[:locale] || I18n.default_locale }
+  def default_url_options(_options = {})
+    { locale: (current_user&.locale ? current_user.locale : false) || params[:locale] || I18n.default_locale }
   end
 
   def user_time_zone(&block)
@@ -53,15 +56,20 @@ class ApplicationController < ActionController::Base
     begin
       Time.zone = params_tz || user_tz
       current_user.update_attribute :timezone, params_tz if params_tz
-    rescue => ex
-      Raven.capture_message("Invalid timezone", this_is: "Timezone error. params: #{params_tz} user:#{user_tz}. ex: #{ex}") if Rails.env.production?
+    rescue StandardError => e
+      if Rails.env.production?
+        Raven.capture_message(
+          'Invalid timezone',
+          this_is: "Timezone error. params: #{params_tz} user:#{user_tz}. ex: #{e}"
+        )
+      end
       params_tz = 'Brasilia'
-    end    
+    end
     Time.use_zone((params_tz || user_tz), &block)
   end
 
   def attachment_names(klass)
-    klass.reflect_on_all_attachments.filter do |association| 
+    klass.reflect_on_all_attachments.filter do |association|
       association.instance_of? ActiveStorage::Reflection::HasOneAttachedReflection
     end.map(&:name) rescue []
   end

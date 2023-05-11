@@ -5,8 +5,8 @@ class Ability
   include CanCan::Ability
   def initialize(user)
     if user
-      merge Abilities::User.new(user)
-      merge Abilities::Admin.new(user) if user.has_cached_role?(:admin) || user.has_cached_role?(:super_admin)
+      merge Abilities::DefaultUser.new(user)
+      merge Abilities::Admin.new(user) if user.has_cached_role?(:admin)
       merge Abilities::SuperAdmin.new(user) if user.has_cached_role?(:super_admin)
     end
 

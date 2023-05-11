@@ -1,5 +1,5 @@
 <%= semantic_form_for @user, html: { multipart: true, class: 'form-row' } do |f| %>
-  <%= f.input :avatar, as: :image, direct_upload: true, class: 'col-sm-2' %>
+  <%= f.input :avatar, as: :image, direct_upload: true, class: 'col-sm-12' %>
   <div class="col-sm-10"></div>
   <%= f.input :email, class: 'col-sm-6' %>
   <%= f.input :name, class: 'col-sm-6' %>

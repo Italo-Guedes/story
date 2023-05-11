@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-# react page
-class StaticsController < ApplicationController
+# react pages controller
+class ReactController < ApplicationController
   skip_before_action :authenticate_user!
-  layout 'static'
+  layout 'react'
 
   # Página para usuários não logados
   def public
@@ -12,7 +12,7 @@ class StaticsController < ApplicationController
     if current_user
       redirect_to site_path
     else
-      render 'public.html.erb', layout: 'public_static'
+      render 'public.html.erb', layout: 'public_react'
     end
   end
 
@@ -20,7 +20,6 @@ class StaticsController < ApplicationController
   def index
     flash['notice'] = params[:flash_notice]
     flash['alert'] = params[:flash_alert]
-    
     redirect_to public_path unless current_user
   end
 end

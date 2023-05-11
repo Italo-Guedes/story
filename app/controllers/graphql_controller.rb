@@ -1,16 +1,20 @@
+# frozen_string_literal: true
+
+# Controller for global settings
 class GraphqlController < ApplicationController
   def execute
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      current_user: current_user,
-      current_ability: Ability.new(current_user)
+      current_ability: Ability.new(current_user),
+      current_user:
     }
-    result = RdmappsSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+    result = RdmappsSchema.execute(query, variables:, context:, operation_name:)
     render json: result
-  rescue => e
+  rescue StandardError => e
     raise e unless Rails.env.development?
+
     handle_error_in_development e
   end
 
@@ -34,10 +38,10 @@ class GraphqlController < ApplicationController
     end
   end
 
-  def handle_error_in_development(e)
-    logger.error e.message
-    logger.error e.backtrace.join("\n")
+  def handle_error_in_development(exception)
+    logger.error exception.message
+    logger.error exception.backtrace.join("\n")
 
-    render json: { error: { message: e.message, backtrace: e.backtrace }, data: {} }, status: 500
+    render json: { error: { message: exception.message, backtrace: exception.backtrace }, data: {} }, status: 500
   end
 end

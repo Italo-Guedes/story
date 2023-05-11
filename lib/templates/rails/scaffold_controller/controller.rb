@@ -13,14 +13,7 @@ class <%= class_name.pluralize %>Controller < ApplicationController
     @<%= table_name %> = @<%= table_name %>.order(:id).search(params[:pgq], params[:page])
     return unless params[:select2]
 
-    # As a universal way of enabling select2 autocomplete,
-    # we need to return, on each index action, a json with their format
-    render json: Oj.dump(
-      {
-        results: @<%= table_name %>.map { |<%= singular_table_name %>| { text: <%= singular_table_name %>.to_s, id: <%= singular_table_name %>.id } },
-        pagination: { more: @<%= table_name %>.next_page.present? } 
-      }, mode: :compat
-    )
+    select2_render
   end
 
   # GET /<%= table_name %>/1
@@ -73,9 +66,18 @@ class <%= class_name.pluralize %>Controller < ApplicationController
 
   private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def <%= singular_table_name %>_params
-      sanitize_active_storage_params(<%= class_name %>, @<%= singular_table_name %>)
-      params.require(:<%= singular_table_name %>).permit(<%= (attributes.map { |a| (a.type.to_s == "references" ? ":"+a.name+"_id" : ":"+a.name)}).join(", ") %>)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def <%= singular_table_name %>_params
+    sanitize_active_storage_params(<%= class_name %>, @<%= singular_table_name %>)
+    params.require(:<%= singular_table_name %>).permit(<%= (attributes.map { |a| (a.type.to_s == "references" ? ":"+a.name+"_id" : ":"+a.name)}).join(", ") %>)
+  end
+
+  def select2_render
+    render json: Oj.dump(
+      {
+        results: @<%= table_name %>.map { |<%= singular_table_name %>| { text: <%= singular_table_name %>.to_s, id: <%= singular_table_name %>.id } },
+        pagination: { more: @<%= table_name %>.next_page.present? }
+      }, mode: :compat
+    )
+  end
 end

@@ -15,25 +15,21 @@ class <%= class_name %> < <%= parent_class_name.classify %>
   def to_s
     super
   end
-  
+
   def self.search(search, page)
-    if search && search != ''
-      paginate(per_page: 20, page: page).full_search(search)
+    if search.present?
+      paginate(per_page: 20, page:).full_search(search)
     else
-      paginate(per_page: 20, page: page)
+      paginate(per_page: 20, page:)
     end
   end
 
-  pg_search_scope :full_search,
+  pg_search_scope(
+    :full_search,
     against: %i[<%= (attributes.select { |a| %i[string text].include?(a.type) }.map { |a| a.name}).join(' ') %>],
-    associated_against: {
-    	#belongs_to_relation: %i[field1 field2 field3]
-    },
-    using: {
-      tsearch: {prefix: true},
-      # dmetaphone: {},
-      # trigram: {}
-    },
+    associated_against: {}, # relation: %i[f1, f2], another: %i[f1, f2]
+    using: { tsearch: { prefix: true } },
     ignoring: :accents
+  )
 end
 <% end -%>

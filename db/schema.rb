@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 2022_02_28_064019) do
     t.bigint "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["subject_type", "subject_id"], name: "index_notifications_on_subject"
     t.index ["subject_type", "subject_id"], name: "index_notifications_on_subject_type_and_subject_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
