@@ -56,6 +56,11 @@ $( document ).on('turbolinks:load', function() {
     });
   }
 
+  // Autofocus on select2 search on open
+  $(document).on('select2:open', () => {
+    document.querySelector('.select2-search__field').focus();
+  });
+
   /*------------------------------------------------
       Popovers (Bootstrap)
   -------------------------------------------------*/

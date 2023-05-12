@@ -13,7 +13,5 @@ class CreateNotifications < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-
-    add_index(:notifications, %i[subject_type subject_id])
   end
 end

@@ -17,6 +17,7 @@ class ImageInput < FileInput
     template.content_tag(
       :div,
       (
+        label_html <<
         file_preview_html <<
         template.content_tag(
           :div,

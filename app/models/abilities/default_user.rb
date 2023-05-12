@@ -2,7 +2,7 @@
 
 module Abilities
   # Permission class for super admin role
-  class User
+  class DefaultUser
     include CanCan::Ability
 
     def initialize(user)

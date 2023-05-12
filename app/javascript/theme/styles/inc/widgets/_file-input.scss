@@ -102,6 +102,10 @@
 
 .fileinput.input-group {
     // display: table;
+    display: block;
+    max-width: 360px;
+    margin-right: auto;
+    margin-left: auto;
 
     > * {
         position: relative;
@@ -110,12 +114,19 @@
     > .btn-file {
         z-index: 1;
     }
+    .input-group .form-control {
+      width: 100%;
+    }
 }
 
 .fileinput .fileinput-preview {
   line-height: 150px;
   height: 150px;
   width: 100%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 360px;
   text-align: center;
   img {
     max-height: 100%;

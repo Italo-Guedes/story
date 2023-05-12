@@ -1,5 +1,6 @@
 <%%= semantic_form_for @<%= singular_name %>, html: { class: 'form-row' } do |f| %>
   <%- attributes.each do |attribute| -%>
-  <%%= f.input :<%= attribute.name %>, class: 'col-12' %><%- end -%>
+  <%%= f.input :<%= attribute.name %>, class: 'col-12' %>
+  <%- end -%>
   <%%= f.action :submit, label: t('activerecord.link.save'), as: :button, class: 'col-12', html: { 'data-disable-with' => t('activerecord.link.sending') } %>
 <%% end %>

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Home controller - stub methods
 class HomeController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index contact]
 
@@ -19,7 +22,7 @@ class HomeController < ApplicationController
       events << {
         title: "Evento #{i}",
         start: Time.zone.now + b.hours,
-        end: Time.zone.now + (b + 1).hours,
+        end: Time.zone.now + (b + 1).hours
         # url: url_for(current_user),
         # allDay: true,
         # classNames: 'event-red',
@@ -53,13 +56,13 @@ class HomeController < ApplicationController
       validates :email, :name, :message, presence: true
 
       validate do
-        if email.present?
-          self.errors.add(:email, 'inválido') if (self.email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i) != 0
+        if email.present? && (email =~ /\A[\w+\-.]+@[a-z\d-]+(\.[a-z\d-]+)*\.[a-z]+\z/i) != 0
+          errors.add(:email, 'inválido')
         end
       end
 
       def initialize(contact_params)
-        self.assign_attributes(contact_params)
+        assign_attributes(contact_params)
       end
     end
   end
