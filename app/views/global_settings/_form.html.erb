@@ -4,9 +4,9 @@
   <%= f.input :page_author, class: 'col-6' %>
   <%= f.input :menu_color, as: :color, class: 'col-6', input_html: { onChange: "getColorMenu();" } %>
   <%#= f.input :page_title, class: 'col-12', as: :date_picker %>
-  <%#= f.input :page_title, class: 'col-12', as: :string, input_html: { inputmask: 'br-currency' } %>
-  <%#= f.input :page_title, class: 'col-12', as: :string, input_html: { inputmask: 'br-datetime' } %>
-  <%#= f.input :page_title, class: 'col-12', as: :string, input_html: { inputmask: 'br-date' } %>
+  <%#= f.input :page_title, class: 'col-12', as: :string, input_html: { data: { inputmask: "'alias': 'br-currency'" } } %>
+  <%#= f.input :page_title, class: 'col-12', as: :string, input_html: { data: { inputmask: "'alias': 'br-datetime'" } } %>
+  <%#= f.input :page_title, class: 'col-12', as: :string, input_html: { data: { inputmask: "'alias': 'br-date'" } } %>
   <%#= f.input :page_title, class: 'col-12', as: :select, collection: [], input_html: { class: 'select2 select-ajax', data: { placeholder: 'Selecione o time', url: users_path } }  %>
   <%= f.input :page_description, as: :text, input_html: { class: 'textarea-autosize' }, class: 'col-12' %>
   <%#= f.input :menu_border_color, as: :color, class: 'col-6', input_html: { onChange: "getColorMenu();" } %>
