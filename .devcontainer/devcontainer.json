@@ -23,7 +23,6 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"castwide.solargraph",
 				"koichisasada.vscode-rdbg",
 				"rebornix.ruby",
 				"redhat.vscode-yaml",
