@@ -4,8 +4,8 @@ ENV APP_PATH /rdmapps
 ENV BUNDLE_PATH /usr/local/bundle/gems
 
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-    postgresql-client python2 shared-mime-info
-
+    postgresql-client shared-mime-info
+    
 # NVM AND NODE SETUP
 ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION v12.22.12
@@ -23,6 +23,26 @@ RUN npm install -g yarn@$YARN_VERSION
 
 RUN mkdir $APP_PATH
 WORKDIR $APP_PATH
+
+# Install Python 2.7.9
+RUN apt-get install -y \
+    build-essential \
+    zlib1g-dev \
+    libncurses5-dev \
+    libgdbm-dev \
+    libnss3-dev \
+    libssl-dev \
+    libsqlite3-dev \
+    libreadline-dev \
+    libffi-dev \
+    wget
+
+RUN wget https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz && \
+    tar xzf Python-2.7.9.tgz && \
+    cd Python-2.7.9 && \
+    ./configure --enable-optimizations && \
+    make altinstall && \
+    ln -s /usr/local/bin/python2.7 /usr/local/bin/python
 
 # rails server
 EXPOSE 3000

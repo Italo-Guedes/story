@@ -8,12 +8,33 @@ ENV RACK_ENV production
 ENV RAILS_SERVE_STATIC_FILES true
 
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-    nodejs npm postgresql-client python2
+    nodejs npm postgresql-client
 
 RUN npm install -g yarn
 
 RUN mkdir $APP_PATH
 WORKDIR $APP_PATH
+
+# Install Python 2.7.9
+RUN apt-get install -y \
+    build-essential \
+    zlib1g-dev \
+    libncurses5-dev \
+    libgdbm-dev \
+    libnss3-dev \
+    libssl-dev \
+    libsqlite3-dev \
+    libreadline-dev \
+    libffi-dev \
+    wget
+
+RUN wget https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz && \
+    tar xzf Python-2.7.9.tgz && \
+    cd Python-2.7.9 && \
+    ./configure --enable-optimizations && \
+    make altinstall && \
+    ln -s /usr/local/bin/python2.7 /usr/local/bin/python
+
 
 # Rails part
 COPY Gemfile .
