@@ -1,60 +1,91 @@
-FROM ruby:3.0.4
+# syntax = docker/dockerfile:1
 
-ENV APP_PATH /rdmapps
-ENV BUNDLE_PATH /usr/local/bundle/gems
-ENV BUNDLE_VERSION 2.2.3
-ENV RAILS_ENV production
-ENV RACK_ENV production
-ENV RAILS_SERVE_STATIC_FILES true
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
+ARG RUBY_VERSION=3.1.4
+FROM ruby:$RUBY_VERSION-slim as base
 
-RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-    nodejs npm postgresql-client
+# Rails app lives here
+WORKDIR /rails
 
-RUN npm install -g yarn
+# Set production environment
+ENV RAILS_ENV="production" \
+    BUNDLE_WITHOUT="development:test" \
+    BUNDLE_DEPLOYMENT="1"
 
-RUN mkdir $APP_PATH
-WORKDIR $APP_PATH
+# Update gems and bundler
+RUN gem update --system --no-document && \
+    gem install -N bundler
 
-# Install Python 2.7.9
-RUN apt-get install -y \
-    build-essential \
-    zlib1g-dev \
-    libncurses5-dev \
-    libgdbm-dev \
-    libnss3-dev \
-    libssl-dev \
-    libsqlite3-dev \
-    libreadline-dev \
-    libffi-dev \
-    wget
+# Install packages needed to install nodejs
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-RUN wget https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz && \
-    tar xzf Python-2.7.9.tgz && \
-    cd Python-2.7.9 && \
-    ./configure --enable-optimizations && \
-    make altinstall && \
-    ln -s /usr/local/bin/python2.7 /usr/local/bin/python
+# Install Node.js
+ARG NODE_VERSION=12.22.12
+ENV PATH=/usr/local/node/bin:$PATH
+RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
+    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
+    rm -rf /tmp/node-build-master
 
 
-# Rails part
-COPY Gemfile .
-COPY Gemfile.lock .
-RUN bundle install --jobs `expr $(cat /proc/cpuinfo | grep -c "cpu cores") - 1` --retry 3
+# Throw-away build stage to reduce size of final image
+FROM base as build
 
-# Webpacker part
-COPY package.json .
-RUN yarn
+# Install packages needed to build gems and node modules
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential libpq-dev libvips node-gyp pkg-config python-is-python3
 
-# Copying app
-COPY . .
+# Install yarn
+ARG YARN_VERSION=1.22.19
+RUN npm install -g yarn@$YARN_VERSION
 
-RUN mkdir -p tmp/pids/
-RUN mkdir -p tmp/logs/
+# Build options
+ENV PATH="/usr/local/node/bin:$PATH"
 
-RUN bundle exec rake assets:precompile
+# Install application gems
+COPY --link Gemfile Gemfile.lock ./
+RUN bundle install && \
+    bundle exec bootsnap precompile --gemfile && \
+    rm -rf ~/.bundle/ $BUNDLE_PATH/ruby/*/cache $BUNDLE_PATH/ruby/*/bundler/gems/*/.git
 
-# rails server
+# Install node modules
+COPY --link package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
+
+# Copy application code
+COPY --link . .
+
+# Precompile bootsnap code for faster boot times
+RUN bundle exec bootsnap precompile app/ lib/
+
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE=DUMMY ./bin/rails assets:precompile
+
+
+# Final stage for app image
+FROM base
+
+# Install packages needed for deployment
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl imagemagick libvips postgresql-client && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Copy built artifacts: gems, application
+COPY --from=build /usr/local/bundle /usr/local/bundle
+COPY --from=build /rails /rails
+
+# Run and own only the runtime files as a non-root user for security
+RUN useradd rails --create-home --shell /bin/bash && \
+    chown -R rails:rails db log storage tmp
+USER rails:rails
+
+# Deployment options
+ENV RAILS_LOG_TO_STDOUT="1" \
+    RAILS_SERVE_STATIC_FILES="true"
+
+# Entrypoint prepares the database.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+# Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-
-# Start the main process
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
