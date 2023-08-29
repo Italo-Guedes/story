@@ -16,6 +16,7 @@ services:
       - /rdmapps/tmp/pids
     ports:
       - "3000:3000"
+      - "3002:3002"
     depends_on:
       - db
       - redis
@@ -50,7 +51,7 @@ services:
       WEBPACKER_DEV_SERVER_PUBLIC: 0.0.0.0:3001 # Hot Reload só funciona com o 0.0.0.0
   sidekiq:
     image: ${DOCKER_IMAGE_NAME-startkit}
-    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "bundle", "exec", "sidekiq", "-c", "6", "-q", "default", "-q", "mailers", "-q", "push_notifications", "-q", "active_storage_analysis", "-q", "active_storage_purge"]
+    command: [ "./scripts/wait-for-it.sh", "db:5432", "--", "./scripts/start_sidekiq.sh"]
     volumes:
       - .:/rdmapps:cached
       - global_gems_cache_ubuntu:/usr/local/bundle/gems
@@ -58,6 +59,8 @@ services:
     depends_on:
       - db
       - redis
+    ports:
+      - "3003:3003"
     environment:
       DB_HOST: db
       DB_PASS: postgres

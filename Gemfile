@@ -27,6 +27,7 @@ gem 'pg'
 gem 'pghero'
 gem 'pg_search'
 gem 'ransack'
+gem 'redis', '~> 4.2'
 
 # Account management
 gem 'cancancan'
@@ -76,22 +77,23 @@ group :development do
   gem 'annotate'
   gem 'debug', '>= 1.0.0'
   gem 'derailed_benchmarks'
-  gem 'foreman'
+  gem 'dockerfile-rails', '>= 1.5'
   gem 'web-console'
 end
 
 group :development, :test do
   # Terminal Debugging
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
   gem 'pry-rails'
 
   # tests
   gem 'capybara'
+  gem 'coderay'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'listen', '~> 3.0.5'
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'spring'
   gem 'spring-commands-rspec'
@@ -102,7 +104,3 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
-
-gem "dockerfile-rails", ">= 1.5", :group => :development
-
-gem "redis", "~> 4.2"

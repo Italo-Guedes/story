@@ -16,5 +16,7 @@
 require 'rails_helper'
 
 RSpec.describe GlobalSetting, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'Must exist' do
+    expect(GlobalSetting.instance).not_to be_blank
+  end
 end

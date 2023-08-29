@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "koichisasada.vscode-rdbg",
+    "rebornix.ruby",
+    "noku.rails-run-spec-vscode",
+    "bung87.rails",
+    "misogi.ruby-rubocop",
+    "eamodio.gitlens",
+    "seatonjiang.gitmoji-vscode",
+    "aki77.rails-db-schema"
+  ]
+}

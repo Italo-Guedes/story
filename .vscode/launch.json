@@ -9,7 +9,7 @@
       "name": "Debug web",
       "request": "attach",
       "debugPort": "localhost:3002",
-      "localfs": true
+      "localfsMap": "/rdmapps:${workspaceFolder},/rdmapps/tmp:${workspaceFolder}/tmp",
     },
     {
       "type": "rdbg",

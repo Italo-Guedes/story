@@ -1,7 +1,3 @@
-clear_sidekiq_jobs_job:
-  class: ClearSidekiqJobsJob
-  cron: "0 1 * * *"
-  queue: default
 clear_active_storage_unattached_job:
   class: ClearActiveStorageUnattachedJob
   cron: "0 1 * * *"

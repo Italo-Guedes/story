@@ -31,11 +31,12 @@
 
 FactoryBot.define do
   factory :user, aliases: [:user_admin_default] do
-    avatar { fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'test-image.png'), 'image/png') }
+    avatar { Rack::Test::UploadedFile.new('spec/support/assets/test-image.png', 'image/png') }
     name { Faker::Name.name }
     email { Faker::Internet.email }
     password { 'lklklklk' }
     password_confirmation { password }
+    confirmed_at { 1.hour.ago }
     trait :super_admin do
       before(:create) { |user| user.roles << Role.find_or_create_by(name: :super_admin) }
     end
