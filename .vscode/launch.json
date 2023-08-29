@@ -16,7 +16,7 @@
       "name": "Debug sidekiq",
       "request": "attach",
       "debugPort": "localhost:3003",
-      "localfs": true
+      "localfsMap": "/rdmapps:${workspaceFolder},/rdmapps/tmp:${workspaceFolder}/tmp",
     },
   ]
 }
