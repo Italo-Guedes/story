@@ -65,7 +65,7 @@ develop-deploy:
     - curl -L https://fly.io/install.sh | sh
   stage: deploy
   script:
-    - flyctl deploy
+    - /root/.fly/bin/flyctl deploy
   only:
     - develop
   tags:
@@ -75,8 +75,8 @@ develop-pronto:
   image: arcadiandigital/docker-pronto
   stage: lint
   script:
-    - pronto run -c=origin/develop --exit-code
+    - pronto run --exit-code -f gitlab_mr -c origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
   only:
-    - develop
+    - merge_requests
   tags:
     - docker
