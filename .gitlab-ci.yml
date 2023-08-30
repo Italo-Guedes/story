@@ -75,7 +75,7 @@ develop-pronto:
   image: arcadiandigital/docker-pronto
   stage: lint
   script:
-    - pronto run -c=origin/flyio --exit-code
+    - pronto run -c=origin/develop --exit-code
   only:
     - develop
   tags:
