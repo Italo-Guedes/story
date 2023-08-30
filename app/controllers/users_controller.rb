@@ -13,14 +13,7 @@ class UsersController < ApplicationController
     @users = @users.search(params[:pgq], params[:page])
     return unless params[:select2]
 
-    # As a universal way of enabling select2 autocomplete,
-    # we need to return, on each index action, a json with their format
-    render json: Oj.dump(
-      {
-        results: @users.select(:id, :name).map { |user| { text: user.to_s, id: user.id } },
-        pagination: { more: @users.next_page.present? }
-      }, mode: :compat
-    )
+    select2_render
   end
 
   # GET /users/1
@@ -53,12 +46,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    if params[:user][:password].blank?
-      params[:user].delete :password
-      params[:user].delete :password_confirmation
-    end
-    params[:user].delete :is_active unless current_user.has_role?(:admin) || current_user.has_role?(:super_admin)
-
+    sanitize_update_params
     respond_to do |format|
       if @user.update(user_params)
         sign_in @user, bypass: true if @user.id == current_user.id
@@ -87,10 +75,30 @@ class UsersController < ApplicationController
   def user_params
     sanitize_active_storage_params(User, @user)
     sanitize_role_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :name, :locale, :is_active, :avatar, role_ids: [])
+    params.require(:user).permit(:email, :password, :password_confirmation, :name, :locale, :is_active, :avatar,
+                                 role_ids: [])
   end
 
   def sanitize_role_params
-    params[:user][:role_ids] &= Role.allowed_roles(current_user).pluck(:id).map(&:to_s) if params[:user] && params[:user][:role_ids]
+    return unless params[:user] && params[:user][:role_ids]
+
+    params[:user][:role_ids] &= Role.allowed_roles(current_user).pluck(:id).map(&:to_s)
+  end
+
+  def select2_render
+    render json: Oj.dump(
+      {
+        results: @users.select(:id, :name).map { |user| { text: user.to_s, id: user.id } },
+        pagination: { more: @users.next_page.present? }
+      }, mode: :compat
+    )
+  end
+
+  def sanitize_update_params
+    if params[:user][:password].blank?
+      params[:user].delete :password
+      params[:user].delete :password_confirmation
+    end
+    params[:user].delete :is_active unless current_user.has_role?(:admin) || current_user.has_role?(:super_admin)
   end
 end

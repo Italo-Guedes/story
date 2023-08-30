@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: global_settings
@@ -17,6 +19,6 @@ require 'rails_helper'
 
 RSpec.describe GlobalSetting, type: :model do
   it 'Must exist' do
-    expect(GlobalSetting.instance).not_to be_blank
+    expect(described_class.instance).not_to be_blank
   end
 end

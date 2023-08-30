@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -32,7 +34,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  context 'Validations' do
+  context 'with model' do
     it { is_expected.to validate_presence_of(:email) }
     it { is_expected.to validate_presence_of(:name) }
   end

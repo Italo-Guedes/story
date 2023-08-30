@@ -33,12 +33,50 @@ image: ruby:2.7.2-alpine
 #   tags:
 #     - docker
 
-production:
+stages:
+  - lint
+  # - test
+  - deploy
+
+production-deploy:
   image: rdmapps/ruby_dpl
   stage: deploy
   script:
     - dpl --provider=heroku --app=rdmapps --api-key=$HEROKU_API_KEY
   only:
     - main
+  tags:
+    - docker
+
+production-pronto:
+  image: arcadiandigital/docker-pronto
+  stage: lint
+  script:
+    - pronto run -c=origin/flyio --exit-code
+  only:
+    - main
+  tags:
+    - docker
+
+develop-deploy:
+  image: golang:1.13
+  before_script:
+    - apt-get update -qq && apt-get install -y curl
+    - curl -L https://fly.io/install.sh | sh
+  stage: deploy
+  script:
+    - flyctl deploy
+  only:
+    - develop
+  tags:
+    - docker
+
+develop-pronto:
+  image: arcadiandigital/docker-pronto
+  stage: lint
+  script:
+    - pronto run -c=origin/flyio --exit-code
+  only:
+    - develop
   tags:
     - docker

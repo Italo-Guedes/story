@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe GlobalSettingsController, type: :controller do
   login_super_admin
-  
+
   describe 'GET #index' do
     it 'returns a success response' do
       get :index

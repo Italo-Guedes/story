@@ -65,7 +65,6 @@ gem 'cocoon'
 gem 'figaro'
 gem 'formtastic'
 # gem 'money-rails'
-gem 'rubocop', require: false
 gem 'sentry-raven'
 gem 'will_paginate'
 
@@ -88,7 +87,6 @@ group :development, :test do
   gem 'pry-rails'
 
   # tests
-  gem 'capybara'
   gem 'coderay'
   gem 'factory_bot_rails'
   gem 'faker'

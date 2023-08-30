@@ -1,11 +1,7 @@
 {
   "ruby.specCommand": "docker exec -it web bundle exec rspec --color",
-  "ruby.rubocop.executePath": "./scripts/",
-  "ruby.useLanguageServer": true, // use the internal language server (see below)
-  "ruby.lint": {
-    "rubocop": {
-      "useBundler": true // enable rubocop via bundler
-    },
+  "ruby.format": "prettier",
+  "[ruby]": {
+    "editor.defaultFormatter": "rubocop.vscode-rubocop"
   },
-  "ruby.format": "rubocop"
 }

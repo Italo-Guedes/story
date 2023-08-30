@@ -30,7 +30,11 @@ class VersionsController < ApplicationController
   def init
     authorize! :read, :deleted_records
     @deleted = true
-    return if self.send("#{params[:model_name]}_path") rescue nil
+    begin
+      return if send("#{params[:model_name]}_path")
+    rescue StandardError
+      nil
+    end
 
     redirect_to root_path
   end

@@ -78,9 +78,7 @@ services:
       - "5432:5432"
 volumes:
   global_gems_cache_ubuntu:
-    external:
-      name: global_gems_cache_ubuntu
+    name: global_gems_cache_ubuntu
   global_node_modules_cache:
-    external:
-      name: global_node_modules_cache
+    name: global_node_modules_cache
   database:
