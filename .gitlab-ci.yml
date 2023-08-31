@@ -77,6 +77,7 @@ develop-pronto:
     PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.roadmaps.com.br/api/v4"
   stage: lint
   script:
+    - sudo update-ca-certificates
     - git fetch
     - pronto run -f gitlab_mr -c origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
   only:
