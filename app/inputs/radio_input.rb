@@ -8,13 +8,13 @@ class RadioInput < Formtastic::Inputs::RadioInput
   def to_html
     input_wrapping do
       legend_html <<
-      error_html <<
-      choices_group_wrapping do
-        collection.map { |choice|
-          choice_html(choice)
-        }.join("\n").html_safe
-      end <<
-      hint_html
+        error_html <<
+        choices_group_wrapping do
+          collection.map do |choice|
+            choice_html(choice)
+          end.join("\n").html_safe
+        end <<
+        hint_html
     end
   end
 
@@ -40,9 +40,10 @@ class RadioInput < Formtastic::Inputs::RadioInput
 
   def legend_html
     if render_label?
-      template.content_tag(:div,
+      template.content_tag(
+        :div,
         template.content_tag(:label, label_text),
-        label_html_options.merge(:class => "label")
+        label_html_options.merge(class: 'label')
       )
     else
       ''.html_safe
@@ -83,7 +84,10 @@ class RadioInput < Formtastic::Inputs::RadioInput
   def choice_html(choice)
     template.content_tag(
       :div,
-      builder.radio_button(input_name, choice_value(choice), input_html_options.merge(choice_html_options(choice)).merge(:required => false)) << 
+      builder.radio_button(
+        input_name, choice_value(choice),
+        input_html_options.merge(choice_html_options(choice)).merge(required: false)
+      ) <<
       choice_label(choice),
       class: 'radio'
     )

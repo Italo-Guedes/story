@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Unused channel class
 class UserNotificationChannel < ApplicationCable::Channel
   def subscribed
     stream_from "user_#{current_user.id}_channel"
@@ -8,7 +11,7 @@ class UserNotificationChannel < ApplicationCable::Channel
   end
 
   def send_message(data)
-  	puts data
+    Rails.logger.debug data
     # process data sent from the page
   end
 end

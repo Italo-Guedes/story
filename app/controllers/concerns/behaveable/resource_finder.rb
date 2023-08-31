@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Behaveable
+  # Module to find polymorphic resource.
   module ResourceFinder
     # Get the behaveable object.
     #
@@ -6,7 +9,7 @@ module Behaveable
     # * <tt>ActiveRecord::Model</tt> - Behaveable instance object.
     def behaveable
       klass, param = behaveable_class
-      klass.find(params[param.to_sym]) if klass
+      klass&.find(params[param.to_sym])
     end
 
     private
@@ -18,7 +21,7 @@ module Behaveable
     def behaveable_class
       params.each do |name, _value|
         if name =~ /(.+)_id$/
-          model = name.match(%r{([^\/.]*)_id$})
+          model = name.match(%r{([^/.]*)_id$})
           return model[1].classify.constantize, name
         end
       end

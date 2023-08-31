@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Input with file tag and image preview
 class ImageInput < FileInput
   include Rails.application.routes.url_helpers
 
@@ -10,7 +13,9 @@ class ImageInput < FileInput
   end
 
   def img_html
-    "<img src=\"#{url_for(ApplicationController.helpers.thumb(attachment))}\" alt=\"Image selection thumbnail\" />".html_safe if attachment && attachment.attached?
+    return unless attachment&.attached?
+
+    "<img src=\"#{url_for(ApplicationController.helpers.thumb(attachment))}\" alt=\"Image selection thumbnail\" />".html_safe
   end
 
   def input_wrapping(&block)

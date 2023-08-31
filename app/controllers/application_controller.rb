@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  before_action :set_locale, unless: :is_json
+  before_action :set_locale, unless: :json?
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_paper_trail_whodunnit
@@ -21,21 +21,27 @@ class ApplicationController < ActionController::Base
     # Don't allow avatar if it's empty
     if params[:user] && params[:user][:avatar].blank?
       devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :password_confirmation) }
-      devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :password_confirmation) }
+      devise_parameter_sanitizer.permit(:account_update) do |u|
+        u.permit(:name, :email, :password, :password_confirmation)
+      end
     else
-      devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :password_confirmation, :avatar) }
-      devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :password_confirmation, :avatar) }
+      devise_parameter_sanitizer.permit(:sign_up) do |u|
+        u.permit(:name, :email, :password, :password_confirmation, :avatar)
+      end
+      devise_parameter_sanitizer.permit(:account_update) do |u|
+        u.permit(:name, :email, :password, :password_confirmation, :avatar)
+      end
     end
   end
 
-  def is_json
+  def json?
     request.format == :json
   end
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
-      format.html { redirect_to root_url, :alert => exception.message }
-      format.json { render json: {error: :access_denied} }
+      format.html { redirect_to root_url, alert: exception.message }
+      format.json { render json: { error: :access_denied } }
     end
   end
 
@@ -71,7 +77,9 @@ class ApplicationController < ActionController::Base
   def attachment_names(klass)
     klass.reflect_on_all_attachments.filter do |association|
       association.instance_of? ActiveStorage::Reflection::HasOneAttachedReflection
-    end.map(&:name) rescue []
+    end.map(&:name)
+  rescue StandardError
+    []
   end
 
   def sanitize_active_storage_params(klass, model)
@@ -82,7 +90,7 @@ class ApplicationController < ActionController::Base
       next unless params[class_name]["#{attachment_name}_remove"].to_i == 1
 
       params[class_name].delete attachment_name
-      model&.send(attachment_name)&.purge
+      model.send(attachment_name)&.purge
     end
   end
 end

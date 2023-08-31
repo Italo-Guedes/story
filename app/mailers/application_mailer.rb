@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Base class for all application mailers
 class ApplicationMailer < ActionMailer::Base
   default from: 'contato@roadmaps.com.br'
   layout 'mailer'

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Input with number input tag
 class NumberInput < StringInput
   def to_html
     input_wrapping do

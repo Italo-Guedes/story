@@ -20,7 +20,7 @@
 #   resources :posts, concerns: :commenteable
 # Add this to show.html.erb's end
 #   <%= render partial: "comments/index", locals: {:@comments => @post.comments} %>
-# TODO: 
+# TODO:
 #  - ajustar formulário de criar novo comentário
 #  - ajustar layouts dos comentários em si
 

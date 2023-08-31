@@ -67,7 +67,7 @@ class SelectInput < Formtastic::Inputs::SelectInput
   end
 
   def wrapper_html_options
-    new_class = ([options[:class], super[:class], 'form-group']).compact.join(' ').gsub(' select', '')
+    new_class = [options[:class], super[:class], 'form-group'].compact.join(' ').gsub(' select', '')
     super.merge(class: new_class)
   end
 end

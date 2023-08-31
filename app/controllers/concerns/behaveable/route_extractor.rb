@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Behaveable
+  # Helper to have polymorphic routes
   module RouteExtractor
     # Generate url location.
     #
@@ -31,6 +34,7 @@ module Behaveable
     # * <tt>Route</tt> - Url location.
     def regular(location_url, resource)
       return send(location_url) unless resource
+
       send(location_url, resource)
     end
 
@@ -45,6 +49,7 @@ module Behaveable
     # * <tt>Route</tt> - Url location.
     def nested(location_url, behaveable, resource)
       return send(location_url, behaveable) unless resource
+
       send(location_url, behaveable, resource)
     end
 
@@ -69,6 +74,7 @@ module Behaveable
     # * <tt>String</tt> - Behaveable class snake case name or nil.
     def behaveable_name_from(behaveable)
       return unless behaveable
+
       behaveable.class.name.underscore
     end
   end

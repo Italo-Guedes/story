@@ -1,10 +1,11 @@
-# app/helpers/i18n_helper.rb
+# frozen_string_literal: true
 
+# app/helpers/i18n_helper.rb
 module I18nHelper
   def translate(key, **options)
-    super(key, **(options.merge(raise: true)))
+    super(key, **options.merge(raise: true))
   rescue I18n::MissingTranslationData
     "missing translation: #{key}"
   end
-  alias :t :translate
+  alias t translate
 end

@@ -1,17 +1,17 @@
-module ApplicationCable
+# frozen_string_literal: true
 
+module ApplicationCable
   class Connection < ActionCable::Connection::Base
     identified_by :current_user
 
     def connect
-      
       # NOTE: connection bypassed
-      return reject_unauthorized_connection
-      
-      self.current_user = find_verified_user
+      reject_unauthorized_connection
 
-      logger.add_tags 'ActionCable', current_user.email
-      logger.add_tags 'ActionCable', current_user.id
+      # self.current_user = find_verified_user
+
+      # logger.add_tags 'ActionCable', current_user.email
+      # logger.add_tags 'ActionCable', current_user.id
     end
 
     protected

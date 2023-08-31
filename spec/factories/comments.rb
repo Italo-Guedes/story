@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: comments
@@ -14,7 +16,7 @@
 FactoryBot.define do
   factory :comment do
     text { Faker::Text.text }
-		user
-		commenteable { user }
+    user
+    commenteable { user }
   end
 end

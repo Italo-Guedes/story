@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Input with password input tag
 class PasswordInput < StringInput
   def to_html
     input_wrapping do

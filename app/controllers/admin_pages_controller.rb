@@ -11,7 +11,7 @@ class AdminPagesController < ApplicationController
     authorize! :admin_pages, :database_changes
     params[:item_type] = 'todos' if params[:item_type].blank?
     Rails.application.eager_load! if Rails.env.development?
-    version_load
+    versions_load
   end
 
   def pghero
@@ -20,7 +20,7 @@ class AdminPagesController < ApplicationController
 
   private
 
-  def vertions_load
+  def versions_load
     # Excluding models with no papertrail needs
     @models = ApplicationRecord.descendants - [Notification, Comment, Role]
     @versions = PaperTrail::Version.order(id: :desc).paginate(per_page: 20, page: params[:page].presence || 1)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -14,7 +16,7 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
 
@@ -48,7 +50,7 @@ Rails.application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  config.assets.debug = ENV.fetch('DEBUG_ASSETS') { true } != 'false' # yml has no bool value
+  config.assets.debug = ENV.fetch('DEBUG_ASSETS', true) != 'false' # yml has no bool value
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
@@ -72,9 +74,9 @@ Rails.application.configure do
   config.web_console.whiny_requests = false
   config.web_console.permissions = '0.0.0.0/0'
   # BetterErrors::Middleware.allow_ip! '0.0.0.0/0'
-  
+
   config.webpacker.check_yarn_integrity = false
-  logger           = ActiveSupport::Logger.new(STDOUT)
+  logger           = ActiveSupport::Logger.new($stdout)
   logger.formatter = config.log_formatter
   config.logger    = ActiveSupport::TaggedLogging.new(logger)
 

@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
+# File input with better layout
 class FileInput < Formtastic::Inputs::FileInput
   def to_html
     input_wrapping do
       controls_wrapping do
         removal_html <<
-        selection_html
+          selection_html
       end <<
-      file_label_html
+        file_label_html
     end
   end
 
@@ -29,7 +32,7 @@ class FileInput < Formtastic::Inputs::FileInput
     template.content_tag(
       :span,
       (
-        "<span class=\"fileinput-new\">#{I18n.t('fileinput.add')}</span>" <<
+        "<span class=\"fileinput-new\">#{I18n.t('fileinput.add')}</span>" \
         "<span class=\"fileinput-exists\">#{I18n.t('fileinput.change')}</span>" <<
         input_htmls
       ).html_safe,
@@ -39,16 +42,12 @@ class FileInput < Formtastic::Inputs::FileInput
 
   def input_htmls
     if preserve
-      builder.hidden_field(method, value: preserve) <<
-      builder.hidden_field(method, value: nil, name: nil) <<
-      builder.file_field(method, input_html_options.merge(name: nil))
+      input_html_preserve
     else
-      builder.hidden_field(method, value: preserve) <<
-      builder.hidden_field(method, value: nil) <<
-      builder.file_field(method, input_html_options)
+      input_html_no_preserve
     end
   end
-  
+
   def input_html_options
     new_hash = {}
     if options[:direct_upload] == true
@@ -58,11 +57,15 @@ class FileInput < Formtastic::Inputs::FileInput
   end
 
   def attachment
-    @attachment ||= object.send(method) rescue nil
+    @attachment ||= begin
+      object.send(method)
+    rescue StandardError
+      nil
+    end
   end
 
   def filename
-    attachment.filename if attachment && attachment.attached?
+    attachment.filename if attachment&.attached?
   end
 
   def file_label_html
@@ -78,7 +81,7 @@ class FileInput < Formtastic::Inputs::FileInput
   end
 
   def preserve
-    @preserve ||= attachment&.signed_id if attachment && attachment&.attached?
+    @preserve ||= attachment&.signed_id if attachment&.attached?
   end
 
   def hint_html
@@ -129,5 +132,19 @@ class FileInput < Formtastic::Inputs::FileInput
     new_class = [super[:class], 'fileinput', 'input-group']
     new_class += preserve ? ['fileinput-exists'] : ['fileinput-new']
     super.merge(class: new_class.compact.join(' '), 'data-provides' => 'fileinput')
+  end
+
+  private
+
+  def input_html_preserve
+    builder.hidden_field(method, value: preserve) <<
+      builder.hidden_field(method, value: nil, name: nil) <<
+      builder.file_field(method, input_html_options.merge(name: nil))
+  end
+
+  def input_html_no_preserve
+    builder.hidden_field(method, value: preserve) <<
+      builder.hidden_field(method, value: nil) <<
+      builder.file_field(method, input_html_options)
   end
 end

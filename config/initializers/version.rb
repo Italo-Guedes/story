@@ -3,7 +3,7 @@
 # Papertrail helper method to auditing purposes
 module PaperTrail
   # Papertrail helper method to auditing purposes
-  class Version < ActiveRecord::Base
+  class Version < ApplicationRecord
     include PaperTrail::VersionConcern
 
     def translated_changeset
@@ -13,13 +13,12 @@ module PaperTrail
       clean_hash(set)
       set.each do |k, v|
         name = k
-        values = v
-        if name.end_with? '_id'
-          name = name.sub(/_id$/, '')
-          entity1 = eval(name.classify).find(v[0]) rescue "id: #{v[0]}"
-          entity2 = eval(name.classify).find(v[1]) rescue "id: #{v[1]}"
-          values = [entity1, entity2]
-        end
+        values =
+          if name.end_with? '_id'
+            search_relations(name, v)
+          else
+            v
+          end
         t_name = I18n.t("activerecord.attributes.#{item_type.underscore}.#{name}")
         name = t_name unless t_name.start_with?('<span') || t_name.start_with?('translation missing')
         result_hash[name] = values
@@ -39,5 +38,20 @@ module PaperTrail
       confirmation_token
       remember_created_at
     ].freeze
+
+    private
+
+    def search_relations(name, values)
+      name = name.sub(/_id$/, '')
+      entity1 = relation_search(name, values[0])
+      entity2 = relation_search(name, values[1])
+      [entity1, entity2]
+    end
+
+    def relation_search(name, id)
+      name.classify.constantize.find(id)
+    rescue StandardError
+      "id: #{id}"
+    end
   end
 end

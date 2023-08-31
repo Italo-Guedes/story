@@ -1,6 +1,8 @@
-require "base64"
+# frozen_string_literal: true
 
-desc "This task is called by the Heroku scheduler add-on"
+require 'base64'
 
-task :example => :environment do
+desc 'This task is called by the Heroku scheduler add-on'
+
+task example: :environment do
 end

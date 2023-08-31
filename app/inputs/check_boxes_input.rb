@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
+# Custom input group with checkboxes
 class CheckBoxesInput < Formtastic::Inputs::CheckBoxesInput
-    
   # Original html
   #   <li class='check_boxes'>
   #     <fieldset>
@@ -39,7 +41,7 @@ class CheckBoxesInput < Formtastic::Inputs::CheckBoxesInput
   end
 
   def choice_wrapping_html_options(choice)
-    super(choice).merge(:class => "checkbox m-b-15")
+    super(choice).merge(class: 'checkbox m-b-15')
   end
 
   def hint_html
@@ -65,25 +67,25 @@ class CheckBoxesInput < Formtastic::Inputs::CheckBoxesInput
   def to_html
     input_wrapping do
       legend_html <<
-      hidden_field_for_all <<
-      error_html <<
-      choices_group_wrapping do
-        collection.map { |choice|
-          choice_html(choice)
-        }.join("\n").html_safe
-      end <<
-      hint_html
+        hidden_field_for_all <<
+        error_html <<
+        choices_group_wrapping do
+          collection.map do |choice|
+            choice_html(choice)
+          end.join("\n").html_safe
+        end <<
+        hint_html
     end
   end
 
   def choice_html(choice)
     template.content_tag(
       :div,
-      checkbox_input(choice) << 
+      checkbox_input(choice) <<
       template.content_tag(
-        :label, 
+        :label,
         choice_label(choice),
-        label_html_options.merge(:for => choice_input_dom_id(choice), class: 'checkbox__label')
+        label_html_options.merge(for: choice_input_dom_id(choice), class: 'checkbox__label')
       ),
       class: 'checkbox'
     )
@@ -111,9 +113,10 @@ class CheckBoxesInput < Formtastic::Inputs::CheckBoxesInput
 
   def legend_html
     if render_label?
-      template.content_tag(:div,
+      template.content_tag(
+        :div,
         template.content_tag(:label, label_text),
-        label_html_options.merge(:class => "label")
+        label_html_options.merge(class: 'label')
       )
     else
       ''.html_safe

@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 # Set the default text field size when input is a string. Default is nil.
 # Formtastic::FormBuilder.default_text_field_size = 50
@@ -78,7 +78,7 @@
 # Allows to set a custom field_error_proc wrapper. By default this wrapper
 # is disabled since `formtastic` already adds an error class to the LI tag
 # containing the input.
-Formtastic::Helpers::FormHelper.formtastic_field_error_proc = proc { |html_tag, instance_tag| html_tag }
+Formtastic::Helpers::FormHelper.formtastic_field_error_proc = proc { |html_tag, _instance_tag| html_tag }
 
 # You can opt-in to Formtastic's use of the HTML5 `required` attribute on `<input>`, `<select>`
 # and `<textarea>` tags by setting this to true (defaults to false).

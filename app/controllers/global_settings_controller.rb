@@ -17,7 +17,10 @@ class GlobalSettingsController < ApplicationController
   def update
     respond_to do |format|
       if @global_setting.update(global_setting_params)
-        format.html { redirect_to global_settings_url, notice: "#{t('activerecord.models.global_setting.one')} atualizado com sucesso." }
+        format.html do
+          redirect_to global_settings_url,
+                      notice: "#{t('activerecord.models.global_setting.one')} atualizado com sucesso."
+        end
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -30,7 +33,9 @@ class GlobalSettingsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def global_setting_params
-    params.require(:global_setting).permit(:page_title, :page_subtitle, :page_author, :page_description, :menu_color, :menu_border_color)
+    params.require(:global_setting).permit(
+      :page_title, :page_subtitle, :page_author, :page_description, :menu_color, :menu_border_color
+    )
   end
 
   def load_global_setting

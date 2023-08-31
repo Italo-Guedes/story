@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Class to clear unattached blobs
-class ClearActiveStorageUnattachedJob < ActiveJob::Base
+class ClearActiveStorageUnattachedJob < ApplicationJob
   queue_as :default
 
   def perform(_options = {})
