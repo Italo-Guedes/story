@@ -73,6 +73,8 @@ develop-deploy:
 
 develop-pronto:
   image: arcadiandigital/docker-pronto
+  variables:
+    PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.roadmaps.com.br/api/v4"
   stage: lint
   script:
     - pronto run --exit-code -f gitlab_mr -c origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
