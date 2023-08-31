@@ -25,7 +25,8 @@ class DropzoneInput
     signed_id = attachment.signed_id
     active_storage_input = "active_storage_input_#{attachment.id}"
     active_storage_div = "active_storage_div_#{attachment.id}"
-    "<input value=\"#{signed_id}\" id=\"#{active_storage_input}\" type=\"hidden\" name=\"#{object.class.name.underscore}[#{method}][]\" />" <<
+    "<input value=\"#{signed_id}\" id=\"#{active_storage_input}\" type=\"hidden\" " \
+      "name=\"#{object.class.name.underscore}[#{method}][]\" />" <<
       template.content_tag(
         :div,
         "<div class=\"dz-image\">#{img_html(attachment)}</div>" \
@@ -82,7 +83,12 @@ class DropzoneInput
   def dropzone_classes(options)
     max_size_mb = options && options[:max_size_mb].present? ? options[:max_size_mb] : 20
     max_files = options && options[:max_files].present? ? options[:max_files] : 20
-    accepted_files = options && options[:accepted_files].present? ? options[:accepted_files] : 'audio/ogg,image/jpeg,image/gif,image/png'
+    accepted_files =
+      if options && options[:accepted_files].present?
+        options[:accepted_files]
+      else
+        'audio/ogg,image/jpeg,image/gif,image/png'
+      end
     classes = %w[dropzone dropzone-default dz-clickable]
     {
       class: classes.compact.join(' '),
@@ -102,9 +108,7 @@ class DropzoneInput
     if options[:direct_upload] == true
       new_hash['data-direct-upload-url'] = Rails.application.routes.url_helpers.rails_direct_uploads_path
     end
-    if options[:dropzone_html].present?
-      new_hash['dropzone_html'] = dropzone_html_options
-    end
+    new_hash['dropzone_html'] = dropzone_html_options if options[:dropzone_html].present?
     super.merge(new_hash)
   end
 
@@ -126,14 +130,14 @@ class DropzoneInput
       htmls << input_htmls(attachment)
     end
     builder.file_field(method, input_html_options) <<
-    htmls.join.html_safe
+      htmls.join.html_safe
   end
 
   def dropzone_html_options
     {
       max_size_mb: options[:dropzone_html][:max_size_mb],
       max_files: options[:dropzone_html][:max_files],
-      accepted_files: options[:dropzone_html][:accepted_files] 
+      accepted_files: options[:dropzone_html][:accepted_files]
     }
   end
 end

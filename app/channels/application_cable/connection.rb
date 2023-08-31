@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module ApplicationCable
+  # Unused action cable class
   class Connection < ActionCable::Connection::Base
     identified_by :current_user
 

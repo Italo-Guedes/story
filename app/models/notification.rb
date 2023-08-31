@@ -17,7 +17,13 @@
 #
 
 # Notification class, to use with internal notification system
-# Notification.create(user: User.first, subject: Model, text: "Texto", link_url: "/admin/users", image_url: "/img/profile-menu.png")
+# Notification.create(
+#   user: User.first,
+#   subject: Model,
+#   text: "Texto",
+#   link_url: "/admin/users",
+#   image_url: "/img/profile-menu.png"
+# )
 class Notification < ApplicationRecord
   belongs_to :user
   belongs_to :subject, polymorphic: true
@@ -28,7 +34,11 @@ class Notification < ApplicationRecord
   def send_notification
     # Any push notification should be sent here, but with the help of a background job
 
-    # ActionCable.server.broadcast("user_#{user_id}_channel", number: user.unviewed_notifications.count, html: render_notification(self))
+    # ActionCable.server.broadcast(
+    #   "user_#{user_id}_channel",
+    #   number: user.unviewed_notifications.count,
+    #   html: render_notification(self)
+    # )
   end
 
   def best_url

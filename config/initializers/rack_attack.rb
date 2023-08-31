@@ -17,7 +17,9 @@ module Rack
     # com base no valor do parâmetro "email".
     #
     throttle('logins/email', limit: 5, period: 20.seconds) do |req|
-      req.params.dig('user', 'email').to_s.downcase.gsub(/\s+/, '').presence if req.path == '/users/sign_in' && req.post?
+      if req.path == '/users/sign_in' && req.post?
+        req.params.dig('user', 'email').to_s.downcase.gsub(/\s+/, '').presence
+      end
     end
 
     ### Custom Throttle Response ###

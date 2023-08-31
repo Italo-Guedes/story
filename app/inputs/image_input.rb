@@ -15,7 +15,8 @@ class ImageInput < FileInput
   def img_html
     return unless attachment&.attached?
 
-    "<img src=\"#{url_for(ApplicationController.helpers.thumb(attachment))}\" alt=\"Image selection thumbnail\" />".html_safe
+    "<img src=\"#{url_for(ApplicationController.helpers.thumb(attachment))}\" alt=\"Image selection thumbnail\" />"
+      .html_safe
   end
 
   def input_wrapping(&block)

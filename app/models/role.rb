@@ -14,7 +14,10 @@
 
 # Role class, helps with user authorization rules
 class Role < ApplicationRecord
+  # Disabling rubocop as this is a third party gem behaviour
+  # rubocop:disable Rails/HasAndBelongsToMany
   has_and_belongs_to_many :users, join_table: :users_roles
+  # rubocop:enable Rails/HasAndBelongsToMany
   belongs_to :resource, polymorphic: true, optional: true
   scopify
 

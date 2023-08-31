@@ -9,11 +9,13 @@ class CheckBoxesInput < Formtastic::Inputs::CheckBoxesInput
   #       <ol>
   #         <li>
   #           <input type="hidden" name="post[category_ids][1]" value="">
-  #           <label for="post_category_ids_1"><input id="post_category_ids_1" name="post[category_ids][1]" type="checkbox" value="1" /> Ruby</label>
+  #           <label for="post_category_ids_1"><input id="post_category_ids_1" name="post[category_ids][1]"
+  #                  type="checkbox" value="1" /> Ruby</label>
   #         </li>
   #         <li>
   #           <input type="hidden" name="post[category_ids][2]" value="">
-  #           <label for="post_category_ids_2"><input id="post_category_ids_2" name="post[category_ids][2]" type="checkbox" value="2" /> Rails</label>
+  #           <label for="post_category_ids_2"><input id="post_category_ids_2" name="post[category_ids][2]"
+  #                  type="checkbox" value="2" /> Rails</label>
   #         </li>
   #       </ol>
   #     </fieldset>

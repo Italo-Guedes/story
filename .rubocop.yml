@@ -4,12 +4,18 @@ require:
 AllCops:
   Exclude:
     - db/schema.rb
+    - lib/templates/**/*
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
   Max: 20
 Metrics/AbcSize:
   Max: 20
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/*
 RSpec/FilePath:
   Enabled: false
-  
+Rails/OutputSafety:
+  Exclude:
+    - 'app/inputs/*'

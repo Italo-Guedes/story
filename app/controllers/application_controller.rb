@@ -47,7 +47,9 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     I18n.locale = params[:locale] || current_user&.locale || I18n.default_locale
-    current_user.update_attributes locale: I18n.locale.to_s if current_user && current_user.locale != I18n.locale.to_s
+    # rubocop:disable Rails/SkipsModelValidations
+    current_user.update_attribute(:locale, I18n.locale.to_s) if current_user && current_user.locale != I18n.locale.to_s
+    # rubocop:enable Rails/SkipsModelValidations
   end
 
   def default_url_options(_options = {})
@@ -61,7 +63,9 @@ class ApplicationController < ActionController::Base
 
     begin
       Time.zone = params_tz || user_tz
-      current_user.update_attribute :timezone, params_tz if params_tz
+      # rubocop:disable Rails/SkipsModelValidations
+      current_user.update_attribute(:timezone, params_tz) if params_tz
+      # rubocop:enable Rails/SkipsModelValidations
     rescue StandardError => e
       if Rails.env.production?
         Raven.capture_message(

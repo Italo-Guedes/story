@@ -74,7 +74,9 @@ class User < ApplicationRecord
   end
 
   def mark_notifications_viewed
+    # rubocop:disable Rails/SkipsModelValidations
     notifications.where(viewed: false).update_all viewed: true
+    # rubocop:enable Rails/SkipsModelValidations
   end
 
   def unviewed_notifications

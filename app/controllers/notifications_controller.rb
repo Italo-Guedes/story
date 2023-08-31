@@ -12,12 +12,14 @@ class NotificationsController < ApplicationController
   end
 
   def mark_all_read
+    # rubocop:disable Rails/SkipsModelValidations
     @notifications.where(viewed: false).update_all viewed: true
+    # rubocop:enable Rails/SkipsModelValidations
     head :no_content
   end
 
   def mark_read
-    @notification.update_attribute :viewed, true
+    @notification.update(viewed: true)
     head :no_content
   end
 end
