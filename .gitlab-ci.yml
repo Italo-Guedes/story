@@ -72,12 +72,11 @@ develop-deploy:
     - docker
 
 develop-pronto:
-  image: arcadiandigital/docker-pronto
+  image: rdmapps/ruby_dpl
   variables:
     PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.roadmaps.com.br/api/v4"
   stage: lint
   script:
-    - update-ca-certificates
     - git fetch
     - pronto run -f gitlab_mr -c origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
   only:
