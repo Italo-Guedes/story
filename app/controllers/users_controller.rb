@@ -83,23 +83,26 @@ class UsersController < ApplicationController
   def sanitize_role_params
     return unless params[:user] && params[:user][:role_ids]
 
-    params[:user][:role_ids] &= Role.allowed_roles(current_user).pluck(:id).map(&:to_s)
+    params[:user][:role_ids] &= Role.allowed_roles(current_user).ids.map(&:to_s)
   end
 
   def select2_render
-    render json: Oj.dump(
-      {
-        results: @users.select(:id, :name).map { |user| { text: user.to_s, id: user.id } },
-        pagination: { more: @users.next_page.present? }
-      }, mode: :compat
+    render(
+      json: Oj.dump(
+        {
+          results: @users.select(:id, :name).map { |user| { text: user.to_s, id: user.id } },
+          pagination: { more: @users.next_page.present? }
+        },
+        mode: :compat
+      )
     )
   end
 
   def sanitize_update_params
     if params[:user][:password].blank?
-      params[:user].delete :password
-      params[:user].delete :password_confirmation
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
     end
-    params[:user].delete :is_active unless current_user.has_role?(:admin) || current_user.has_role?(:super_admin)
+    params[:user].delete(:is_active) unless current_user.has_role?(:admin) || current_user.has_role?(:super_admin)
   end
 end
