@@ -3,7 +3,7 @@
 # Papertrail helper method to auditing purposes
 module PaperTrail
   # Papertrail helper method to auditing purposes
-  class Version < ApplicationRecord
+  class Version < ActiveRecord::Base
     include PaperTrail::VersionConcern
 
     def translated_changeset

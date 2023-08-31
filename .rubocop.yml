@@ -19,3 +19,6 @@ RSpec/FilePath:
 Rails/OutputSafety:
   Exclude:
     - 'app/inputs/*'
+Rails/ApplicationRecord:
+  Exclude:
+    - 'config/initializers/version.rb'
