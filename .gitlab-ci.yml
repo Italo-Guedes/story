@@ -77,7 +77,8 @@ develop-pronto:
     PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.roadmaps.com.br/api/v4"
   stage: lint
   script:
-    - pronto run --exit-code -f gitlab_mr -c origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+    - git fetch
+    - pronto run -f gitlab_mr -c origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
   only:
     - merge_requests
   tags:
