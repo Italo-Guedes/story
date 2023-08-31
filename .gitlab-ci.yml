@@ -35,7 +35,6 @@ image: ruby:2.7.2-alpine
 
 stages:
   - lint
-  # - test
   - deploy
 
 production-deploy:
@@ -59,9 +58,8 @@ production-pronto:
     - docker
 
 develop-deploy:
-  image: golang:1.13
+  image: rdmapps/ruby_dpl
   before_script:
-    - apt-get update -qq && apt-get install -y curl
     - curl -L https://fly.io/install.sh | sh
   stage: deploy
   script:
@@ -71,10 +69,8 @@ develop-deploy:
   tags:
     - docker
 
-develop-pronto:
+pronto:
   image: rdmapps/ruby_dpl
-  variables:
-    PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.roadmaps.com.br/api/v4"
   stage: lint
   script:
     - git fetch

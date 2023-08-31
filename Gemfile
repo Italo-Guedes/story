@@ -13,6 +13,7 @@ gem 'coffee-rails'
 gem 'react-rails'
 gem 'turbolinks'
 gem 'webpacker'
+
 # Front end (needed only because of pghero and graphiql)
 gem 'jquery-rails'
 gem 'sass-rails'
@@ -27,7 +28,7 @@ gem 'pg'
 gem 'pghero'
 gem 'pg_search'
 gem 'ransack'
-gem 'redis', '~> 4.2'
+gem 'redis'
 
 # Account management
 gem 'cancancan'
@@ -56,6 +57,7 @@ gem 'rack-attack'
 # gem 'wkhtmltopdf-binary', group: 'production'
 # In order to generate PDFs locally, see dockerfile instructions
 
+# Web server
 gem 'puma'
 
 # Development produtivity
@@ -64,7 +66,6 @@ gem 'bootsnap'
 gem 'cocoon'
 gem 'figaro'
 gem 'formtastic'
-# gem 'money-rails'
 gem 'sentry-raven'
 gem 'will_paginate'
 
@@ -76,21 +77,19 @@ group :development do
   gem 'annotate'
   gem 'debug', '>= 1.0.0'
   gem 'derailed_benchmarks'
-  gem 'dockerfile-rails', '>= 1.5'
+  gem 'dockerfile-rails'
   gem 'web-console'
 end
 
 group :development, :test do
   # Terminal Debugging
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
-  gem 'pry-rails'
 
   # tests
   gem 'coderay'
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'listen', '~> 3.0.5'
+  gem 'listen'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'spring'

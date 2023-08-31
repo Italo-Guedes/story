@@ -27,7 +27,7 @@ RSpec.describe GlobalSettingsController, type: :controller do
 
       it 'updates the requested global_setting' do
         global_setting = GlobalSetting.instance
-        put :update, params: { id: global_setting.to_param, global_setting: new_attributes}
+        put :update, params: { id: global_setting.to_param, global_setting: new_attributes }
         global_setting.reload
         expect(global_setting.page_title).to eq(new_attributes[:page_title])
       end
