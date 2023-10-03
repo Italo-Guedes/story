@@ -48,12 +48,13 @@ production-deploy:
     - docker
 
 production-pronto:
-  image: arcadiandigital/docker-pronto
+  image: rdmapps/ruby_dpl
   stage: lint
   script:
-    - pronto run -c=origin/flyio --exit-code
+    - git fetch
+    - pronto run -f gitlab_mr -c origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
   only:
-    - main
+    - merge_requests
   tags:
     - docker
 
