@@ -1,23 +1,21 @@
-Startkit Rails Rdmapps
-=====================
+# Ecommerce
 
 Este projeto deve ser utilizado como base para qualquer projeto web padrão. Ele hoje está com o ambiente Docker pré-configurado, com o rails e o ruby em versões recentes, e com diversas Gems que são necessárias em quase todos os projetos que fazemos já instaladas.
 
 As mais importantes são:
 
- - Devise (autenticação)
- - Cancancan (autorização)
- - Formtastic (inputs mais poderosos para formulários)
- - Papertrail (auditoria)
- - Pgsearch (busca textual em bancos postgresql)
- - Pghero (interface web para monitorar ineficiências no banco)
- - Sidekiq (processamento de tarefas em background)
- - Sidekiq-Cron (tarefas agendadas com sidekiq)
+- Devise (autenticação)
+- Cancancan (autorização)
+- Formtastic (inputs mais poderosos para formulários)
+- Papertrail (auditoria)
+- Pgsearch (busca textual em bancos postgresql)
+- Pghero (interface web para monitorar ineficiências no banco)
+- Sidekiq (processamento de tarefas em background)
+- Sidekiq-Cron (tarefas agendadas com sidekiq)
 
 O layout do site, junto com os formulários usando formtastic e o gerador de scaffold foram modificados utilizar um tema baseado no Material Design.
 
-Passo a passo para começar a utilizar o projeto
---------------
+## Passo a passo para começar a utilizar o projeto
 
 1. **Pré-requisitos**
 
@@ -34,7 +32,7 @@ cd nome-do-projeto
 
 3. **Remova a referência ao projeto do startkit no git:**
 
-_[passo necessário apenas para trabalhar em novos projetos]_ 
+_[passo necessário apenas para trabalhar em novos projetos]_
 
 ```bash
 git remote rm origin
@@ -51,7 +49,7 @@ docker volume create --name=global_node_modules_cache
 
 ```bash
 docker-compose build
-docker-compose up web 
+docker-compose up web
 # Aguarde a instalação das gems ser concluída, e encerre o docker pressionando ctrl+c
 docker-compose run web rake db:create db:schema:load db:seed
 ```
@@ -62,7 +60,7 @@ docker-compose run web rake db:create db:schema:load db:seed
 docker-compose up
 ```
 
-7. **Se você pretende utilizar o byebug, você deve executar o docker de modo *detached*. Para isso, levante o projeto utilizando o comando abaixo:**
+7. **Se você pretende utilizar o byebug, você deve executar o docker de modo _detached_. Para isso, levante o projeto utilizando o comando abaixo:**
 
 ```bash
 docker-compose up -d && docker attach web

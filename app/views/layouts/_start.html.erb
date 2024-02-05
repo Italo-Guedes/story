@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <% if Rails.env.development? %>
-    <h4 class="card-title">StartKit Rails</h4>
+    <h4 class="card-title">Ecommerce Rails</h4>
     <p>Parabéns! Você conseguiu levantar o projeto, agora você está pronto para começar.</p></br>
     <p>As primeiras ações que você deverá tomar são:</p>
 
@@ -16,10 +16,10 @@
 
   GlobalSetting.first ||
   GlobalSetting.create!(
-    page_title: 'Rdmapps',
-    page_subtitle: 'startkit',
-    page_author: 'Rdmapps',
-    page_description: 'Um sistema feito pela Rdmapps',
+    page_title: 'Italo',
+    page_subtitle: 'ecommerce',
+    page_author: 'Italo',
+    page_description: 'Um sistema feito pela Italo',
     menu_color: '#D12E5E',
     menu_border_color: '#FFFFFF'
   )</code>
@@ -48,7 +48,7 @@
       </li>
       <pre>
         <code>
-  image: ${DOCKER_IMAGE_NAME-startkit}
+  image: ${DOCKER_IMAGE_NAME-ecommerce}
         </code>
       </pre>
       <li>

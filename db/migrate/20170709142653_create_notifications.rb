@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Creation of notifications table, from rdmapps startkit
+# Creation of notifications table, from italo ecommerce
 class CreateNotifications < ActiveRecord::Migration[5.1]
   def change
     create_table :notifications do |t|

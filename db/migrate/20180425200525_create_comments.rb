@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Creation of comments table, from rdmapps startkit
+# Creation of comments table, from italo ecommerce
 class CreateComments < ActiveRecord::Migration[5.1]
   def change
     create_table :comments do |t|

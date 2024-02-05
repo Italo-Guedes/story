@@ -57,10 +57,10 @@ ActiveRecord::Schema.define(version: 2022_02_28_064019) do
   end
 
   create_table "global_settings", force: :cascade do |t|
-    t.string "page_title", default: "Rdmapps"
-    t.string "page_subtitle", default: "startkit"
-    t.string "page_author", default: "Rdmapps"
-    t.string "page_description", default: "Startkit rdmapps"
+    t.string "page_title", default: "Italo"
+    t.string "page_subtitle", default: "ecommerce"
+    t.string "page_author", default: "Italo"
+    t.string "page_description", default: "ecommerce italo"
     t.string "menu_color", default: "#D12E5E"
     t.string "menu_border_color", default: "#FFFFFF"
     t.datetime "created_at", null: false
