@@ -1,0 +1,32 @@
+<header class="content__title">
+  <h1>
+    <%= t('helpers.submit.general.show', model: t('activerecord.models.category.one')) %>
+  </h1>
+
+  <div class="actions">
+    <%= link_to '', (controller_name == "versions" ? index_versions_path(model_name: "categories") : categories_path), title: t('activerecord.link.back_to_list'), class: 'actions__item zmdi zmdi-arrow-left' %>
+    <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    <%= link_to '', edit_category_path(@category), title: t('activerecord.link.edit'), class: 'actions__item zmdi zmdi-edit' if can?(:edit, @category) && controller_name != 'versions' %>
+  </div>
+</header>
+<div class="card">
+  <div class="card-body card-padding record-show">
+    <div class="row">
+        <div class="col-12">
+          <label class="fg-label"><%= t('activerecord.attributes.category.name') %></label><br/>&nbsp;
+          <%= @category.name %>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <label class="fg-label"><%= t('activerecord.attributes.category.created_at') %></label><br/>&nbsp;
+        <%= @category.created_at %>
+      </div>
+      <div class="col-sm-6">
+        <label class="fg-label"><%= t('activerecord.attributes.category.updated_at') %></label><br/>&nbsp;
+        <%= @category.updated_at %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render partial: "layouts/record_changes", locals: { :@object => @category } %>

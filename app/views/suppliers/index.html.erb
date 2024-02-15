@@ -1,0 +1,74 @@
+<header class="content__title">
+  <h1>
+    <%= t('activerecord.models.supplier.other') %>
+    <% if controller_name == "versions" %>
+      <small style="color: red">
+        <%= t('helpers.scaffold.deleted_warning') %>
+      </small>
+    <% end %>
+  </h1>
+
+  <div class="actions">
+    <%= link_to '', suppliers_path, title: t('activerecord.link.back_to_list'), class: 'actions__item zmdi zmdi-arrow-left' if controller_name == 'versions' %>
+    <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    <%= link_to '', new_supplier_path, title: t('activerecord.link.add_new'), class: 'actions__item zmdi zmdi-plus' if can?(:new, Supplier) && controller_name != 'versions' %>
+  </div>
+</header>
+<div class="card">
+  <div class="card-body card-padding">
+    <%= render 'layouts/search' unless controller_name == "versions" %>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <%# As we use this view to show deleted records, we check if it's %>
+            <%# the versions controller to show an extra column %>
+          <% if controller_name == "versions" %>
+            <th style="color: red"><%= t('helpers.scaffold.deleted_at') %></th>
+          <% end %>
+            <%# If there's a @q, ransack is started. Otherwise, normal translated text %>
+            <th><%= if @q then sort_link(@q, :name) else t('activerecord.attributes.supplier.name') end %></th>
+            <th><%= if @q then sort_link(@q, :address) else t('activerecord.attributes.supplier.address') end %></th>
+            <th><%= if @q then sort_link(@q, :phone) else t('activerecord.attributes.supplier.phone') end %></th>
+            <th><%= if @q then sort_link(@q, :email) else t('activerecord.attributes.supplier.email') end %></th>
+            <th><%= if @q then sort_link(@q, :cpf_cnpj) else t('activerecord.attributes.supplier.cpf_cnpj') end %></th>
+            <th class="actions-column"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @suppliers.empty? %>
+            <tr>
+              <td colspan="99" class="text-center"><%= t('helpers.scaffold.no_records') %></td>
+            </tr>
+          <% end %>
+          <%# If we're in version controller, we need to reify each element %>
+          <% (controller_name == 'versions' ? @suppliers.map(&:reify) : @suppliers).each do |supplier| %>
+            <tr>
+            <% if controller_name == "versions" %>
+              <td style="color: red"><%= supplier.version.created_at %></td>
+            <% end %>
+              <td><%= supplier.name %></td>
+              <td><%= supplier.address %></td>
+              <td><%= supplier.phone %></td>
+              <td><%= supplier.email %></td>
+              <td><%= supplier.cpf_cnpj %></td>
+              <td class="actions-column actions">
+                <%= link_to '', (supplier.version.present? ? show_version_path(model_name: "suppliers", id: supplier.version.id) : supplier), title: t("activerecord.link.details"), class: "zmdi zmdi-search actions__item" %>
+                <%= link_to '', edit_supplier_path(supplier), title: t("activerecord.link.edit"), class: "zmdi zmdi-edit actions__item" if can? :edit, supplier %>
+                <%= link_to '', supplier, title: t("activerecord.link.destroy"), class: "zmdi zmdi-delete actions__item", method: :delete, data: { confirm: t('activerecord.link.destroy_confirm') } if can? :destroy, supplier %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= will_paginate @suppliers, class: "apple_pagination", previous_label: t('activerecord.link.previous'), next_label: t('activerecord.link.next') %>
+    <br/>
+    <div class="text-center">
+      <%= link_to index_versions_path(model_name: "suppliers"), style: "color: red" do %>
+        <%= t('helpers.scaffold.deleted_records') %>
+      <% end if can?(:read, :deleted_records) && controller_name != "versions" %>
+    </div>
+  </div>
+  <br>
+</div>

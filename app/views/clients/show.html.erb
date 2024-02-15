@@ -1,0 +1,52 @@
+<header class="content__title">
+  <h1>
+    <%= t('helpers.submit.general.show', model: t('activerecord.models.client.one')) %>
+  </h1>
+
+  <div class="actions">
+    <%= link_to '', (controller_name == "versions" ? index_versions_path(model_name: "clients") : clients_path), title: t('activerecord.link.back_to_list'), class: 'actions__item zmdi zmdi-arrow-left' %>
+    <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    <%= link_to '', edit_client_path(@client), title: t('activerecord.link.edit'), class: 'actions__item zmdi zmdi-edit' if can?(:edit, @client) && controller_name != 'versions' %>
+  </div>
+</header>
+<div class="card">
+  <div class="card-body card-padding record-show">
+    <div class="row">
+        <div class="col-12">
+          <label class="fg-label"><%= t('activerecord.attributes.client.name') %></label><br/>&nbsp;
+          <%= @client.name %>
+        </div>
+        <div class="col-12">
+          <label class="fg-label"><%= t('activerecord.attributes.client.address') %></label><br/>&nbsp;
+          <%= @client.address %>
+        </div>
+        <div class="col-12">
+          <label class="fg-label"><%= t('activerecord.attributes.client.phone') %></label><br/>&nbsp;
+          <%= @client.phone %>
+        </div>
+        <div class="col-12">
+          <label class="fg-label"><%= t('activerecord.attributes.client.email') %></label><br/>&nbsp;
+          <%= @client.email %>
+        </div>
+        <div class="col-12">
+          <label class="fg-label"><%= t('activerecord.attributes.client.cpf_cnpj') %></label><br/>&nbsp;
+          <%= @client.cpf_cnpj %>
+        </div>
+        <div class="col-12">
+          <label class="fg-label"><%= t('activerecord.attributes.client.is_active') %></label><br/>&nbsp;
+          <%= @client.is_active %>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <label class="fg-label"><%= t('activerecord.attributes.client.created_at') %></label><br/>&nbsp;
+        <%= @client.created_at %>
+      </div>
+      <div class="col-sm-6">
+        <label class="fg-label"><%= t('activerecord.attributes.client.updated_at') %></label><br/>&nbsp;
+        <%= @client.updated_at %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render partial: "layouts/record_changes", locals: { :@object => @client } %>

@@ -1,0 +1,8 @@
+<%= semantic_form_for @supplier, html: { class: 'form-row' } do |f| %>
+  <%= f.input :name, class: 'col-12' %>
+  <%= f.input :address, class: 'col-12' %>
+  <%= f.input :phone, class: 'col-12' %>
+  <%= f.input :email, class: 'col-12' %>
+  <%= f.input :cpf_cnpj, class: 'col-12' %>
+  <%= f.action :submit, label: t('activerecord.link.save'), as: :button, class: 'col-12', html: { 'data-disable-with' => t('activerecord.link.sending') } %>
+<% end %>

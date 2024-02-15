@@ -1,0 +1,68 @@
+<header class="content__title">
+  <h1>
+    <%= t('activerecord.models.stock.other') %>
+    <% if controller_name == "versions" %>
+      <small style="color: red">
+        <%= t('helpers.scaffold.deleted_warning') %>
+      </small>
+    <% end %>
+  </h1>
+
+  <div class="actions">
+    <%= link_to '', stocks_path, title: t('activerecord.link.back_to_list'), class: 'actions__item zmdi zmdi-arrow-left' if controller_name == 'versions' %>
+    <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    <%= link_to '', new_stock_path, title: t('activerecord.link.add_new'), class: 'actions__item zmdi zmdi-plus' if can?(:new, Stock) && controller_name != 'versions' %>
+  </div>
+</header>
+<div class="card">
+  <div class="card-body card-padding">
+    <%= render 'layouts/search' unless controller_name == "versions" %>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <%# As we use this view to show deleted records, we check if it's %>
+            <%# the versions controller to show an extra column %>
+          <% if controller_name == "versions" %>
+            <th style="color: red"><%= t('helpers.scaffold.deleted_at') %></th>
+          <% end %>
+            <%# If there's a @q, ransack is started. Otherwise, normal translated text %>
+            <th><%= if @q then sort_link(@q, :quantity) else t('activerecord.attributes.stock.quantity') end %></th>
+            <th><%= if @q then sort_link(@q, :product) else t('activerecord.attributes.stock.product') end %></th>
+            <th class="actions-column"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @stocks.empty? %>
+            <tr>
+              <td colspan="99" class="text-center"><%= t('helpers.scaffold.no_records') %></td>
+            </tr>
+          <% end %>
+          <%# If we're in version controller, we need to reify each element %>
+          <% (controller_name == 'versions' ? @stocks.map(&:reify) : @stocks).each do |stock| %>
+            <tr>
+            <% if controller_name == "versions" %>
+              <td style="color: red"><%= stock.version.created_at %></td>
+            <% end %>
+              <td><%= stock.quantity %></td>
+              <td><%= stock.product %></td>
+              <td class="actions-column actions">
+                <%= link_to '', (stock.version.present? ? show_version_path(model_name: "stocks", id: stock.version.id) : stock), title: t("activerecord.link.details"), class: "zmdi zmdi-search actions__item" %>
+                <%= link_to '', edit_stock_path(stock), title: t("activerecord.link.edit"), class: "zmdi zmdi-edit actions__item" if can? :edit, stock %>
+                <%= link_to '', stock, title: t("activerecord.link.destroy"), class: "zmdi zmdi-delete actions__item", method: :delete, data: { confirm: t('activerecord.link.destroy_confirm') } if can? :destroy, stock %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= will_paginate @stocks, class: "apple_pagination", previous_label: t('activerecord.link.previous'), next_label: t('activerecord.link.next') %>
+    <br/>
+    <div class="text-center">
+      <%= link_to index_versions_path(model_name: "stocks"), style: "color: red" do %>
+        <%= t('helpers.scaffold.deleted_records') %>
+      <% end if can?(:read, :deleted_records) && controller_name != "versions" %>
+    </div>
+  </div>
+  <br>
+</div>

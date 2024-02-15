@@ -5,9 +5,11 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  address                :string
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
 #  confirmed_at           :datetime
+#  cpf_cnpj               :string
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string
 #  email                  :string           default(""), not null
@@ -62,6 +64,7 @@ class User < ApplicationRecord
   validates :roles, length: { maximum: 1, minimum: 1, message: 'Selecione uma regra de acesso' }
   # validates :locale, inclusion: { in: I18n.available_locales }
   has_many :notifications, dependent: :destroy
+  has_many :sales
 
   # validate :presence_avatar
   # def presence_avatar

@@ -1,0 +1,36 @@
+<header class="content__title">
+  <h1>
+    <%= t('helpers.submit.general.show', model: t('activerecord.models.stock.one')) %>
+  </h1>
+
+  <div class="actions">
+    <%= link_to '', (controller_name == "versions" ? index_versions_path(model_name: "stocks") : stocks_path), title: t('activerecord.link.back_to_list'), class: 'actions__item zmdi zmdi-arrow-left' %>
+    <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    <%= link_to '', edit_stock_path(@stock), title: t('activerecord.link.edit'), class: 'actions__item zmdi zmdi-edit' if can?(:edit, @stock) && controller_name != 'versions' %>
+  </div>
+</header>
+<div class="card">
+  <div class="card-body card-padding record-show">
+    <div class="row">
+        <div class="col-12">
+          <label class="fg-label"><%= t('activerecord.attributes.stock.quantity') %></label><br/>&nbsp;
+          <%= @stock.quantity %>
+        </div>
+        <div class="col-12">
+          <label class="fg-label"><%= t('activerecord.attributes.stock.product') %></label><br/>&nbsp;
+          <%= @stock.product %>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <label class="fg-label"><%= t('activerecord.attributes.stock.created_at') %></label><br/>&nbsp;
+        <%= @stock.created_at %>
+      </div>
+      <div class="col-sm-6">
+        <label class="fg-label"><%= t('activerecord.attributes.stock.updated_at') %></label><br/>&nbsp;
+        <%= @stock.updated_at %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render partial: "layouts/record_changes", locals: { :@object => @stock } %>

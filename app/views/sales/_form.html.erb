@@ -1,0 +1,7 @@
+<%= semantic_form_for @sale, html: { class: 'form-row' } do |f| %>
+  <%= f.input :date, class: 'col-12' %>
+  <%= f.input :total, class: 'col-12' %>
+  <%= f.input :user, class: 'col-12' %>
+  <%= f.input :client, class: 'col-12' %>
+  <%= f.action :submit, label: t('activerecord.link.save'), as: :button, class: 'col-12', html: { 'data-disable-with' => t('activerecord.link.sending') } %>
+<% end %>

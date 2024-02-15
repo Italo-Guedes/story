@@ -1,0 +1,44 @@
+<header class="content__title">
+  <h1>
+    <%= t('helpers.submit.general.show', model: t('activerecord.models.sale.one')) %>
+  </h1>
+
+  <div class="actions">
+    <%= link_to '', (controller_name == "versions" ? index_versions_path(model_name: "sales") : sales_path), title: t('activerecord.link.back_to_list'), class: 'actions__item zmdi zmdi-arrow-left' %>
+    <%= link_to '', '', title: t('activerecord.link.refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+    <%= link_to '', edit_sale_path(@sale), title: t('activerecord.link.edit'), class: 'actions__item zmdi zmdi-edit' if can?(:edit, @sale) && controller_name != 'versions' %>
+  </div>
+</header>
+<div class="card">
+  <div class="card-body card-padding record-show">
+    <div class="row">
+        <div class="col-12">
+          <label class="fg-label"><%= t('activerecord.attributes.sale.date') %></label><br/>&nbsp;
+          <%= @sale.date %>
+        </div>
+        <div class="col-12">
+          <label class="fg-label"><%= t('activerecord.attributes.sale.total') %></label><br/>&nbsp;
+          <%= @sale.total %>
+        </div>
+        <div class="col-12">
+          <label class="fg-label"><%= t('activerecord.attributes.sale.user') %></label><br/>&nbsp;
+          <%= @sale.user %>
+        </div>
+        <div class="col-12">
+          <label class="fg-label"><%= t('activerecord.attributes.sale.client') %></label><br/>&nbsp;
+          <%= @sale.client %>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <label class="fg-label"><%= t('activerecord.attributes.sale.created_at') %></label><br/>&nbsp;
+        <%= @sale.created_at %>
+      </div>
+      <div class="col-sm-6">
+        <label class="fg-label"><%= t('activerecord.attributes.sale.updated_at') %></label><br/>&nbsp;
+        <%= @sale.updated_at %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render partial: "layouts/record_changes", locals: { :@object => @sale } %>

@@ -5,9 +5,11 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  address                :string
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
 #  confirmed_at           :datetime
+#  cpf_cnpj               :string
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string
 #  email                  :string           default(""), not null

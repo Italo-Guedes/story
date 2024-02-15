@@ -1,0 +1,13 @@
+<header class="content__title">
+  <h1><%= t('helpers.submit.general.edit', model: t('activerecord.models.sale.one')) %></h1>
+  <div class="actions">
+    <%= link_to '', sales_path, title: t('activerecord.link.back_to_list'), class: 'actions__item zmdi zmdi-arrow-left' %>
+    <%= link_to '', @sale, title: t('activerecord.link.details'), class: 'actions__item zmdi zmdi-search' %>
+    <%= link_to '', '', title: t('Refresh'), class: 'actions__item zmdi zmdi-refresh-alt' %>
+  </div>
+</header>
+<div class="card">
+  <div class="card-body card-padding record">
+		<%= render 'form' %>
+	</div>
+</div>
