@@ -13,12 +13,14 @@
 #  sku          :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  brand_id     :bigint           not null
 #  category_id  :bigint           not null
 #  supplier_id  :bigint           not null
 #
 class Product < ApplicationRecord
   belongs_to :category, required: true
   belongs_to :supplier, required: true
+  belongs_to :brand, required: true
   has_one :stock
   has_many :sale_items
   has_many :sales, through: :sale_items

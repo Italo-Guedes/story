@@ -30,7 +30,7 @@
         </div>
         <div class="col-12">
           <label class="fg-label"><%= t('activerecord.attributes.product.category') %></label><br/>&nbsp;
-          <%= @product.category %>
+          <%= @product.category.name %>
         </div>
         <div class="col-12">
           <label class="fg-label"><%= t('activerecord.attributes.product.resale_price') %></label><br/>&nbsp;
@@ -38,7 +38,7 @@
         </div>
         <div class="col-12">
           <label class="fg-label"><%= t('activerecord.attributes.product.supplier') %></label><br/>&nbsp;
-          <%= @product.supplier %>
+          <%= @product.supplier.name %>
         </div>
         <div class="col-12">
           <label class="fg-label"><%= t('activerecord.attributes.product.cost') %></label><br/>&nbsp;
@@ -55,6 +55,14 @@
         <%= @product.updated_at %>
       </div>
     </div>
-  </div>
+    <div class="row">   
+      <div class="col-sm-6">
+        <label class="fg-label"><%= t('activerecord.attributes.product.image') %></label><br/>&nbsp;
+        <%= link_to url_for(@product.image), data: { lightbox: true } do %>
+          <%= image_tag url_for(thumb(@product.image)), style: "max-width: 300px; height: auto;" %>
+        <% end if @product.image.attached? %>
+      </div>
+    </div>
+  </div>  
 </div>
 <%= render partial: "layouts/record_changes", locals: { :@object => @product } %>

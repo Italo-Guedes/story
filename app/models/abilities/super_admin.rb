@@ -6,6 +6,14 @@ module Abilities
     include CanCan::Ability
 
     def initialize(user)
+      can :manage, Product
+      can :manage, Category
+      can :manage, Brand
+      can :manage, Supplier
+      can :manage, Stock
+      can :manage, Sale
+      can :manage, Client
+      can :manage, SaleItem      
       can :manage, User
       cannot :destroy, User, id: user.id
       can :manage, GlobalSetting, id: GlobalSetting.instance.id

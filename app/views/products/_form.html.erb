@@ -1,11 +1,13 @@
 <%= semantic_form_for @product, html: { class: 'form-row' } do |f| %>
-  <%= f.input :sku, class: 'col-12' %>
-  <%= f.input :name, class: 'col-12' %>
-  <%= f.input :description, class: 'col-12' %>
-  <%= f.input :quantity, class: 'col-12' %>
-  <%= f.input :category, class: 'col-12' %>
-  <%= f.input :resale_price, class: 'col-12' %>
-  <%= f.input :supplier, class: 'col-12' %>
-  <%= f.input :cost, class: 'col-12' %>
+  <%= f.input :sku, class: 'col-sm-4' %>
+  <%= f.input :name, class: 'col-sm-4' %>
+  <%= f.input :description, class: 'col-sm-12' %>
+  <%= f.input :category, class: 'col-sm-4' %>
+  <%= f.input :brand, class: 'col-sm-4' %>
+  <%= f.input :quantity, class: 'col-sm-4' %>  
+  <%= f.input :resale_price, class: 'col-sm-4' %>
+  <%= f.input :supplier, class: 'col-sm-4' %>
+  <%= f.input :cost, class: 'col-sm-4' %>
+  <%= f.input :image, as: :image, direct_upload: true, class: 'col-12' %>
   <%= f.action :submit, label: t('activerecord.link.save'), as: :button, class: 'col-12', html: { 'data-disable-with' => t('activerecord.link.sending') } %>
 <% end %>

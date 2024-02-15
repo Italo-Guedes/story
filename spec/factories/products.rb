@@ -11,6 +11,7 @@
 #  sku          :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  brand_id     :bigint           not null
 #  category_id  :bigint           not null
 #  supplier_id  :bigint           not null
 #

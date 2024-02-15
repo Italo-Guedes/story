@@ -45,6 +45,48 @@
           <% end %>
         </li>
       <% end %>
+
+      <li class="navigation__li">
+        <%= active_link_to products_path, active: [['products'], []] do %>
+          <i class="zmdi zmdi-devices"></i><%= t('activerecord.models.product.other') %>
+        <% end %>
+      </li>
+      <li class="navigation__li">
+        <%= active_link_to categories_path, active: [['categories'], []] do %>
+          <i class="zmdi zmdi-apps"></i> Categorias
+        <% end %>
+      </li>
+      <li class="navigation__li">
+        <%= active_link_to brands_path, active: [['brands'],[]] do %>
+          <i class="zmdi zmdi-apple"></i> Marcas
+        <% end %>
+      </li>
+      <li class="navigation__li">
+        <%= active_link_to suppliers_path, active: [['suppliers'], []] do %>
+          <i class="zmdi zmdi-truck"></i> Fornecedores
+        <% end %>
+      </li>
+      <li class="navigation__li">
+        <%= active_link_to stocks_path, active: [['stocks'], []] do %>
+          <i class="zmdi zmdi-dropbox"></i> Estoque
+        <% end %>
+      </li>
+      <li class="navigation__li">
+        <%= active_link_to sales_path, active: [['sales'], []] do %>
+          <i class="zmdi zmdi-check-square"></i> Vendas
+        <% end %>
+      </li>
+      <li class="navigation__li">
+        <%= active_link_to clients_path, active: [['clients'], []] do %>
+          <i class="zmdi zmdi-accounts-alt"></i> Clientes
+        <% end %>
+      </li>
+      <li class="navigation__li">
+        <%= active_link_to sale_items_path, active: [['sale_items'], []] do %>
+          <i class="zmdi zmdi-format-list-numbered"></i> Itens de Vendas
+        <% end %>
+      </li>
+
       
       <!-- sempre seguir esse padrão de submenu com as class desta forma -->
       <li class="separator"><hr/></li>

@@ -29,7 +29,7 @@ class GlobalSetting < ApplicationRecord
           page_title: 'Italo',
           page_subtitle: 'ecommerce',
           page_author: 'Italo',
-          page_description: 'Um sistema feito pela Italo',
+          page_description: 'Um sistema feito por Italo',
           menu_color: '#D12E5E',
           menu_border_color: '#FFFFFF'
         )

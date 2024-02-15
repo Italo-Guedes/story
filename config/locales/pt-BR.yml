@@ -102,6 +102,34 @@ pt-BR:
       comment:
         one: 'Comentário'
         other: 'Comentários'
+      product:
+        one: 'Produto'
+        other: 'Produtos'
+        name: 'nome'
+      brand:
+        one: 'Marca'
+        Other: 'Marcas'
+      category:
+        one: 'Categoria'
+        other: 'Categorias'
+      brand:
+        one: Marca
+        other: Marcas
+      supplier:
+        one: Fornecedor
+        other: Fornecedores
+      stock:
+        one: Estoque
+        other: Estoques
+      sale:
+        one: Venda
+        other: Vendas
+      client:
+        one: Cliente
+        other: Clientes
+      sale_item:
+        one: Item de Venda
+        other: Itens de Venda
     attributes:
       comment:
         id: "Id"
@@ -149,6 +177,34 @@ pt-BR:
         sign_in_count: Contagem de acessos
         unconfirmed_email: E-mail não confirmado
         unlock_token: Token de desbloqueio
+        updated_at: Atualizado em
+      product:
+        sku: SKU
+        name: Nome
+        description: Descrição
+        quantity: Quantidade
+        category: Categoria
+        resale_price: Preço de Revenda(R$)
+        supplier: Fornecedor
+        cost: Custo(R$)
+        image: Imagem
+        created_at: Criado em
+        updated_at: Atualizado em
+      brand:
+        name: Nome
+        created_at: Criado em
+        updated_at: Atualizado em
+      supplier:
+        name: Nome
+        address: Endereço
+        phone: Fone
+        email: E-mail
+        cpf_cnpj: CPF-CNPJ
+        created_at: Criado em
+        updated_at: Atualizado em
+      category:
+        name: Nome
+        created_at: Criado em
         updated_at: Atualizado em
   date:
     abbr_day_names:

@@ -69,7 +69,7 @@ class ProductsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
     sanitize_active_storage_params(Product, @product)
-    params.require(:product).permit(:sku, :name, :description, :quantity, :category_id, :resale_price, :supplier_id, :cost, :image)
+    params.require(:product).permit(:sku, :name, :description, :quantity, :category_id, :resale_price, :supplier_id, :cost, :image, :brand_id)
   end
 
   def select2_render

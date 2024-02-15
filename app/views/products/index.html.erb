@@ -28,13 +28,15 @@
           <% end %>
             <%# If there's a @q, ransack is started. Otherwise, normal translated text %>
             <th><%= if @q then sort_link(@q, :sku) else t('activerecord.attributes.product.sku') end %></th>
+            <th><%= if @q then sort_link(@q, :image) else t('activerecord.attributes.product.image') end %></th>
             <th><%= if @q then sort_link(@q, :name) else t('activerecord.attributes.product.name') end %></th>
-            <th><%= if @q then sort_link(@q, :description) else t('activerecord.attributes.product.description') end %></th>
+            <!--<th><%#= if @q then sort_link(@q, :description) else t('activerecord.attributes.product.description') end %></th>-->
             <th><%= if @q then sort_link(@q, :quantity) else t('activerecord.attributes.product.quantity') end %></th>
             <th><%= if @q then sort_link(@q, :category) else t('activerecord.attributes.product.category') end %></th>
-            <th><%= if @q then sort_link(@q, :resale_price) else t('activerecord.attributes.product.resale_price') end %></th>
+            <th><%= if @q then sort_link(@q, :cost) else t('activerecord.attributes.product.cost') end %></th>            
             <th><%= if @q then sort_link(@q, :supplier) else t('activerecord.attributes.product.supplier') end %></th>
-            <th><%= if @q then sort_link(@q, :cost) else t('activerecord.attributes.product.cost') end %></th>
+            <th><%= if @q then sort_link(@q, :resale_price) else t('activerecord.attributes.product.resale_price') end %></th>
+            
             <th class="actions-column"></th>
           </tr>
         </thead>
@@ -51,13 +53,18 @@
               <td style="color: red"><%= product.version.created_at %></td>
             <% end %>
               <td><%= product.sku %></td>
+              
+              <td><%= image_tag product.image, class: "product-image", size: "100x80" if product.image.attached? %></td>
+                  
+             
+
               <td><%= product.name %></td>
-              <td><%= product.description %></td>
+              <!--<td><%#= product.description %></td>-->
               <td><%= product.quantity %></td>
-              <td><%= product.category %></td>
-              <td><%= product.resale_price %></td>
-              <td><%= product.supplier %></td>
-              <td><%= product.cost %></td>
+              <td><%= product.category.name %></td>
+              <td><%= product.cost %></td>              
+              <td><%= product.supplier.name %></td>
+              <td><%= product.resale_price %></td>              
               <td class="actions-column actions">
                 <%= link_to '', (product.version.present? ? show_version_path(model_name: "products", id: product.version.id) : product), title: t("activerecord.link.details"), class: "zmdi zmdi-search actions__item" %>
                 <%= link_to '', edit_product_path(product), title: t("activerecord.link.edit"), class: "zmdi zmdi-edit actions__item" if can? :edit, product %>
