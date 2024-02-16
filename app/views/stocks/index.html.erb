@@ -27,8 +27,8 @@
             <th style="color: red"><%= t('helpers.scaffold.deleted_at') %></th>
           <% end %>
             <%# If there's a @q, ransack is started. Otherwise, normal translated text %>
-            <th><%= if @q then sort_link(@q, :quantity) else t('activerecord.attributes.stock.quantity') end %></th>
             <th><%= if @q then sort_link(@q, :product) else t('activerecord.attributes.stock.product') end %></th>
+            <th><%= if @q then sort_link(@q, :quantity) else t('activerecord.attributes.stock.quantity') end %></th>            
             <th class="actions-column"></th>
           </tr>
         </thead>
@@ -44,8 +44,8 @@
             <% if controller_name == "versions" %>
               <td style="color: red"><%= stock.version.created_at %></td>
             <% end %>
+              <td><%= stock.product.sku %></td>
               <td><%= stock.quantity %></td>
-              <td><%= stock.product %></td>
               <td class="actions-column actions">
                 <%= link_to '', (stock.version.present? ? show_version_path(model_name: "stocks", id: stock.version.id) : stock), title: t("activerecord.link.details"), class: "zmdi zmdi-search actions__item" %>
                 <%= link_to '', edit_stock_path(stock), title: t("activerecord.link.edit"), class: "zmdi zmdi-edit actions__item" if can? :edit, stock %>

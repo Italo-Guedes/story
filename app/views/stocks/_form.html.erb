@@ -1,5 +1,5 @@
 <%= semantic_form_for @stock, html: { class: 'form-row' } do |f| %>
   <%= f.input :quantity, class: 'col-12' %>
-  <%= f.input :product, class: 'col-12' %>
+  <%= f.input :product, collection: Product.pluck(:sku, :id), prompt: 'Selecione um produto', class: 'col-12' %>
   <%= f.action :submit, label: t('activerecord.link.save'), as: :button, class: 'col-12', html: { 'data-disable-with' => t('activerecord.link.sending') } %>
 <% end %>

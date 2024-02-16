@@ -27,10 +27,10 @@ class GlobalSetting < ApplicationRecord
       GlobalSetting.first ||
         GlobalSetting.create!(
           page_title: 'Italo',
-          page_subtitle: 'ecommerce',
+          page_subtitle: 'story',
           page_author: 'Italo',
           page_description: 'Um sistema feito por Italo',
-          menu_color: '#D12E5E',
+          menu_color: '#5E736F',
           menu_border_color: '#FFFFFF'
         )
     end

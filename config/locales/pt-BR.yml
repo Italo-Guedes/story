@@ -108,13 +108,10 @@ pt-BR:
         name: 'nome'
       brand:
         one: 'Marca'
-        Other: 'Marcas'
+        other: 'Marcas'
       category:
         one: 'Categoria'
         other: 'Categorias'
-      brand:
-        one: Marca
-        other: Marcas
       supplier:
         one: Fornecedor
         other: Fornecedores
@@ -184,6 +181,7 @@ pt-BR:
         description: Descrição
         quantity: Quantidade
         category: Categoria
+        brand: Marca
         resale_price: Preço de Revenda(R$)
         supplier: Fornecedor
         cost: Custo(R$)
