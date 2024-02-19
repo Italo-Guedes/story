@@ -28,6 +28,8 @@ class Product < ApplicationRecord
   include PgSearch::Model
   has_paper_trail
 
+  after_save :create_or_update_stock
+
   def to_s
     super
   end
@@ -47,4 +49,12 @@ class Product < ApplicationRecord
     using: { tsearch: { prefix: true } },
     ignoring: :accents
   )
+
+  private
+
+  def create_or_update_stock
+    stock = Stock.find_or_initialize_by(product_id: id)
+    stock.quantity = quantity
+    stock.save
+  end
 end

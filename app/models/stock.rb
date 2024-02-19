@@ -15,6 +15,9 @@ class Stock < ApplicationRecord
   include PgSearch::Model
   has_paper_trail
 
+  after_save :update_product
+  
+
   def to_s
     super
   end
@@ -34,4 +37,21 @@ class Stock < ApplicationRecord
     using: { tsearch: { prefix: true } },
     ignoring: :accents
   )
+
+  private
+
+  # def update_product
+  #   product = Product.find_by(id: product_id)
+  #   product.quantity = quantity
+  #   return unless product
+
+  #   product.update(quantity: quantity)
+  # end
+  def update_product
+    product = Product.find_by(id: product_id)
+      return unless product
+
+      product.update_column(:quantity, quantity)
+  end
+
 end
