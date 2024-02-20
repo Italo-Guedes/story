@@ -39,4 +39,9 @@ class Sale < ApplicationRecord
     using: { tsearch: { prefix: true } },
     ignoring: :accents
   )
+
+  def update_total
+    total_amount = sale_items.sum(&:total)
+    update(total: total_amount)
+  end
 end

@@ -204,6 +204,21 @@ pt-BR:
         name: Nome
         created_at: Criado em
         updated_at: Atualizado em
+      sale:
+        date: Data da Venda
+        total: Valor total da Venda(R$)
+        user: Usuário
+        client: Cliente
+        created_at: Criado em
+        updated_at: Atualizado em
+      sale_item:
+        sale: Venda
+        product: Produto
+        quantity: Quantidade
+        unit_price: Preço Unitário(R$)
+        total: Valor total(R$)
+        created_at: Criado em
+        updated_at: Atualizado em
   date:
     abbr_day_names:
     - Dom

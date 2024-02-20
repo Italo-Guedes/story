@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_02_15_104004) do
+ActiveRecord::Schema.define(version: 2024_02_20_170703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 2024_02_15_104004) do
     t.decimal "unit_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "total"
     t.index ["product_id"], name: "index_sale_items_on_product_id"
     t.index ["sale_id"], name: "index_sale_items_on_sale_id"
   end

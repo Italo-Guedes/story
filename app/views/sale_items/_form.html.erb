@@ -1,5 +1,5 @@
 <%= semantic_form_for @sale_item, html: { class: 'form-row' } do |f| %>
-  <%= f.input :sale, class: 'col-12' %>
+  <%= f.input :sale, collection: Sale.pluck(:id), class: 'col-12' %>
   <%= f.input :product, class: 'col-12' %>
   <%= f.input :quantity, class: 'col-12' %>
   <%= f.input :unit_price, class: 'col-12' %>

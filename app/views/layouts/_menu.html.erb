@@ -77,15 +77,16 @@
         <% end %>
       </li>
       <li class="navigation__li">
-        <%= active_link_to clients_path, active: [['clients'], []] do %>
-          <i class="zmdi zmdi-accounts-alt"></i> Clientes
-        <% end %>
-      </li>
-      <li class="navigation__li">
         <%= active_link_to sale_items_path, active: [['sale_items'], []] do %>
           <i class="zmdi zmdi-format-list-numbered"></i> Itens de Vendas
         <% end %>
       </li>
+      <li class="navigation__li">
+        <%= active_link_to clients_path, active: [['clients'], []] do %>
+          <i class="zmdi zmdi-accounts-alt"></i> Clientes
+        <% end %>
+      </li>
+      
 
       
       <!-- sempre seguir esse padrão de submenu com as class desta forma -->

@@ -27,10 +27,11 @@
             <th style="color: red"><%= t('helpers.scaffold.deleted_at') %></th>
           <% end %>
             <%# If there's a @q, ransack is started. Otherwise, normal translated text %>
-            <th><%= if @q then sort_link(@q, :date) else t('activerecord.attributes.sale.date') end %></th>
-            <th><%= if @q then sort_link(@q, :total) else t('activerecord.attributes.sale.total') end %></th>
+            <th><%= if @q then sort_link(@q, :id) else t('activerecord.attributes.sale.date') end %></th>
+            <th><%= if @q then sort_link(@q, :date) else t('activerecord.attributes.sale.date') end %></th>            
             <th><%= if @q then sort_link(@q, :user) else t('activerecord.attributes.sale.user') end %></th>
             <th><%= if @q then sort_link(@q, :client) else t('activerecord.attributes.sale.client') end %></th>
+            <th><%= if @q then sort_link(@q, :total) else t('activerecord.attributes.sale.total') end %></th>
             <th class="actions-column"></th>
           </tr>
         </thead>
@@ -46,10 +47,11 @@
             <% if controller_name == "versions" %>
               <td style="color: red"><%= sale.version.created_at %></td>
             <% end %>
-              <td><%= sale.date %></td>
-              <td><%= sale.total %></td>
+              <td><%= sale.id %></td>
+              <td><%= sale.date %></td>              
               <td><%= sale.user %></td>
-              <td><%= sale.client %></td>
+              <td><%= sale.client.name %></td>
+              <td><%= sale.total %></td>
               <td class="actions-column actions">
                 <%= link_to '', (sale.version.present? ? show_version_path(model_name: "sales", id: sale.version.id) : sale), title: t("activerecord.link.details"), class: "zmdi zmdi-search actions__item" %>
                 <%= link_to '', edit_sale_path(sale), title: t("activerecord.link.edit"), class: "zmdi zmdi-edit actions__item" if can? :edit, sale %>

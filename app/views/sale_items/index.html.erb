@@ -31,6 +31,7 @@
             <th><%= if @q then sort_link(@q, :product) else t('activerecord.attributes.sale_item.product') end %></th>
             <th><%= if @q then sort_link(@q, :quantity) else t('activerecord.attributes.sale_item.quantity') end %></th>
             <th><%= if @q then sort_link(@q, :unit_price) else t('activerecord.attributes.sale_item.unit_price') end %></th>
+            <th><%= if @q then sort_link(@q, :total) else t('activerecord.attributes.sale_item.total') end %></th>
             <th class="actions-column"></th>
           </tr>
         </thead>
@@ -46,10 +47,11 @@
             <% if controller_name == "versions" %>
               <td style="color: red"><%= sale_item.version.created_at %></td>
             <% end %>
-              <td><%= sale_item.sale %></td>
-              <td><%= sale_item.product %></td>
+              <td><%= sale_item.sale.id %></td>
+              <td><%= sale_item.product.name %></td>
               <td><%= sale_item.quantity %></td>
               <td><%= sale_item.unit_price %></td>
+              <td><%= sale_item.total %></td>
               <td class="actions-column actions">
                 <%= link_to '', (sale_item.version.present? ? show_version_path(model_name: "sale_items", id: sale_item.version.id) : sale_item), title: t("activerecord.link.details"), class: "zmdi zmdi-search actions__item" %>
                 <%= link_to '', edit_sale_item_path(sale_item), title: t("activerecord.link.edit"), class: "zmdi zmdi-edit actions__item" if can? :edit, sale_item %>
