@@ -20,6 +20,8 @@ class Sale < ApplicationRecord
   include PgSearch::Model
   has_paper_trail
 
+  after_commit :update_product_quantities
+
   def to_s
     super
   end
@@ -44,4 +46,15 @@ class Sale < ApplicationRecord
     total_amount = sale_items.sum(&:total)
     update(total: total_amount)
   end
+
+  private
+
+  def update_product_quantities    
+    sale_items.each do |sale_item|
+      product = Product.find(sale_item.product_id)
+      new_quantity = product.quantity - sale_item.quantity
+      product.update(quantity: new_quantity)
+    end
+  end
+  
 end
