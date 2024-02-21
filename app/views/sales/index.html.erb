@@ -48,9 +48,9 @@
               <td style="color: red"><%= sale.version.created_at %></td>
             <% end %>
               <td><%= sale.id %></td>
-              <td><%= sale.date %></td>              
+              <td><%= sale.created_at %></td>              
               <td><%= sale.user %></td>
-              <td><%= sale.client.name %></td>
+              <td><%= sale.client.name if sale.client.present? %></td>
               <td><%= sale.total %></td>
               <td class="actions-column actions">
                 <%= link_to '', (sale.version.present? ? show_version_path(model_name: "sales", id: sale.version.id) : sale), title: t("activerecord.link.details"), class: "zmdi zmdi-search actions__item" %>

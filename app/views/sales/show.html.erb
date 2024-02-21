@@ -13,8 +13,8 @@
   <div class="card-body card-padding record-show">
     <div class="row">
         <div class="col-12">
-          <label class="fg-label"><%= t('activerecord.attributes.sale.date') %></label><br/>&nbsp;
-          <%= @sale.date %>
+          <label class="fg-label"><%= t('activerecord.attributes.sale.id') %></label><br/>&nbsp;
+          <%= @sale.id %>
         </div>
         <div class="col-12">
           <label class="fg-label"><%= t('activerecord.attributes.sale.total') %></label><br/>&nbsp;
@@ -26,8 +26,8 @@
         </div>
         <div class="col-12">
           <label class="fg-label"><%= t('activerecord.attributes.sale.client') %></label><br/>&nbsp;
-          <%= @sale.client.name %>
-        </div>
+          <%= @sale.client.name if @sale.client.present? %> 
+        </div> 
     </div>
     <div class="row">
       <div class="col-sm-6">

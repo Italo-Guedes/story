@@ -2,6 +2,6 @@
   <%= f.input :sale, collection: Sale.pluck(:id), class: 'col-12' %>
   <%= f.input :product, class: 'col-12' %>
   <%= f.input :quantity, class: 'col-12' %>
-  <%= f.input :unit_price, class: 'col-12' %>
+  <%#= f.input :unit_price, class: 'col-12' %>
   <%= f.action :submit, label: t('activerecord.link.save'), as: :button, class: 'col-12', html: { 'data-disable-with' => t('activerecord.link.sending') } %>
 <% end %>

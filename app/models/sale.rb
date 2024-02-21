@@ -9,12 +9,12 @@
 #  total      :decimal(, )
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  client_id  :bigint           not null
+#  client_id  :bigint
 #  user_id    :bigint           not null
 #
 class Sale < ApplicationRecord
   belongs_to :user, required: true
-  belongs_to :client, required: true
+  belongs_to :client, required: false
   has_many :sale_items
   has_many :products, through: :sale_items
   include PgSearch::Model

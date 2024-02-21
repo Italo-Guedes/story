@@ -47,7 +47,8 @@ class SaleItem < ApplicationRecord
   private
 
   def update_total_sale_item
-    self.total = quantity * unit_price
+    self.total = quantity * product.resale_price
+    self.unit_price = product.resale_price
   end
 
   def update_sale_total
